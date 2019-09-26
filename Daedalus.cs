@@ -10,20 +10,20 @@ namespace Daedalus
 
     public class Daedalus
     {
-        // EventHandler for Pulse
+        // EventHandler for pulse
         private static event EventHandler<LSEventArgs> Frame;
 
-        // ISXEVE Variables
+        // ISXEVE variables
         public static EVE.ISXEVE.EVE eve;
 		public static EVE.ISXEVE.Me me;
         public static EVE.ISXEVE.Ship myShip;
         public static EVE.ISXEVE.Station station;
 
-        // Pulse Variables
+        // Pulse variables
         private static DateTime nextPulse;
         private static int pulseRate = 1;
 
-        // Misc Variables
+        // Misc variables
         public static bool paused = false;
 
         public static UI DaedalusUI;
@@ -31,21 +31,27 @@ namespace Daedalus
         public Daedalus(UI Arg)
         {
             DaedalusUI = Arg;
-            // One time only constructor.
+
+            // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
-            DaedalusUI.NewConsoleMessage("Daedalus 06/06/2016");
+
+            DaedalusUI.NewConsoleMessage("Daedalus 26/09/2019");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
 
         public static void Start()
         {
+            // Attach Daedalus to ISXEVE
             AttachEvent();
+
+            // Set the first pulse
             nextPulse = DateTime.Now.AddSeconds(pulseRate);
         }
 
         static internal void AttachEvent()
         {
+            // Attach Daedalus to the ISXEVE_OnFrame event, this event is called every frame so 30 FPS is 30 events per second.
             LavishScript.Events.AttachEventTarget("ISXEVE_OnFrame", Frame);
             DaedalusUI.NewConsoleMessage("Attaching to ISXEVE");
         }
@@ -64,15 +70,19 @@ namespace Daedalus
         {
             using (new FrameLock(true))
             {
+                //  We don't need to process our code every single frame as it's inefficient, so let's only do it every *pulseRate*
                 if (DateTime.Now > nextPulse)
                 {
                     nextPulse = DateTime.Now.AddSeconds(pulseRate);
+
+                    // Let's refresh all the data provided by ISXEVE
                     eve = new EVE.ISXEVE.EVE();
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
 
                     DaedalusUI.Text = "Daedalus - " + me.Name + " [" + m_RoutineController.ActiveRoutine.ToString() + "]";
-                    if (!paused) b_Mining.Pulse();
+
+                    //if (!paused) b_Mining.Pulse();
                 }
                 return;
             }
