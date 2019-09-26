@@ -75,7 +75,7 @@ namespace Daedalus
                 {
                     nextPulse = DateTime.Now.AddSeconds(pulseRate);
 
-                    // Let's refresh all the data provided by ISXEVE
+                    // Let's refresh all the data made available by ISXEVE
                     eve = new EVE.ISXEVE.EVE();
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
