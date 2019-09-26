@@ -50,7 +50,7 @@ namespace Daedalus.Modules
                     {
                         Daedalus.myShip.LaunchAllDrones();
                         System.Media.SystemSounds.Hand.Play();
-                        Program.DaedalusUI.newConsoleMessage("WARNING: We're under attack! Launching drones!");
+                        Program.DaedalusUI.newConsoleMessage("We're under attack! Launching drones!");
                         dronesLaunched = true;
                     }
                     else if (dronesLaunched && !targetLocked)
