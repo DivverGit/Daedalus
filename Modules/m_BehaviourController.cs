@@ -60,6 +60,7 @@ namespace Daedalus.Modules
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Space;
+                    m_RoutineController.activeRoutine = Routine.Space_Idle;
                     b_Space.InitComplete = false;
                     setInTransition();
                 }
