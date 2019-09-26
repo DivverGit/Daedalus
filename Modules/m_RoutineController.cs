@@ -24,10 +24,15 @@ namespace Daedalus.Modules
                 if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
                 else if (activeRoutine == Routine.Station_Leave) r_Station_Leave.Pulse();
             }
+            else if (m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Space)
+            {
+                if (activeRoutine == Routine.Space_Idle) r_Space_Idle.Pulse();
+            }
         }
     }
 
     public enum Routine {
+        Space_Idle,
         Station_Idle,
         Station_Leave,
         undefined
