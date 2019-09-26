@@ -31,7 +31,7 @@ namespace Daedalus.Routines
             {
                 if(InitComplete)
                 {
-                    string OurStatus = f_Entities.GetEntityMode(Daedalus.Me.ToEntity);
+                    string OurStatus = f_Entities.GetEntityMode(Daedalus.me.ToEntity);
                     double Distance = f_Entities.DistanceFromPlayerToEntity(NearestAsteroidBelt);
                     if (OurStatus == "Warping" && Distance < 200000) return;
                     else if (OurStatus != "Warping" && Distance < 200000)

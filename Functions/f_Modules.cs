@@ -17,7 +17,7 @@ namespace Daedalus.Functions
         public static List<IModule> GetMiningLasers()
         {
             List<IModule> MiningLasers = new List<IModule>();
-            List<IModule> ModulesFitted = Daedalus.MyShip.GetModules();
+            List<IModule> ModulesFitted = Daedalus.myShip.GetModules();
             foreach (IModule Module in ModulesFitted)
             {
                 if (Module.MiningAmount > 0)

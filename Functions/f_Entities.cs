@@ -44,18 +44,18 @@ namespace Daedalus.Functions
 
         public static List<Entity> GetStations()
         {
-            return Daedalus.Eve.QueryEntities("GroupID = 15");
+            return Daedalus.eve.QueryEntities("GroupID = 15");
         }
 
         public static List<Entity> GetAsteroidBelts()
         {
-            return Daedalus.Eve.QueryEntities("GroupID = 9");
+            return Daedalus.eve.QueryEntities("GroupID = 9");
         }
 
         public static List<Entity> GetAsteroids()
         {
             List<Entity> Asteroids = new List<Entity>();
-            List<Entity> Entities = Daedalus.Eve.QueryEntities("CategoryID = 25");
+            List<Entity> Entities = Daedalus.eve.QueryEntities("CategoryID = 25");
             foreach (Entity e in Entities)
             {
                 Asteroids.Add(e);
@@ -65,12 +65,12 @@ namespace Daedalus.Functions
 
         public static double DistanceFromPlayerToEntity(Entity e)
         {
-            return Daedalus.Eve.DistanceBetween(Daedalus.Me.ToEntity.ID, e.ID);
+            return Daedalus.eve.DistanceBetween(Daedalus.me.ToEntity.ID, e.ID);
         }
 
         public static double DistanceBetween(Entity e1, Entity e2)
         {
-            return Daedalus.Eve.DistanceBetween(e1.ID, e2.ID);
+            return Daedalus.eve.DistanceBetween(e1.ID, e2.ID);
         }
     }
 }

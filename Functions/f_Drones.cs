@@ -15,12 +15,12 @@ namespace Daedalus.Functions
 
         public static void ReturnAllDronesToBay()
         {
-            Daedalus.Eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
+            Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
         }
 
         public static void EngageTarget()
         {
-            Daedalus.Eve.Execute(ExecuteCommand.CmdDronesEngage);
+            Daedalus.eve.Execute(ExecuteCommand.CmdDronesEngage);
         }
     }
 }

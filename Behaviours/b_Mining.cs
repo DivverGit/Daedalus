@@ -24,14 +24,14 @@ namespace Daedalus.Behaviours
 
         public static void Pulse()
         {
-            if (Daedalus.Me.InStation && !Daedalus.Me.InSpace)
+            if (Daedalus.me.InStation && !Daedalus.me.InSpace)
             {
                 if (m_RoutineController.ActiveRoutine != Routine.Station)
                 {
                     m_RoutineController.ActiveRoutine = Routine.Station;
                 }
             }
-            else if (!Daedalus.Me.InStation && Daedalus.Me.InSpace)
+            else if (!Daedalus.me.InStation && Daedalus.me.InSpace)
             {
                 if (f_Inventory.IsDeliveryRequired() && m_RoutineController.ActiveRoutine != Routine.ReturnToStation)
                 {

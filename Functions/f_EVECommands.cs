@@ -15,12 +15,12 @@ namespace Daedalus.Functions
 
         public static void ExitStation()
         {
-            Daedalus.Eve.Execute(ExecuteCommand.CmdExitStation);
+            Daedalus.eve.Execute(ExecuteCommand.CmdExitStation);
         }
 
         public static void StopShip()
         {
-            Daedalus.Eve.Execute(ExecuteCommand.CmdStopShip);
+            Daedalus.eve.Execute(ExecuteCommand.CmdStopShip);
         }
     }
 }

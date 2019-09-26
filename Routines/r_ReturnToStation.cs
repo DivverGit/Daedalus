@@ -43,7 +43,7 @@ namespace Daedalus.Routines
                 }
                 else if(EnRoute && !WaitingToDock)
                 {
-                    string OurStatus = f_Entities.GetEntityMode(Daedalus.Me.ToEntity);
+                    string OurStatus = f_Entities.GetEntityMode(Daedalus.me.ToEntity);
                     double Distance = f_Entities.DistanceFromPlayerToEntity(DeliveryStation);
                     if (OurStatus != "Warping" && Distance < 10000)
                     {
