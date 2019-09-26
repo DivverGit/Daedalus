@@ -26,20 +26,28 @@ namespace Daedalus.Modules
 
         public static void refreshModules()
         {
-            List<IModule> AllModules = f_Modules.GetAllModules();
-            foreach (IModule Module in AllModules)
-            {
-                Daedalus.DaedalusUI.newConsoleMessage(Module.ToItem.Name);
-            }
+            List<IModule> Modules = new List<IModule>();
+            int i;
+
+            // Refresh hi slot modules
+            Modules = f_Modules.GetHiSlotModules();
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot4, Modules[3].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot5, Modules[4].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot6, Modules[5].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot7, Modules[6].ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
         }
 
         public static void refreshShipData()
         {
-            Daedalus.DaedalusUI.changeStationLabel(UI.stationLabels.shipName, Daedalus.myShip.ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.shipName, Daedalus.myShip.ToItem.Name);
 
-            Daedalus.DaedalusUI.changeStationLabel(UI.stationLabels.shield, Daedalus.myShip.Shield.ToString() + " / " + Daedalus.myShip.MaxShield.ToString());
-            Daedalus.DaedalusUI.changeStationLabel(UI.stationLabels.armor, Daedalus.myShip.Armor.ToString() + " / " + Daedalus.myShip.MaxArmor.ToString());
-            Daedalus.DaedalusUI.changeStationLabel(UI.stationLabels.hull, Daedalus.myShip.Structure.ToString() + " / " + Daedalus.myShip.MaxStructure.ToString());
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.shield, Daedalus.myShip.Shield.ToString() + " / " + Daedalus.myShip.MaxShield.ToString());
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.armor, Daedalus.myShip.Armor.ToString() + " / " + Daedalus.myShip.MaxArmor.ToString());
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hull, Daedalus.myShip.Structure.ToString() + " / " + Daedalus.myShip.MaxStructure.ToString());
         }
     }
 }

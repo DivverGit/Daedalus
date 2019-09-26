@@ -84,20 +84,36 @@ namespace Daedalus
         }
 
         // Label functions
-        public enum stationLabels
+        public enum statusLabels
         {
             shipName,
             shield,
             armor,
-            hull
+            hull,
+            hiSlot1,
+            hiSlot2,
+            hiSlot3,
+            hiSlot4,
+            hiSlot5,
+            hiSlot6,
+            hiSlot7,
+            hiSlot8
         }
 
-        public void changeStationLabel(stationLabels label, string value)
+        public void changeStationLabel(statusLabels label, string value)
         {
-            if(label == stationLabels.shipName) shipNameValueLabel.Text = value;
-            else if (label == stationLabels.shield) shieldValueLabel.Text = value;
-            else if (label == stationLabels.armor) armorValueLabel.Text = value;
-            else if (label == stationLabels.hull) hullValueLabel.Text = value;
+            if(label == statusLabels.shipName) shipNameValueLabel.Text = value;
+            else if (label == statusLabels.shield) shieldValueLabel.Text = value;
+            else if (label == statusLabels.armor) armorValueLabel.Text = value;
+            else if (label == statusLabels.hull) hullValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot1) hiSlot1ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot2) hiSlot2ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot3) hiSlot3ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot4) hiSlot4ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot5) hiSlot5ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot6) hiSlot6ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot7) hiSlot7ValueLabel.Text = value;
+            else if (label == statusLabels.hiSlot8) hiSlot8ValueLabel.Text = value;
         }
 
         // Misc functions
