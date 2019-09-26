@@ -47,6 +47,22 @@
             this.hullValueLabel = new System.Windows.Forms.Label();
             this.spaceTabPage = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.hiSlot1Label = new System.Windows.Forms.Label();
+            this.hiSlot2Label = new System.Windows.Forms.Label();
+            this.hiSlot3Label = new System.Windows.Forms.Label();
+            this.hiSlot4Label = new System.Windows.Forms.Label();
+            this.hiSlot5Label = new System.Windows.Forms.Label();
+            this.hiSlot6Label = new System.Windows.Forms.Label();
+            this.hiSlot7Label = new System.Windows.Forms.Label();
+            this.hiSlot8Label = new System.Windows.Forms.Label();
+            this.hiSlot1ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot2ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot3ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot4ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot5ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot6ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot7ValueLabel = new System.Windows.Forms.Label();
+            this.hiSlot8ValueLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
@@ -66,11 +82,12 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(805, 768);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 600F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(403, 903);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // Console
@@ -81,7 +98,7 @@
             this.Console.Location = new System.Drawing.Point(4, 4);
             this.Console.Margin = new System.Windows.Forms.Padding(4);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(797, 360);
+            this.Console.Size = new System.Drawing.Size(395, 192);
             this.Console.TabIndex = 0;
             // 
             // tabControl1
@@ -90,10 +107,10 @@
             this.tabControl1.Controls.Add(this.stationTabPage);
             this.tabControl1.Controls.Add(this.spaceTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 371);
+            this.tabControl1.Location = new System.Drawing.Point(3, 203);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(799, 94);
+            this.tabControl1.Size = new System.Drawing.Size(397, 94);
             this.tabControl1.TabIndex = 1;
             // 
             // generalTabPage
@@ -126,16 +143,14 @@
             this.stationTabPage.Controls.Add(this.flowLayoutPanel2);
             this.stationTabPage.Location = new System.Drawing.Point(4, 25);
             this.stationTabPage.Name = "stationTabPage";
-            this.stationTabPage.Size = new System.Drawing.Size(791, 65);
+            this.stationTabPage.Size = new System.Drawing.Size(389, 65);
             this.stationTabPage.TabIndex = 1;
             this.stationTabPage.Text = "Station";
             this.stationTabPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 5;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -148,10 +163,38 @@
             this.tableLayoutPanel3.Controls.Add(this.shieldValueLabel, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.armorValueLabel, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.hullValueLabel, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot1Label, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot2Label, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot3Label, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot4Label, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot5Label, 0, 9);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot6Label, 0, 10);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot7Label, 0, 11);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot8Label, 0, 12);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot1ValueLabel, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot2ValueLabel, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot3ValueLabel, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot4ValueLabel, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot5ValueLabel, 1, 9);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot6ValueLabel, 1, 10);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot7ValueLabel, 1, 11);
+            this.tableLayoutPanel3.Controls.Add(this.hiSlot8ValueLabel, 1, 12);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 471);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 303);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 10;
+            this.tableLayoutPanel3.RowCount = 22;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -162,7 +205,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(799, 294);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(397, 594);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // shipNameLabel
@@ -279,14 +322,174 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(791, 65);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(389, 65);
             this.flowLayoutPanel2.TabIndex = 0;
+            // 
+            // hiSlot1Label
+            // 
+            this.hiSlot1Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot1Label.AutoSize = true;
+            this.hiSlot1Label.Location = new System.Drawing.Point(40, 129);
+            this.hiSlot1Label.Name = "hiSlot1Label";
+            this.hiSlot1Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot1Label.TabIndex = 9;
+            this.hiSlot1Label.Text = "HiSlot1:";
+            // 
+            // hiSlot2Label
+            // 
+            this.hiSlot2Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot2Label.AutoSize = true;
+            this.hiSlot2Label.Location = new System.Drawing.Point(40, 154);
+            this.hiSlot2Label.Name = "hiSlot2Label";
+            this.hiSlot2Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot2Label.TabIndex = 10;
+            this.hiSlot2Label.Text = "HiSlot2:";
+            // 
+            // hiSlot3Label
+            // 
+            this.hiSlot3Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot3Label.AutoSize = true;
+            this.hiSlot3Label.Location = new System.Drawing.Point(40, 179);
+            this.hiSlot3Label.Name = "hiSlot3Label";
+            this.hiSlot3Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot3Label.TabIndex = 11;
+            this.hiSlot3Label.Text = "HiSlot3:";
+            // 
+            // hiSlot4Label
+            // 
+            this.hiSlot4Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot4Label.AutoSize = true;
+            this.hiSlot4Label.Location = new System.Drawing.Point(40, 204);
+            this.hiSlot4Label.Name = "hiSlot4Label";
+            this.hiSlot4Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot4Label.TabIndex = 12;
+            this.hiSlot4Label.Text = "HiSlot4:";
+            // 
+            // hiSlot5Label
+            // 
+            this.hiSlot5Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot5Label.AutoSize = true;
+            this.hiSlot5Label.Location = new System.Drawing.Point(40, 229);
+            this.hiSlot5Label.Name = "hiSlot5Label";
+            this.hiSlot5Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot5Label.TabIndex = 13;
+            this.hiSlot5Label.Text = "HiSlot5:";
+            // 
+            // hiSlot6Label
+            // 
+            this.hiSlot6Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot6Label.AutoSize = true;
+            this.hiSlot6Label.Location = new System.Drawing.Point(40, 254);
+            this.hiSlot6Label.Name = "hiSlot6Label";
+            this.hiSlot6Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot6Label.TabIndex = 14;
+            this.hiSlot6Label.Text = "HiSlot6:";
+            // 
+            // hiSlot7Label
+            // 
+            this.hiSlot7Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot7Label.AutoSize = true;
+            this.hiSlot7Label.Location = new System.Drawing.Point(40, 279);
+            this.hiSlot7Label.Name = "hiSlot7Label";
+            this.hiSlot7Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot7Label.TabIndex = 15;
+            this.hiSlot7Label.Text = "HiSlot7:";
+            // 
+            // hiSlot8Label
+            // 
+            this.hiSlot8Label.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.hiSlot8Label.AutoSize = true;
+            this.hiSlot8Label.Location = new System.Drawing.Point(40, 304);
+            this.hiSlot8Label.Name = "hiSlot8Label";
+            this.hiSlot8Label.Size = new System.Drawing.Size(57, 17);
+            this.hiSlot8Label.TabIndex = 16;
+            this.hiSlot8Label.Text = "HiSlot8:";
+            // 
+            // hiSlot1ValueLabel
+            // 
+            this.hiSlot1ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot1ValueLabel.AutoSize = true;
+            this.hiSlot1ValueLabel.Location = new System.Drawing.Point(103, 129);
+            this.hiSlot1ValueLabel.Name = "hiSlot1ValueLabel";
+            this.hiSlot1ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot1ValueLabel.TabIndex = 17;
+            this.hiSlot1ValueLabel.Text = "undefined";
+            // 
+            // hiSlot2ValueLabel
+            // 
+            this.hiSlot2ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot2ValueLabel.AutoSize = true;
+            this.hiSlot2ValueLabel.Location = new System.Drawing.Point(103, 154);
+            this.hiSlot2ValueLabel.Name = "hiSlot2ValueLabel";
+            this.hiSlot2ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot2ValueLabel.TabIndex = 18;
+            this.hiSlot2ValueLabel.Text = "undefined";
+            // 
+            // hiSlot3ValueLabel
+            // 
+            this.hiSlot3ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot3ValueLabel.AutoSize = true;
+            this.hiSlot3ValueLabel.Location = new System.Drawing.Point(103, 179);
+            this.hiSlot3ValueLabel.Name = "hiSlot3ValueLabel";
+            this.hiSlot3ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot3ValueLabel.TabIndex = 19;
+            this.hiSlot3ValueLabel.Text = "undefined";
+            // 
+            // hiSlot4ValueLabel
+            // 
+            this.hiSlot4ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot4ValueLabel.AutoSize = true;
+            this.hiSlot4ValueLabel.Location = new System.Drawing.Point(103, 204);
+            this.hiSlot4ValueLabel.Name = "hiSlot4ValueLabel";
+            this.hiSlot4ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot4ValueLabel.TabIndex = 20;
+            this.hiSlot4ValueLabel.Text = "undefined";
+            // 
+            // hiSlot5ValueLabel
+            // 
+            this.hiSlot5ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot5ValueLabel.AutoSize = true;
+            this.hiSlot5ValueLabel.Location = new System.Drawing.Point(103, 229);
+            this.hiSlot5ValueLabel.Name = "hiSlot5ValueLabel";
+            this.hiSlot5ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot5ValueLabel.TabIndex = 21;
+            this.hiSlot5ValueLabel.Text = "undefined";
+            // 
+            // hiSlot6ValueLabel
+            // 
+            this.hiSlot6ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot6ValueLabel.AutoSize = true;
+            this.hiSlot6ValueLabel.Location = new System.Drawing.Point(103, 254);
+            this.hiSlot6ValueLabel.Name = "hiSlot6ValueLabel";
+            this.hiSlot6ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot6ValueLabel.TabIndex = 22;
+            this.hiSlot6ValueLabel.Text = "undefined";
+            // 
+            // hiSlot7ValueLabel
+            // 
+            this.hiSlot7ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot7ValueLabel.AutoSize = true;
+            this.hiSlot7ValueLabel.Location = new System.Drawing.Point(103, 279);
+            this.hiSlot7ValueLabel.Name = "hiSlot7ValueLabel";
+            this.hiSlot7ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot7ValueLabel.TabIndex = 23;
+            this.hiSlot7ValueLabel.Text = "undefined";
+            // 
+            // hiSlot8ValueLabel
+            // 
+            this.hiSlot8ValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.hiSlot8ValueLabel.AutoSize = true;
+            this.hiSlot8ValueLabel.Location = new System.Drawing.Point(103, 304);
+            this.hiSlot8ValueLabel.Name = "hiSlot8ValueLabel";
+            this.hiSlot8ValueLabel.Size = new System.Drawing.Size(71, 17);
+            this.hiSlot8ValueLabel.TabIndex = 24;
+            this.hiSlot8ValueLabel.Text = "undefined";
             // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 768);
+            this.ClientSize = new System.Drawing.Size(403, 903);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UI";
@@ -324,5 +527,21 @@
         private System.Windows.Forms.Label armorValueLabel;
         private System.Windows.Forms.Label hullValueLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label hiSlot1Label;
+        private System.Windows.Forms.Label hiSlot2Label;
+        private System.Windows.Forms.Label hiSlot3Label;
+        private System.Windows.Forms.Label hiSlot4Label;
+        private System.Windows.Forms.Label hiSlot5Label;
+        private System.Windows.Forms.Label hiSlot6Label;
+        private System.Windows.Forms.Label hiSlot7Label;
+        private System.Windows.Forms.Label hiSlot8Label;
+        private System.Windows.Forms.Label hiSlot1ValueLabel;
+        private System.Windows.Forms.Label hiSlot2ValueLabel;
+        private System.Windows.Forms.Label hiSlot3ValueLabel;
+        private System.Windows.Forms.Label hiSlot4ValueLabel;
+        private System.Windows.Forms.Label hiSlot5ValueLabel;
+        private System.Windows.Forms.Label hiSlot6ValueLabel;
+        private System.Windows.Forms.Label hiSlot7ValueLabel;
+        private System.Windows.Forms.Label hiSlot8ValueLabel;
     }
 }
