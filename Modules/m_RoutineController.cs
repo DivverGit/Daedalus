@@ -1,4 +1,5 @@
-﻿using Daedalus.Routines;
+﻿using Daedalus.Behaviours;
+using Daedalus.Routines;
 using LavishVMAPI;
 using System;
 using System.Collections.Generic;
@@ -9,25 +10,30 @@ namespace Daedalus.Modules
 {
     public static class m_RoutineController
     {
-        public static Routine PreviousRoutine;
+        public static Routine activeRoutine = Routine.undefined;
 
         static m_RoutineController()
         {
-
+            // Init
         }
 
         public static void Pulse()
         {
-            if (ActiveRoutine == Routine.Station) r_Station.Pulse();
-            else if (ActiveRoutine == Routine.TravelToBelt) r_TravelToBelt.Pulse();
-            else if (ActiveRoutine == Routine.IdleAtBelt) r_IdleAtBelt.Pulse();
-            else if (ActiveRoutine == Routine.Mine) r_Mine.Pulse();
-            else if (ActiveRoutine == Routine.ReturnToStation) r_ReturnToStation.Pulse();
-            return;
+            if(m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Mining)
+            {
+                // TODO: Mining routines
+            }
+            else if (m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Station)
+            {
+                if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
+                else if (activeRoutine == Routine.Station_Leave) r_Station_Leave.Pulse();
+            }
         }
-
-        public static Routine ActiveRoutine;
     }
 
-    public enum Routine { Idle, Station, ReturnToStation, TravelToBelt, IdleAtBelt, Mine };
+    public enum Routine {
+        Station_Idle,
+        Station_Leave,
+        undefined
+    };
 }

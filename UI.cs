@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Daedalus.Modules;
+using Daedalus.Routines;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +25,7 @@ namespace Daedalus
             initTabPages();
         }
 
+        // Tab functions
         public TabPage General;
         public TabPage Station;
         public TabPage Space;
@@ -80,10 +83,34 @@ namespace Daedalus
             }
         }
 
+        // Label functions
+        public enum stationLabels
+        {
+            shipName,
+            shield,
+            armor,
+            hull
+        }
+
+        public void changeStationLabel(stationLabels label, string value)
+        {
+            if(label == stationLabels.shipName) shipNameValueLabel.Text = value;
+            else if (label == stationLabels.shield) shieldValueLabel.Text = value;
+            else if (label == stationLabels.armor) armorValueLabel.Text = value;
+            else if (label == stationLabels.hull) hullValueLabel.Text = value;
+        }
+
+        // Misc functions
         public void newConsoleMessage(string input)
         {
             Console.Items.Add("(" + DateTime.Now.ToString() + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
+        }
+
+        private void undockButton_Click(object sender, EventArgs e)
+        {
+            m_RoutineController.activeRoutine = Routine.Station_Leave;
+            r_Station_Leave.triggerLeaveStation();
         }
     }
 }

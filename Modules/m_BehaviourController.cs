@@ -44,6 +44,7 @@ namespace Daedalus.Modules
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Station;
+                    m_RoutineController.activeRoutine = Routine.Station_Idle;
                     b_Station.InitComplete = false;
                     setInTransition();
                 }

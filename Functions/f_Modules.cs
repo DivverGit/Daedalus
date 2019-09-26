@@ -36,5 +36,77 @@ namespace Daedalus.Functions
                 return false;
             }
         }
+
+        public static List<IModule> GetAllModules()
+        {
+            List<IModule> ModulesFitted = new List<IModule>();
+
+            int i;
+
+            // Get hi slot modules
+            for(i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
+            }
+
+            // Get med slot modules
+            for (i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
+            }
+
+            // Get lo slot modules
+            for (i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
+            }
+
+            return ModulesFitted;
+        }
+
+        public static List<IModule> GetHiSlotModules()
+        {
+            List<IModule> ModulesFitted = new List<IModule>();
+
+            int i;
+
+            // Get hi slot modules
+            for (i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
+            }
+
+            return ModulesFitted;
+        }
+
+        public static List<IModule> GetMedSlotModules()
+        {
+            List<IModule> ModulesFitted = new List<IModule>();
+
+            int i;
+
+            // Get med slot modules
+            for (i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
+            }
+
+            return ModulesFitted;
+        }
+
+        public static List<IModule> GetLoSlotModules()
+        {
+            List<IModule> ModulesFitted = new List<IModule>();
+
+            int i;
+
+            // Get lo slot modules
+            for (i = 0; i < 8; i++)
+            {
+                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
+            }
+
+            return ModulesFitted;
+        }
     }
 }

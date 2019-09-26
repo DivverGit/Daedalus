@@ -80,7 +80,7 @@ namespace Daedalus
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
 
-                    DaedalusUI.Text = "Daedalus - " + me.Name + " [" + m_BehaviourController.activeBehaviour.ToString() + "]";
+                    DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + m_BehaviourController.activeBehaviour.ToString() + "] [Routine: " + m_RoutineController.activeRoutine.ToString() + "]";
 
                     if (!paused)    m_BehaviourController.Pulse();
                 }

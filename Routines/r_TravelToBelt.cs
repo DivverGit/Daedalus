@@ -37,7 +37,7 @@ namespace Daedalus.Routines
                     else if (OurStatus != "Warping" && Distance < 200000)
                     {
                         InitComplete = false;
-                        m_RoutineController.ActiveRoutine = Routine.IdleAtBelt;
+                        //m_RoutineController.activeRoutine = Routine.IdleAtBelt;
                     }
                 }
             }
