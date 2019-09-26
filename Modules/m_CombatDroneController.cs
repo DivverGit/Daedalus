@@ -37,7 +37,7 @@ namespace Daedalus.Modules
                     if (DronesLaunched)
                     {
                         Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
-                        Program.DaedalusUI.NewConsoleMessage("We're no longer under attack! Recalling drones!");
+                        Program.DaedalusUI.newConsoleMessage("We're no longer under attack! Recalling drones!");
                         DronesLaunched = false;
                         TargetLocked = false;
                         DronesEngaged = false;
@@ -50,7 +50,7 @@ namespace Daedalus.Modules
                     {
                         Daedalus.myShip.LaunchAllDrones();
                         System.Media.SystemSounds.Hand.Play();
-                        Program.DaedalusUI.NewConsoleMessage("WARNING: We're under attack! Launching drones!");
+                        Program.DaedalusUI.newConsoleMessage("WARNING: We're under attack! Launching drones!");
                         DronesLaunched = true;
                     }
                     else if (DronesLaunched && !TargetLocked)

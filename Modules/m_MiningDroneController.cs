@@ -43,7 +43,7 @@ namespace Daedalus.Modules
                         //We can target this because no other IModules are!
                         Asteroid.LockTarget();
                         MiningDronesTargetID = Asteroid.ID;
-                        Program.DaedalusUI.NewConsoleMessage("Mining drones assigned to targetID " + Asteroid.ID.ToString());
+                        Program.DaedalusUI.newConsoleMessage("Mining drones assigned to targetID " + Asteroid.ID.ToString());
                         break;
                     }
                 }
@@ -51,7 +51,7 @@ namespace Daedalus.Modules
             else if (GetAsteroidByID(MiningDronesTargetID) == null)
             {
                 MiningDronesTargetID = 0;
-                Program.DaedalusUI.NewConsoleMessage("Mining drones have lost targetID " + MiningDronesTargetID.ToString());
+                Program.DaedalusUI.newConsoleMessage("Mining drones have lost targetID " + MiningDronesTargetID.ToString());
             }
         }
 

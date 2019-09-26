@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Daedalus.Behaviours
 {
-    static class b_Mining
+    static class b_Station
     {
         public static bool InitComplete = false;
 
-        static b_Mining()
+        static b_Station()
         {
             // Init
         }
@@ -23,8 +23,9 @@ namespace Daedalus.Behaviours
             if (!InitComplete)
             {
                 InitComplete = true;
+                Daedalus.DaedalusUI.switchTabPage(Daedalus.DaedalusUI.Station);
             }
-            // TODO: Mining stuff
+            // TODO: Station stuff
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Daedalus.Functions
         public static void Station(Entity Station)
         {
             Station.WarpTo();
-            Program.DaedalusUI.NewConsoleMessage("Warping to " + Station.Name);
+            Program.DaedalusUI.newConsoleMessage("Warping to " + Station.Name);
         }
         
         public static void Belt(Entity Belt)
         {
-            Program.DaedalusUI.NewConsoleMessage("Warping to " + Belt.Name);
+            Program.DaedalusUI.newConsoleMessage("Warping to " + Belt.Name);
             Belt.WarpTo();
         }
     }

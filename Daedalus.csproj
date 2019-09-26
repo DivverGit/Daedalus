@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\b_Mining.cs" />
+    <Compile Include="Behaviours\b_Space.cs" />
+    <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Daedalus.cs" />
     <Compile Include="Functions\f_Asteroids.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Functions\f_Inventory.cs" />
     <Compile Include="Functions\f_Modules.cs" />
     <Compile Include="Functions\f_WarpTo.cs" />
+    <Compile Include="Modules\m_BehaviourController.cs" />
     <Compile Include="Modules\m_CombatDroneController.cs" />
     <Compile Include="Modules\m_MiningDroneController.cs" />
     <Compile Include="Modules\m_MiningLaserController.cs" />

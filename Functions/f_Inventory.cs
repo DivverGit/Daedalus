@@ -64,7 +64,7 @@ namespace Daedalus.Functions
                 {
                     OreHoldItem.MoveTo("MyStationHangar", "Hangar");
                 }
-                Program.DaedalusUI.NewConsoleMessage("Transfer complete.");
+                Program.DaedalusUI.newConsoleMessage("Transfer complete.");
             }
         }
 

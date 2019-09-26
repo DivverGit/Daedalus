@@ -24,7 +24,7 @@ namespace Daedalus.Routines
                     // Asteroid Belt has left than five asteroids so isn't worth our time.
                     Entity AsteroidBeltToRemove = r_TravelToBelt.NearestAsteroidBelt;
                     f_Asteroids.RemoveAsteroidBelt(AsteroidBeltToRemove);
-                    Daedalus.DaedalusUI.NewConsoleMessage("This asteroid belt doesn't have enough asteroids, moving on!");
+                    Daedalus.DaedalusUI.newConsoleMessage("This asteroid belt doesn't have enough asteroids, moving on!");
                     InitComplete = false;
                     m_RoutineController.ActiveRoutine = Routine.TravelToBelt;
                 }

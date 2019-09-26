@@ -35,7 +35,7 @@ namespace Daedalus
             // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
 
-            DaedalusUI.NewConsoleMessage("Daedalus 26/09/2019");
+            DaedalusUI.newConsoleMessage("Daedalus 26/09/2019");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
@@ -53,7 +53,7 @@ namespace Daedalus
         {
             // Attach Daedalus to the ISXEVE_OnFrame event, this event is called every frame so 30 FPS is 30 events per second.
             LavishScript.Events.AttachEventTarget("ISXEVE_OnFrame", Frame);
-            DaedalusUI.NewConsoleMessage("Attaching to ISXEVE");
+            DaedalusUI.newConsoleMessage("Attaching to ISXEVE");
         }
 
         static internal void AttachEvent(object sender, EventArgs e)
@@ -80,9 +80,9 @@ namespace Daedalus
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
 
-                    DaedalusUI.Text = "Daedalus - " + me.Name + " [" + m_RoutineController.ActiveRoutine.ToString() + "]";
+                    DaedalusUI.Text = "Daedalus - " + me.Name + " [" + m_BehaviourController.activeBehaviour.ToString() + "]";
 
-                    //if (!paused) b_Mining.Pulse();
+                    if (!paused)    m_BehaviourController.Pulse();
                 }
                 return;
             }

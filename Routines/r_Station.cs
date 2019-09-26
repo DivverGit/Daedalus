@@ -39,7 +39,7 @@ namespace Daedalus.Routines
                 ExitStationTime = DateTime.Now.AddSeconds(ExitStationDelay);
                 ExitRoutineTime = ExitStationTime.AddSeconds(12.0);
 
-                Program.DaedalusUI.NewConsoleMessage("Leaving " + Daedalus.me.Station.Name.ToString() + " in " + ExitStationDelay.ToString("F0") + " seconds");
+                Program.DaedalusUI.newConsoleMessage("Leaving " + Daedalus.me.Station.Name.ToString() + " in " + ExitStationDelay.ToString("F0") + " seconds");
             }
         }
 
