@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviours\b_Mining.cs" />
     <Compile Include="Behaviours\b_Space.cs" />
     <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Daedalus.cs" />
@@ -88,8 +87,6 @@
     <Compile Include="Functions\f_WarpTo.cs" />
     <Compile Include="Modules\m_BehaviourController.cs" />
     <Compile Include="Modules\m_CombatDroneController.cs" />
-    <Compile Include="Modules\m_MiningDroneController.cs" />
-    <Compile Include="Modules\m_MiningLaserController.cs" />
     <Compile Include="Modules\m_StatusController.cs" />
     <Compile Include="Modules\m_RoutineController.cs" />
     <Compile Include="Program.cs" />

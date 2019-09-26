@@ -24,7 +24,11 @@ namespace Daedalus.Modules
             }
         }
 
-        public enum Behaviour { Mining, Space, Station, undefined };
+        public enum Behaviour {
+            Space,
+            Station,
+            undefined
+        };
         public static Behaviour previousBehaviour = Behaviour.undefined;
         public static Behaviour activeBehaviour = Behaviour.undefined;
 
@@ -64,8 +68,7 @@ namespace Daedalus.Modules
 
         private static void pulseActiveBehaviour()
         {
-            if (activeBehaviour == Behaviour.Mining) b_Mining.Pulse();
-            else if (activeBehaviour == Behaviour.Space) b_Space.Pulse();
+            if (activeBehaviour == Behaviour.Space) b_Space.Pulse();
             else if (activeBehaviour == Behaviour.Station) b_Station.Pulse();
         }
 

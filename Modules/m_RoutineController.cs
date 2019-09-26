@@ -19,11 +19,7 @@ namespace Daedalus.Modules
 
         public static void Pulse()
         {
-            if(m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Mining)
-            {
-                // TODO: Mining routines
-            }
-            else if (m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Station)
+            if (m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Station)
             {
                 if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
                 else if (activeRoutine == Routine.Station_Leave) r_Station_Leave.Pulse();
