@@ -161,7 +161,7 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.Controls.Add(this.shipNameLabel, 0, 0);
@@ -181,23 +181,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(397, 144);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -205,7 +188,7 @@
             // 
             this.shipNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.shipNameLabel.AutoSize = true;
-            this.shipNameLabel.Location = new System.Drawing.Point(57, 4);
+            this.shipNameLabel.Location = new System.Drawing.Point(32, 4);
             this.shipNameLabel.Name = "shipNameLabel";
             this.shipNameLabel.Size = new System.Drawing.Size(40, 17);
             this.shipNameLabel.TabIndex = 0;
@@ -215,7 +198,7 @@
             // 
             this.shipNameValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.shipNameValueLabel.AutoSize = true;
-            this.shipNameValueLabel.Location = new System.Drawing.Point(103, 4);
+            this.shipNameValueLabel.Location = new System.Drawing.Point(78, 4);
             this.shipNameValueLabel.Name = "shipNameValueLabel";
             this.shipNameValueLabel.Size = new System.Drawing.Size(71, 17);
             this.shipNameValueLabel.TabIndex = 1;
@@ -235,7 +218,7 @@
             // 
             this.shieldLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.shieldLabel.AutoSize = true;
-            this.shieldLabel.Location = new System.Drawing.Point(46, 29);
+            this.shieldLabel.Location = new System.Drawing.Point(21, 29);
             this.shieldLabel.Name = "shieldLabel";
             this.shieldLabel.Size = new System.Drawing.Size(51, 17);
             this.shieldLabel.TabIndex = 3;
@@ -245,7 +228,7 @@
             // 
             this.armorLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.armorLabel.AutoSize = true;
-            this.armorLabel.Location = new System.Drawing.Point(47, 54);
+            this.armorLabel.Location = new System.Drawing.Point(22, 54);
             this.armorLabel.Name = "armorLabel";
             this.armorLabel.Size = new System.Drawing.Size(50, 17);
             this.armorLabel.TabIndex = 4;
@@ -255,7 +238,7 @@
             // 
             this.hullLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.hullLabel.AutoSize = true;
-            this.hullLabel.Location = new System.Drawing.Point(61, 79);
+            this.hullLabel.Location = new System.Drawing.Point(36, 79);
             this.hullLabel.Name = "hullLabel";
             this.hullLabel.Size = new System.Drawing.Size(36, 17);
             this.hullLabel.TabIndex = 5;
@@ -265,7 +248,7 @@
             // 
             this.shieldValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.shieldValueLabel.AutoSize = true;
-            this.shieldValueLabel.Location = new System.Drawing.Point(103, 29);
+            this.shieldValueLabel.Location = new System.Drawing.Point(78, 29);
             this.shieldValueLabel.Name = "shieldValueLabel";
             this.shieldValueLabel.Size = new System.Drawing.Size(71, 17);
             this.shieldValueLabel.TabIndex = 6;
@@ -275,7 +258,7 @@
             // 
             this.armorValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.armorValueLabel.AutoSize = true;
-            this.armorValueLabel.Location = new System.Drawing.Point(103, 54);
+            this.armorValueLabel.Location = new System.Drawing.Point(78, 54);
             this.armorValueLabel.Name = "armorValueLabel";
             this.armorValueLabel.Size = new System.Drawing.Size(71, 17);
             this.armorValueLabel.TabIndex = 7;
@@ -285,7 +268,7 @@
             // 
             this.hullValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hullValueLabel.AutoSize = true;
-            this.hullValueLabel.Location = new System.Drawing.Point(103, 79);
+            this.hullValueLabel.Location = new System.Drawing.Point(78, 79);
             this.hullValueLabel.Name = "hullValueLabel";
             this.hullValueLabel.Size = new System.Drawing.Size(71, 17);
             this.hullValueLabel.TabIndex = 8;
