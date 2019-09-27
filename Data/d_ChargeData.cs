@@ -60,7 +60,7 @@ namespace Daedalus.Data
 
         public static void Init()
         {
-            //Do Nothing
+            // Init
         }
 
     }
