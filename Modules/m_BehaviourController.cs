@@ -77,7 +77,7 @@ namespace Daedalus.Modules
         {
             inTransition = true;
             transitionEndTime = DateTime.Now.AddSeconds(5.0f);
-            Daedalus.DaedalusUI.newConsoleMessage("Transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
+            Daedalus.DaedalusUI.newConsoleMessage("Behaviour transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
         }
 
         private static void checkInTransition()
