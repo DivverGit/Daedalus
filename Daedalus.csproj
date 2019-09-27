@@ -77,6 +77,7 @@
     <Compile Include="Behaviours\b_Space.cs" />
     <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Daedalus.cs" />
+    <Compile Include="Data\d_ChargeData.cs" />
     <Compile Include="Functions\f_Asteroids.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
@@ -116,6 +117,7 @@
       <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <EmbeddedResource Include="Data\chargeData.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

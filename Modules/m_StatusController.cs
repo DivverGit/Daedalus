@@ -1,4 +1,5 @@
 ﻿using Daedalus.Behaviours;
+using Daedalus.Data;
 using Daedalus.Functions;
 using Daedalus.Routines;
 using EVE.ISXEVE;
@@ -16,7 +17,7 @@ namespace Daedalus.Modules
 
         static m_StatusController()
         {
-            // Init
+            d_ChargeData.Init();
         }
 
         public static void Pulse()
@@ -28,19 +29,39 @@ namespace Daedalus.Modules
         public static void refreshModules()
         {
             List<IModule> Modules = new List<IModule>();
-            int i;
 
             // Refresh hi slot modules
             Modules = f_Modules.GetHiSlotModules();
 
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot4, Modules[3].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot5, Modules[4].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot6, Modules[5].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot7, Modules[6].ToItem.Name);
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
+            if (Modules[0].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 0).ToString("#.##") + " DPS)");
+            if (Modules[1].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 1).ToString("#.##") + " DPS)");
+            if (Modules[2].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 2).ToString("#.##") + " DPS)");
+            if (Modules[3].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[3].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 3).ToString("#.##") + " DPS)");
+            if (Modules[4].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[4].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 4).ToString("#.##") + " DPS)");
+            if (Modules[5].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[5].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 5).ToString("#.##") + " DPS)");
+            if (Modules[6].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[6].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 6).ToString("#.##") + " DPS)");
+            if (Modules[7].MaxCharges > 0) Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[7].ToItem.Name + " (" + getChargeDPS(SlotType.HiSlot, 7).ToString("#.##") + " DPS)");
+        }
+
+        private static float getChargeDPS(SlotType slotType, int slot)
+        {
+            float dps = 0;
+
+            IModule module = Daedalus.myShip.Module(slotType, slot);
+            ModuleCharge charge = module.Charge;
+            int typeId = charge.TypeId;
+
+            foreach(chargeObject chargeObject in d_ChargeData.chargeObjects)
+            {
+                if(chargeObject.TypeId == typeId)
+                {
+                    dps = chargeObject.EMDamage + chargeObject.ExplosiveDamage + chargeObject.KineticDamage + chargeObject.ThermalDamage;
+                    dps *= (float)module.DamageModifier;
+                    dps /= (float)module.RateOfFire;
+                }
+            }
+
+            return dps;
         }
 
         public static void refreshShipData()

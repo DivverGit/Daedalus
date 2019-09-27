@@ -119,7 +119,7 @@ namespace Daedalus
         // Misc functions
         public void newConsoleMessage(string input)
         {
-            Console.Items.Add("(" + DateTime.Now.ToString() + ") " + input);
+            Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
 
