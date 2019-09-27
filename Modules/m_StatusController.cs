@@ -43,33 +43,9 @@ namespace Daedalus.Modules
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
         }
 
-        public static float getHiSlotDPS(IModule module)
-        {
-            float multiplier = (float)module.DamageModifier.Value;
-            float emDamage = 0.0f;
-            float explosiveDamage = 0.0f;
-            float heatDamage = 0.0f;
-            float kineticDamage = 0.0f;
-            float thermalDamage = 0.0f;
-
-            if (module.EMDamage.HasValue) emDamage = (float)module.EMDamage.Value;
-            if(module.ExplosiveDamage.HasValue) explosiveDamage = (float)module.ExplosiveDamage.Value;
-            if(module.HeatDamage.HasValue) heatDamage = (float)module.HeatDamage.Value;
-            if(module.KineticDamage.HasValue) kineticDamage = (float)module.KineticDamage.Value;
-            if(module.ThermalDamage.HasValue) thermalDamage = (float)module.ThermalDamage.Value;
-
-            float damage = emDamage + explosiveDamage + heatDamage + kineticDamage + thermalDamage;
-
-            damage *= multiplier;
-
-            damage /= (float)module.RateOfFire.Value;
-
-            return damage;
-        }
-
         public static void refreshShipData()
         {
-            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.shipName, Daedalus.myShip.ToItem.Name);
+            Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.shipName, Daedalus.myShip.Name);
 
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.shield, Daedalus.myShip.Shield.ToString() + " / " + Daedalus.myShip.MaxShield.ToString());
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.armor, Daedalus.myShip.Armor.ToString() + " / " + Daedalus.myShip.MaxArmor.ToString());

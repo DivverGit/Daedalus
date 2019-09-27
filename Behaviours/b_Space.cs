@@ -25,7 +25,7 @@ namespace Daedalus.Behaviours
                 InitComplete = true;
                 Daedalus.DaedalusUI.switchTabPage(Daedalus.DaedalusUI.Space);
             }
-            // TODO: Space stuff
+            m_RoutineController.Pulse();
         }
     }
 }

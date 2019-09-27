@@ -26,7 +26,6 @@ namespace Daedalus.Routines
             {
                 initComplete = true;
             }
-
             m_StatusController.Pulse();
         }
     }
