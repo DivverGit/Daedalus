@@ -1,6 +1,7 @@
 ﻿using Daedalus.Behaviours;
 using Daedalus.Functions;
 using Daedalus.Routines;
+using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using LavishVMAPI;
 using System;
@@ -31,6 +32,7 @@ namespace Daedalus.Modules
 
             // Refresh hi slot modules
             Modules = f_Modules.GetHiSlotModules();
+
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name);
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name);
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name);
@@ -39,6 +41,30 @@ namespace Daedalus.Modules
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot6, Modules[5].ToItem.Name);
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot7, Modules[6].ToItem.Name);
             Daedalus.DaedalusUI.changeStationLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
+        }
+
+        public static float getHiSlotDPS(IModule module)
+        {
+            float multiplier = (float)module.DamageModifier.Value;
+            float emDamage = 0.0f;
+            float explosiveDamage = 0.0f;
+            float heatDamage = 0.0f;
+            float kineticDamage = 0.0f;
+            float thermalDamage = 0.0f;
+
+            if (module.EMDamage.HasValue) emDamage = (float)module.EMDamage.Value;
+            if(module.ExplosiveDamage.HasValue) explosiveDamage = (float)module.ExplosiveDamage.Value;
+            if(module.HeatDamage.HasValue) heatDamage = (float)module.HeatDamage.Value;
+            if(module.KineticDamage.HasValue) kineticDamage = (float)module.KineticDamage.Value;
+            if(module.ThermalDamage.HasValue) thermalDamage = (float)module.ThermalDamage.Value;
+
+            float damage = emDamage + explosiveDamage + heatDamage + kineticDamage + thermalDamage;
+
+            damage *= multiplier;
+
+            damage /= (float)module.RateOfFire.Value;
+
+            return damage;
         }
 
         public static void refreshShipData()
