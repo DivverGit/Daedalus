@@ -1,5 +1,5 @@
 ﻿using Daedalus.Functions;
-using Daedalus.Modules;
+using Daedalus.Controllers;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using LavishVMAPI;
@@ -40,7 +40,7 @@ namespace Daedalus.Routines
             {
                 leaveStation = false;
                 Program.DaedalusUI.newConsoleMessage("Leaving " + Daedalus.me.Station.Name.ToString());
-                m_RoutineController.activeRoutine = Routine.undefined;
+                c_Routines.activeRoutine = Routine.undefined;
                 f_EVECommands.ExitStation();
             }
             else if(leaveStationDelayed)
@@ -62,6 +62,7 @@ namespace Daedalus.Routines
         public static void triggerLeaveStation()
         {
             leaveStation = true;
+            c_Routines.activeRoutine = Routine.Station_Leave;
         }
 
         public static void triggerLeaveStationDelayed()

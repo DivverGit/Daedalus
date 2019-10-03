@@ -5,8 +5,8 @@ using System;
 namespace Daedalus
 {
     using Behaviours;
+    using Controllers;
     using Functions;
-    using Modules;
 
     public class Daedalus
     {
@@ -35,7 +35,7 @@ namespace Daedalus
             // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
 
-            DaedalusUI.newConsoleMessage("Daedalus 26/09/2019");
+            DaedalusUI.newConsoleMessage("Daedalus 03/10/2019");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
@@ -80,9 +80,9 @@ namespace Daedalus
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
 
-                    DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + m_BehaviourController.activeBehaviour.ToString() + "] [Routine: " + m_RoutineController.activeRoutine.ToString() + "]";
+                    DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + c_Behaviours.activeBehaviour.ToString() + "] [Routine: " + c_Routines.activeRoutine.ToString() + "]";
 
-                    if (!paused)    m_BehaviourController.Pulse();
+                    if (!paused)    c_Behaviours.Pulse();
                 }
                 return;
             }

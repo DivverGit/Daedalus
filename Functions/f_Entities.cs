@@ -52,6 +52,14 @@ namespace Daedalus.Functions
             return Daedalus.eve.QueryEntities("GroupID = 9");
         }
 
+        public static Entity GetEntityByID(long id)
+        {
+            Entity idToReturn = null;
+            List<Entity> entities = Daedalus.eve.QueryEntities("ID = " + id.ToString());
+            if (entities.Count > 0) idToReturn = entities[0];
+            return idToReturn;
+        }
+
         public static List<Entity> GetAsteroids()
         {
             List<Entity> Asteroids = new List<Entity>();

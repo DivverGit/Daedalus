@@ -1,5 +1,6 @@
-﻿using Daedalus.Modules;
+﻿using Daedalus.Controllers;
 using Daedalus.Routines;
+using Daedalus.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,6 @@ namespace Daedalus
         public TabPage Station;
         public TabPage Space;
         public TabPage Combat;
-
         private void initTabPages()
         {
             General = tabControl1.TabPages[0];
@@ -43,7 +43,6 @@ namespace Daedalus
             showHideTabPage(Space, true);
             showHideTabPage(Combat, true);
         }
-
         private void showHideTabPage(TabPage page, bool hide)
         {
             if (page == General)
@@ -79,7 +78,6 @@ namespace Daedalus
                 }
             }
         }
-
         public void switchTabPage(TabPage page)
         {
             TabPage[] tabPages = { General, Station, Space, Combat };
@@ -108,10 +106,25 @@ namespace Daedalus
             hiSlot5,
             hiSlot6,
             hiSlot7,
-            hiSlot8
+            hiSlot8,
+            medSlot1,
+            medSlot2,
+            medSlot3,
+            medSlot4,
+            medSlot5,
+            medSlot6,
+            medSlot7,
+            medSlot8,
+            loSlot1,
+            loSlot2,
+            loSlot3,
+            loSlot4,
+            loSlot5,
+            loSlot6,
+            loSlot7,
+            loSlot8
         }
-
-        public void changeStationLabel(statusLabels label, string value)
+        public void changeStatusLabel(statusLabels label, string value)
         {
             if(label == statusLabels.shipName) shipNameValueLabel.Text = value;
             else if (label == statusLabels.shield) shieldValueLabel.Text = value;
@@ -125,6 +138,38 @@ namespace Daedalus
             else if (label == statusLabels.hiSlot6) hiSlot6ValueLabel.Text = value;
             else if (label == statusLabels.hiSlot7) hiSlot7ValueLabel.Text = value;
             else if (label == statusLabels.hiSlot8) hiSlot8ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot1) medSlot1ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot2) medSlot2ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot3) medSlot3ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot4) medSlot4ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot5) medSlot5ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot6) medSlot6ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot7) medSlot7ValueLabel.Text = value;
+            else if (label == statusLabels.medSlot8) medSlot8ValueLabel.Text = value;
+        }
+
+        public void changeStatusLabelColour(statusLabels label, Color color)
+        {
+            if (label == statusLabels.shipName) shipNameValueLabel.ForeColor = color;
+            else if (label == statusLabels.shield) shieldValueLabel.ForeColor = color;
+            else if (label == statusLabels.armor) armorValueLabel.ForeColor = color;
+            else if (label == statusLabels.hull) hullValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot1) hiSlot1ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot2) hiSlot2ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot3) hiSlot3ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot4) hiSlot4ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot5) hiSlot5ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot6) hiSlot6ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot7) hiSlot7ValueLabel.ForeColor = color;
+            else if (label == statusLabels.hiSlot8) hiSlot8ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot1) medSlot1ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot2) medSlot2ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot3) medSlot3ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot4) medSlot4ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot5) medSlot5ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot6) medSlot6ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot7) medSlot7ValueLabel.ForeColor = color;
+            else if (label == statusLabels.medSlot8) medSlot8ValueLabel.ForeColor = color;
         }
 
         // Misc functions
@@ -134,10 +179,23 @@ namespace Daedalus
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
 
-        private void undockButton_Click(object sender, EventArgs e)
+        private bool propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
+        private void propulsionAlwaysOnLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            m_RoutineController.activeRoutine = Routine.Station_Leave;
-            r_Station_Leave.triggerLeaveStation();
+            if(propulsionAlwaysOn)
+            {
+                Settings.Default.propulsionAlwaysOn = false;
+                propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
+                propulsionAlwaysOnLinkLabel.LinkColor = Color.Red;
+                Daedalus.DaedalusUI.newConsoleMessage("Propulsion 'Always On' disabled");
+            }
+            else if(!propulsionAlwaysOn)
+            {
+                Settings.Default.propulsionAlwaysOn = true;
+                propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
+                propulsionAlwaysOnLinkLabel.LinkColor = Color.Blue;
+                Daedalus.DaedalusUI.newConsoleMessage("Propulsion 'Always On' enabled");
+            }
         }
     }
 }

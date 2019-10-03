@@ -1,5 +1,5 @@
 ﻿using Daedalus.Functions;
-using Daedalus.Modules;
+using Daedalus.Controllers;
 using EVE.ISXEVE;
 using LavishVMAPI;
 using System;
@@ -25,7 +25,7 @@ namespace Daedalus.Behaviours
                 InitComplete = true;
                 Daedalus.DaedalusUI.switchTabPage(Daedalus.DaedalusUI.Combat);
             }
-            m_RoutineController.Pulse();
+            c_Routines.Pulse();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Daedalus.Behaviours;
 using Daedalus.Functions;
-using Daedalus.Modules;
+using Daedalus.Controllers;
 using EVE.ISXEVE;
 using LavishVMAPI;
 using System;
@@ -8,15 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Daedalus.Modules
+namespace Daedalus.Controllers
 {
-    public static class m_BehaviourController
+    public static class c_Behaviours
     {
         public static bool InitComplete = false;
         private static bool inTransition = false;
         private static DateTime transitionEndTime;
 
-        static m_BehaviourController()
+        static c_Behaviours()
         {
             if (!InitComplete)
             {
@@ -52,7 +52,7 @@ namespace Daedalus.Modules
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Station;
-                    m_RoutineController.activeRoutine = Routine.Station_Idle;
+                    c_Routines.activeRoutine = Routine.Station_Idle;
                     b_Station.InitComplete = false;
                     setInTransition();
                 }
@@ -60,19 +60,19 @@ namespace Daedalus.Modules
             // Else if we're not in station and we're in space then we're in space! duh!
             else if (!Daedalus.me.InStation && Daedalus.me.InSpace)
             {
-                if (activeBehaviour != Behaviour.Space && !m_TargetController.redAlert)
+                if (activeBehaviour != Behaviour.Space && !c_Targets.redAlert)
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Space;
-                    m_RoutineController.activeRoutine = Routine.Space_Idle;
+                    c_Routines.activeRoutine = Routine.Space_Idle;
                     b_Space.InitComplete = false;
                     setInTransition();
                 }
-                else if (activeBehaviour != Behaviour.Combat && m_TargetController.redAlert)
+                else if (activeBehaviour != Behaviour.Combat && c_Targets.redAlert)
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Combat;
-                    m_RoutineController.activeRoutine = Routine.Combat_Idle;
+                    c_Routines.activeRoutine = Routine.Combat_Idle;
                     b_Combat.InitComplete = false;
                     setInTransition();
                 }
@@ -89,15 +89,14 @@ namespace Daedalus.Modules
         private static void setInTransition()
         {
             inTransition = true;
-            transitionEndTime = DateTime.Now.AddSeconds(10.0f);
-            Daedalus.DaedalusUI.newConsoleMessage("Behaviour transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
+            transitionEndTime = DateTime.Now.AddSeconds(5.0f);
+            Daedalus.DaedalusUI.newConsoleMessage("Transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
         }
 
         private static void checkInTransition()
         {
             if(DateTime.Now > transitionEndTime)
             {
-                Daedalus.DaedalusUI.newConsoleMessage("Transition finished");
                 inTransition = false;
             }
         }

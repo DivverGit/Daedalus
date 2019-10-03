@@ -10,12 +10,12 @@ using System.Text;
 
 namespace Daedalus.Routines
 {
-    static class r_Station_Idle
+    static class r_Space_Warp
     {
         // Variables
         private static bool initComplete = false;
 
-        static r_Station_Idle()
+        static r_Space_Warp()
         {
             // Init
         }
@@ -25,7 +25,13 @@ namespace Daedalus.Routines
             if (!initComplete)
             {
                 initComplete = true;
-
+            }
+            if (f_Entities.GetEntityMode(Daedalus.me.ToEntity) != "Warping")
+            {
+                c_Routines.activeRoutine = Routine.Space_Idle;
+            }
+            else
+            {
                 c_Status.Pulse();
             }
         }

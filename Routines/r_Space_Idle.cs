@@ -1,5 +1,5 @@
 ﻿using Daedalus.Functions;
-using Daedalus.Modules;
+using Daedalus.Controllers;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using LavishVMAPI;
@@ -26,8 +26,16 @@ namespace Daedalus.Routines
             {
                 initComplete = true;
             }
-            m_TargetController.Pulse();
-            m_StatusController.Pulse();
+            if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) == "Warping")
+            {
+                c_Routines.activeRoutine = Routine.Space_Warp;
+            }
+            else
+            {
+                c_Targets.Pulse();
+                c_Status.Pulse();
+                c_Modules.PropulsionPulse();
+            }
         }
     }
 }

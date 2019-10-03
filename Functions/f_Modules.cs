@@ -1,4 +1,5 @@
-﻿using EVE.ISXEVE;
+﻿using Daedalus.Controllers;
+using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ namespace Daedalus.Functions
             }
             return MiningLasers;
         }
-        
         public static bool UsesCrystals(IModule MiningLaser)
         {
             if (MiningLaser.ChargeSize > 0) return true;
@@ -36,7 +36,6 @@ namespace Daedalus.Functions
                 return false;
             }
         }
-
         public static List<IModule> GetAllModules()
         {
             List<IModule> ModulesFitted = new List<IModule>();
@@ -63,7 +62,6 @@ namespace Daedalus.Functions
 
             return ModulesFitted;
         }
-
         public static List<IModule> GetHiSlotModules()
         {
             List<IModule> ModulesFitted = new List<IModule>();
@@ -78,7 +76,6 @@ namespace Daedalus.Functions
 
             return ModulesFitted;
         }
-
         public static List<IModule> GetMedSlotModules()
         {
             List<IModule> ModulesFitted = new List<IModule>();
@@ -93,7 +90,6 @@ namespace Daedalus.Functions
 
             return ModulesFitted;
         }
-
         public static List<IModule> GetLoSlotModules()
         {
             List<IModule> ModulesFitted = new List<IModule>();
@@ -107,6 +103,39 @@ namespace Daedalus.Functions
             }
 
             return ModulesFitted;
+        }
+        public static float getModuleOptimalRange(SlotType slotType, int slot)
+        {
+            float optimalRange = 0;
+
+            IModule module = Daedalus.myShip.Module(slotType, slot);
+
+            optimalRange = (float)module.OptimalRange;
+
+            return optimalRange;
+        }
+        public static float getModuleFalloffRange(SlotType slotType, int slot)
+        {
+            float falloffRange = 0;
+
+            IModule module = Daedalus.myShip.Module(slotType, slot);
+
+            falloffRange = (float)module.AccuracyFalloff;
+
+            return falloffRange;
+        }
+        public static void getAfterburnerModules()
+        {
+            List<IModule> modules = f_Modules.GetMedSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.MaxVelocityBonus > 0 && module.ToItem.Name.Contains("Afterburner"))
+                {
+                    c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
+                    Daedalus.DaedalusUI.newConsoleMessage(module.ToItem.Name + " was registered as an afterburner");
+                }
+            }
         }
     }
 }

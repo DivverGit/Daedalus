@@ -6,9 +6,9 @@ using EVE.ISXEVE;
 using LavishVMAPI;
 using Daedalus.Functions;
 
-namespace Daedalus.Modules
+namespace Daedalus.Controllers
 {
-    static class m_CombatDroneController
+    static class c_CombatDrones
     {
         // Variables
         private static bool dronesLaunched = false;
@@ -19,7 +19,7 @@ namespace Daedalus.Modules
 
         private static List<Attacker> currentAttackers = new List<Attacker>();
 
-        static m_CombatDroneController()
+        static c_CombatDrones()
         {
             // Init
         }
