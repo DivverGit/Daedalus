@@ -31,7 +31,9 @@ namespace Daedalus.Routines
 
             c_Status.Pulse();
             c_Targets.Pulse();
-            c_Modules.PropulsionPulse();
+            if(c_Modules.afterburners.Count > 0) c_Modules.PropulsionPulse();
+            if (c_Modules.armorRepairers.Count > 0)  c_Modules.ArmorPulse();
+            if (c_Modules.shieldBoosters.Count > 0) c_Modules.ShieldPulse();
 
             ManageHiSlotModules();
         }

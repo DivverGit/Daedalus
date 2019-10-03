@@ -20,9 +20,9 @@ namespace Daedalus.Modules
         }
     }
 
-    public static class m_Afterburner
+    public static class m_Propulsion
     {
-        static m_Afterburner()
+        static m_Propulsion()
         {
             // Init
         }

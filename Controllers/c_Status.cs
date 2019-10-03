@@ -22,6 +22,8 @@ namespace Daedalus.Controllers
         static c_Status()
         {
             f_Modules.getAfterburnerModules();
+            f_Modules.getArmorRepairModules();
+            f_Modules.getShieldBoosterModules();
         }
 
         public static void Pulse()
@@ -40,11 +42,11 @@ namespace Daedalus.Controllers
             if (Modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name);
             if (Modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name);
             if (Modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name);
-            if (Modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[3].ToItem.Name);
-            if (Modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[4].ToItem.Name);
-            if (Modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[5].ToItem.Name);
-            if (Modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[6].ToItem.Name);
-            if (Modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[7].ToItem.Name);
+            if (Modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot4, Modules[3].ToItem.Name);
+            if (Modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot5, Modules[4].ToItem.Name);
+            if (Modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot6, Modules[5].ToItem.Name);
+            if (Modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot7, Modules[6].ToItem.Name);
+            if (Modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
 
             IModule module;
 
@@ -96,25 +98,35 @@ namespace Daedalus.Controllers
             if (Modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot7, Modules[6].ToItem.Name);
             if (Modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot8, Modules[7].ToItem.Name);
         }
+        public static string myShipName;
+        public static double shieldCurrent;
+        public static double shieldMaximum;
+        public static double shieldPercent;
+        public static double armorCurrent;
+        public static double armorMaximum;
+        public static double armorPercent;
+        public static double structureCurrent;
+        public static double structureMaximum;
+        public static double structurePercent;
         public static void updateShipData()
         {
             // Variables
-            string myShipName = Daedalus.myShip.Name;
-            string shieldCurrent = Daedalus.myShip.Shield.ToString("#");
-            string shieldMaximum = Daedalus.myShip.MaxShield.ToString("#");
-            string shieldPercent = " (" + Daedalus.myShip.ShieldPct.ToString("#") + "%)";
-            string armorCurrent = Daedalus.myShip.Armor.ToString("#");
-            string armorMaximum = Daedalus.myShip.MaxArmor.ToString("#");
-            string armorPercent = " (" + Daedalus.myShip.ArmorPct.ToString("#") + "%)";
-            string structureCurrent = Daedalus.myShip.Structure.ToString("#");
-            string structureMaximum = Daedalus.myShip.MaxStructure.ToString("#");
-            string structurePercent = " (" + Daedalus.myShip.StructurePct.ToString("#") + "%)";
+            myShipName = Daedalus.myShip.Name;
+            shieldCurrent = Daedalus.myShip.Shield;
+            shieldMaximum = Daedalus.myShip.MaxShield;
+            shieldPercent = Daedalus.myShip.ShieldPct;
+            armorCurrent = Daedalus.myShip.Armor;
+            armorMaximum = Daedalus.myShip.MaxArmor;
+            armorPercent = Daedalus.myShip.ArmorPct;
+            structureCurrent = Daedalus.myShip.Structure;
+            structureMaximum = Daedalus.myShip.MaxStructure;
+            structurePercent = Daedalus.myShip.StructurePct;
 
             // Set all the labels
             Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.shipName, myShipName);
-            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.shield, shieldCurrent + " / " + shieldMaximum + shieldPercent);
-            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.armor, armorCurrent + " / " + armorMaximum + armorPercent);
-            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hull, structureCurrent + " / " + structureMaximum + structurePercent);
+            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.shield, shieldCurrent.ToString("#") + " / " + shieldMaximum.ToString("#") + " (" + shieldPercent.ToString("#") + "%)");
+            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.armor, armorCurrent.ToString("#") + " / " + armorMaximum.ToString("#") + " (" + armorPercent.ToString("#") + "%)");
+            Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hull, structureCurrent.ToString("#") + " / " + structureMaximum.ToString("#") + " (" + structurePercent.ToString("#") + "%)");
         }
     }
 }

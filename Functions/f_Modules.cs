@@ -132,8 +132,37 @@ namespace Daedalus.Functions
                 IModule module = modules[i];
                 if (module.MaxVelocityBonus > 0 && module.ToItem.Name.Contains("Afterburner"))
                 {
-                    Daedalus.DaedalusUI.newConsoleMessage("Afterburner detected");
+                    Daedalus.DaedalusUI.newConsoleMessage("Afterburner enabled");
                     c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
+                }
+            }
+        }
+
+        public static void getArmorRepairModules()
+        {
+            List<IModule> modules = f_Modules.GetLoSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.ArmorHPRepaired > 0 && module.ToItem.Name.Contains("Repairer"))
+                {
+                    double armorRepaired = Convert.ToDouble(module.ArmorHPRepaired);
+                    Daedalus.DaedalusUI.newConsoleMessage("ArmorRepair enabled - " + armorRepaired.ToString("#") + " HP");
+                    c_Modules.armorRepairers.Add(new Modules.ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
+                }
+            }
+        }
+        public static void getShieldBoosterModules()
+        {
+            List<IModule> modules = f_Modules.GetMedSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.ShieldBonus > 0 && module.ToItem.Name.Contains("Booster"))
+                {
+                    double shieldBoosted = Convert.ToDouble(module.ShieldBonus);
+                    Daedalus.DaedalusUI.newConsoleMessage("ShieldBooster enabled - " + shieldBoosted.ToString("#") + " HP");
+                    c_Modules.shieldBoosters.Add(new Modules.ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
                 }
             }
         }
