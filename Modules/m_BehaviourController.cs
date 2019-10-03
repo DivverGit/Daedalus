@@ -25,6 +25,7 @@ namespace Daedalus.Modules
         }
 
         public enum Behaviour {
+            Combat,
             Space,
             Station,
             undefined
@@ -35,8 +36,11 @@ namespace Daedalus.Modules
         public static void Pulse()
         {
             if (inTransition) checkInTransition();
-            checkActiveBehaviour();
-            pulseActiveBehaviour();
+            else if (!inTransition)
+            {
+                checkActiveBehaviour();
+                pulseActiveBehaviour();
+            }
         }
 
         private static void checkActiveBehaviour()
@@ -44,7 +48,7 @@ namespace Daedalus.Modules
             // If we're in station and not in space then we're in station! duh!
             if (Daedalus.me.InStation && !Daedalus.me.InSpace)
             {
-                if(activeBehaviour != Behaviour.Station && !inTransition)
+                if(activeBehaviour != Behaviour.Station)
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Station;
@@ -56,12 +60,20 @@ namespace Daedalus.Modules
             // Else if we're not in station and we're in space then we're in space! duh!
             else if (!Daedalus.me.InStation && Daedalus.me.InSpace)
             {
-                if (activeBehaviour != Behaviour.Space && !inTransition)
+                if (activeBehaviour != Behaviour.Space && !m_TargetController.redAlert)
                 {
                     previousBehaviour = activeBehaviour;
                     activeBehaviour = Behaviour.Space;
                     m_RoutineController.activeRoutine = Routine.Space_Idle;
                     b_Space.InitComplete = false;
+                    setInTransition();
+                }
+                else if (activeBehaviour != Behaviour.Combat && m_TargetController.redAlert)
+                {
+                    previousBehaviour = activeBehaviour;
+                    activeBehaviour = Behaviour.Combat;
+                    m_RoutineController.activeRoutine = Routine.Combat_Idle;
+                    b_Combat.InitComplete = false;
                     setInTransition();
                 }
             }
@@ -71,12 +83,13 @@ namespace Daedalus.Modules
         {
             if (activeBehaviour == Behaviour.Space) b_Space.Pulse();
             else if (activeBehaviour == Behaviour.Station) b_Station.Pulse();
+            else if (activeBehaviour == Behaviour.Combat) b_Combat.Pulse();
         }
 
         private static void setInTransition()
         {
             inTransition = true;
-            transitionEndTime = DateTime.Now.AddSeconds(5.0f);
+            transitionEndTime = DateTime.Now.AddSeconds(10.0f);
             Daedalus.DaedalusUI.newConsoleMessage("Behaviour transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
         }
 
@@ -84,6 +97,7 @@ namespace Daedalus.Modules
         {
             if(DateTime.Now > transitionEndTime)
             {
+                Daedalus.DaedalusUI.newConsoleMessage("Transition finished");
                 inTransition = false;
             }
         }

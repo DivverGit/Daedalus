@@ -29,16 +29,19 @@ namespace Daedalus
         public TabPage General;
         public TabPage Station;
         public TabPage Space;
+        public TabPage Combat;
 
         private void initTabPages()
         {
             General = tabControl1.TabPages[0];
             Station = tabControl1.TabPages[1];
             Space = tabControl1.TabPages[2];
+            Combat = tabControl1.TabPages[3];
 
             showHideTabPage(General, true);
             showHideTabPage(Station, true);
             showHideTabPage(Space, true);
+            showHideTabPage(Combat, true);
         }
 
         private void showHideTabPage(TabPage page, bool hide)
@@ -67,11 +70,19 @@ namespace Daedalus
                     tabControl1.TabPages.Insert(0, Space);
                 }
             }
+            else if (page == Combat)
+            {
+                if (hide) tabControl1.TabPages.Remove(Combat);
+                else
+                {
+                    tabControl1.TabPages.Insert(0, Combat);
+                }
+            }
         }
 
         public void switchTabPage(TabPage page)
         {
-            TabPage[] tabPages = { General, Station, Space };
+            TabPage[] tabPages = { General, Station, Space, Combat };
 
             foreach(TabPage tabPage in tabPages)
             {

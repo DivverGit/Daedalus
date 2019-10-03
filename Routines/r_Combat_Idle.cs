@@ -10,12 +10,12 @@ using System.Text;
 
 namespace Daedalus.Routines
 {
-    static class r_Space_Idle
+    static class r_Combat_Idle
     {
         // Variables
         private static bool initComplete = false;
 
-        static r_Space_Idle()
+        static r_Combat_Idle()
         {
             // Init
         }
@@ -26,6 +26,7 @@ namespace Daedalus.Routines
             {
                 initComplete = true;
             }
+            if (m_TargetController.redAlert) m_RoutineController.activeRoutine = Routine.Combat_Brawl;
             m_TargetController.Pulse();
             m_StatusController.Pulse();
         }

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Charges>
+  <Charge Name="Republic Fleet Phased Plasma S" TypeID="21924" EM_Damage="0" Thermal_Damage="11.5" Kinetic_Damage="2.3" Explosive_Damage="0" />
+</Charges>

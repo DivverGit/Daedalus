@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Daedalus.Data
 {
@@ -27,34 +28,25 @@ namespace Daedalus.Data
         }
     }
 
-    public static class d_ChargeData
+    public static class d_Charges
     {
         public static List<chargeObject> chargeObjects = new List<chargeObject>();
 
-        static d_ChargeData()
+        static d_Charges()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("chargeData.csv"));
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Charges.xml"));
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (var reader = new StreamReader(stream))
             {
-                List<string> listA = new List<string>();
-                List<string> listB = new List<string>();
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
+                XElement dataDoc = XElement.Load(stream);
+                chargeObjects = (from a in dataDoc.Descendants("Charge")
+                        select new chargeObject(a.Attribute("Name").Value, Convert.ToInt32(a.Attribute("TypeID").Value), float.Parse(a.Attribute("EM_Damage").Value), float.Parse(a.Attribute("Thermal_Damage").Value), float.Parse(a.Attribute("Kinetic_Damage").Value), float.Parse(a.Attribute("Explosive_Damage").Value))).ToList();
+            }
 
-                    string name = values[0];
-                    int typeId = Convert.ToInt32(values[1]);
-                    float em = float.Parse(values[2]);
-                    float thermal = float.Parse(values[3]);
-                    float kinetic = float.Parse(values[4]);
-                    float explosive = float.Parse(values[5]);
-
-                    chargeObjects.Add(new chargeObject(name, typeId, em, thermal, kinetic, explosive));
-                }
+            foreach(chargeObject charge in chargeObjects)
+            {
+                Daedalus.DaedalusUI.newConsoleMessage(charge.Name);
             }
         }
 

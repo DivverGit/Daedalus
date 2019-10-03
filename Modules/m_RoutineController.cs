@@ -28,10 +28,17 @@ namespace Daedalus.Modules
                 if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
                 else if (activeRoutine == Routine.Station_Leave) r_Station_Leave.Pulse();
             }
+            else if (m_BehaviourController.activeBehaviour == m_BehaviourController.Behaviour.Combat)
+            {
+                if (activeRoutine == Routine.Combat_Idle) r_Combat_Idle.Pulse();
+                else if (activeRoutine == Routine.Combat_Brawl) r_Combat_Brawl.Pulse();
+            }
         }
     }
 
     public enum Routine {
+        Combat_Idle,
+        Combat_Brawl,
         Space_Idle,
         Station_Idle,
         Station_Leave,
