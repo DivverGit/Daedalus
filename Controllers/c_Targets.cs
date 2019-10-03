@@ -31,7 +31,8 @@ namespace Daedalus.Controllers
                 allEntities = Daedalus.eve.QueryEntities();
                 enemyNpcEntities = new List<Entity>();
 
-                int entitiesCount = allEntities.Count;
+                int entitiesCount = 0;
+                entitiesCount = allEntities.Count;
 
                 if (entitiesCount == 0) return;
                 else if (entitiesCount > 0)

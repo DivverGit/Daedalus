@@ -73,6 +73,7 @@ namespace Daedalus.Functions
 
         public static double DistanceFromPlayerToEntity(Entity e)
         {
+            if (!e.IsValid) return 0;
             return Daedalus.eve.DistanceBetween(Daedalus.me.ToEntity.ID, e.ID);
         }
 

@@ -132,8 +132,8 @@ namespace Daedalus.Functions
                 IModule module = modules[i];
                 if (module.MaxVelocityBonus > 0 && module.ToItem.Name.Contains("Afterburner"))
                 {
+                    Daedalus.DaedalusUI.newConsoleMessage("Afterburner detected");
                     c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
-                    Daedalus.DaedalusUI.newConsoleMessage(module.ToItem.Name + " was registered as an afterburner");
                 }
             }
         }
