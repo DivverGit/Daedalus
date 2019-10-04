@@ -178,24 +178,5 @@ namespace Daedalus
             Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
-
-        private bool propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
-        private void propulsionAlwaysOnLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if(propulsionAlwaysOn)
-            {
-                Settings.Default.propulsionAlwaysOn = false;
-                propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
-                propulsionAlwaysOnLinkLabel.LinkColor = Color.Red;
-                Daedalus.DaedalusUI.newConsoleMessage("Propulsion 'Always On' disabled");
-            }
-            else if(!propulsionAlwaysOn)
-            {
-                Settings.Default.propulsionAlwaysOn = true;
-                propulsionAlwaysOn = Settings.Default.propulsionAlwaysOn;
-                propulsionAlwaysOnLinkLabel.LinkColor = Color.Blue;
-                Daedalus.DaedalusUI.newConsoleMessage("Propulsion 'Always On' enabled");
-            }
-        }
     }
 }

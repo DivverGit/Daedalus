@@ -1,4 +1,5 @@
-﻿using EVE.ISXEVE;
+﻿using Daedalus.Data;
+using EVE.ISXEVE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,6 @@ namespace Daedalus.Functions
 {
     public static class f_Entities
     {
-        static f_Entities()
-        {
-            // Init
-        }
-
         public static string GetEntityMode(Entity e)
         {
             int Mode = e.Mode;
@@ -41,17 +37,14 @@ namespace Daedalus.Functions
                 return "NULL";
             }
         }
-
         public static List<Entity> GetStations()
         {
             return Daedalus.eve.QueryEntities("GroupID = 15");
         }
-
         public static List<Entity> GetAsteroidBelts()
         {
             return Daedalus.eve.QueryEntities("GroupID = 9");
         }
-
         public static Entity GetEntityByID(long id)
         {
             Entity idToReturn = null;
@@ -59,7 +52,6 @@ namespace Daedalus.Functions
             if (entities.Count > 0) idToReturn = entities[0];
             return idToReturn;
         }
-
         public static List<Entity> GetAsteroids()
         {
             List<Entity> Asteroids = new List<Entity>();
@@ -70,16 +62,25 @@ namespace Daedalus.Functions
             }
             return Asteroids;
         }
-
         public static double DistanceFromPlayerToEntity(Entity e)
         {
             if (!e.IsValid) return 0;
             return Daedalus.eve.DistanceBetween(Daedalus.me.ToEntity.ID, e.ID);
         }
-
         public static double DistanceBetween(Entity e1, Entity e2)
         {
             return Daedalus.eve.DistanceBetween(e1.ID, e2.ID);
+        }
+        public static List<Entity> GetNpcEntities()
+        {
+            List<Entity> toReturn = new List<Entity>();
+            // Get all enemy npcs from NPC_Types.xml list
+            foreach(long groupID in d_NPC_Types.All)
+            {
+                List<Entity> entities = Daedalus.eve.QueryEntities("GroupID = " + groupID);
+                if(entities.Count > 0)  toReturn.AddRange(entities);
+            }
+            return toReturn;
         }
     }
 }

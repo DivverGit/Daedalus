@@ -130,21 +130,20 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.MaxVelocityBonus > 0 && module.ToItem.Name.Contains("Afterburner"))
+                if (module.ToItem.GroupID == 46)
                 {
                     Daedalus.DaedalusUI.newConsoleMessage("Afterburner enabled");
                     c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
                 }
             }
         }
-
         public static void getArmorRepairModules()
         {
             List<IModule> modules = f_Modules.GetLoSlotModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ArmorHPRepaired > 0 && module.ToItem.Name.Contains("Repairer"))
+                if (module.ToItem.GroupID == 62)
                 {
                     double armorRepaired = Convert.ToDouble(module.ArmorHPRepaired);
                     Daedalus.DaedalusUI.newConsoleMessage("ArmorRepair enabled - " + armorRepaired.ToString("#") + " HP");
@@ -158,11 +157,24 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ShieldBonus > 0 && module.ToItem.Name.Contains("Booster"))
+                if (module.ToItem.GroupID == 40)
                 {
                     double shieldBoosted = Convert.ToDouble(module.ShieldBonus);
                     Daedalus.DaedalusUI.newConsoleMessage("ShieldBooster enabled - " + shieldBoosted.ToString("#") + " HP");
                     c_Modules.shieldBoosters.Add(new Modules.ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
+                }
+            }
+        }
+        public static void getShieldHardenerModules()
+        {
+            List<IModule> modules = f_Modules.GetMedSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.ToItem.GroupID == 77)
+                {
+                    Daedalus.DaedalusUI.newConsoleMessage("ShieldHardener enabled");
+                    c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
                 }
             }
         }

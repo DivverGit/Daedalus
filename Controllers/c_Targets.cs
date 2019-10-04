@@ -14,9 +14,7 @@ namespace Daedalus.Controllers
         // Variables
         private static List<Entity> allEntities = new List<Entity>();
         public static List<Entity> enemyNpcEntities = new List<Entity>();
-
         public static List<Entity> targets = new List<Entity>();
-
         public static bool redAlert = false;
 
         static c_Targets()
@@ -28,24 +26,7 @@ namespace Daedalus.Controllers
         {
             using (new FrameLock(true))
             {
-                allEntities = Daedalus.eve.QueryEntities();
-                enemyNpcEntities = new List<Entity>();
-
-                int entitiesCount = 0;
-                entitiesCount = allEntities.Count;
-
-                if (entitiesCount == 0) return;
-                else if (entitiesCount > 0)
-                {
-                    foreach(Entity entity in allEntities)
-                    {
-                        long GroupID = entity.GroupID;
-                        if (d_NPC_Types.All.Contains(GroupID))
-                        {
-                            enemyNpcEntities.Add(entity);
-                        }
-                    }
-                }
+                enemyNpcEntities = f_Entities.GetNpcEntities();
 
                 if (enemyNpcEntities.Count > 0)
                 {
@@ -60,12 +41,13 @@ namespace Daedalus.Controllers
         }
 
         private static double maxTargetRange;
-        //public static List<Entity> targetsLockedEntities = new List<Entity>();
+        private static double maxTargetsLocked;
         public static List<long> targetsLockedIDs = new List<long>();
         public static List<long> targetsLockingIDs = new List<long>();
         public static void ManageTargetLocks()
         {
             maxTargetRange = Daedalus.myShip.MaxTargetRange;
+            maxTargetsLocked = Daedalus.me.MaxLockedTargets;
 
             // Clear and populate targets locked list
             targetsLockedIDs = new List<long>();
@@ -87,9 +69,11 @@ namespace Daedalus.Controllers
                 if (!targetsLockingIDs.Contains(target.ID) && f_Entities.DistanceFromPlayerToEntity(target) < maxTargetRange)
                 {
                     targetsLockingIDs.Add(target.ID);
+                    string npcClass = d_NPC_Classes.getNpcClass(target.GroupID);
+                    Daedalus.DaedalusUI.newConsoleMessage("Target is " + target.Name + " (" + npcClass + ")");
                     target.LockTarget();
                 }
-                else if (!targetsLockingIDs.Contains(target.ID) && f_Entities.DistanceFromPlayerToEntity(target) > maxTargetRange)
+                else if (f_Entities.GetEntityMode(Daedalus.me.ToEntity) != "Approaching" && !targetsLockingIDs.Contains(target.ID) && f_Entities.DistanceFromPlayerToEntity(target) > maxTargetRange)
                 {
                     target.Approach();
                 }

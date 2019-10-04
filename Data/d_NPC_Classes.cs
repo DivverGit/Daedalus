@@ -32,6 +32,22 @@ namespace Daedalus.Data
             }
         }
 
+        public static string getNpcClass(long groupID)
+        {
+            string toReturn = null;
+
+            List<long> keys = All.Keys.ToList<long>();
+            List<string> values = All.Values.ToList<string>();
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if(keys[i] == groupID)
+                {
+                    toReturn = values[i];
+                }
+            }
+            return toReturn;
+        }
+
         public static readonly List<String> FactionSpawns = new List<string>
         {
             "Sentient",
@@ -42,7 +58,6 @@ namespace Daedalus.Data
             "Domination",
             "Psycho"
         };
-
         public static readonly List<String> OfficerSpawns = new List<string>
         {
             "Ahremen Arkah",
@@ -70,7 +85,6 @@ namespace Daedalus.Data
             "Vepas Minimala",
             "Vizan Ankonin"
         };
-
         public static readonly List<String> HaulerSpawns = new List<string>
         {
             "Angel Bulker",

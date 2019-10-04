@@ -67,7 +67,6 @@ namespace Daedalus.Routines
                     if (orbitTargetID != target.ID)
                     {
                         orbitTargetID = target.ID;
-                        Daedalus.DaedalusUI.newConsoleMessage("Orbiting " + target.Name);
                         target.Orbit(Convert.ToInt32(orbitRange));
                     }
 
