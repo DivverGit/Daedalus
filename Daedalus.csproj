@@ -79,6 +79,7 @@
     <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Controllers\c_Modules.cs" />
     <Compile Include="Daedalus.cs" />
+    <Compile Include="Data\d_Weapon_Types.cs" />
     <Compile Include="Data\d_Priority_Targets.cs" />
     <Compile Include="Data\d_NPC_Types.cs" />
     <Compile Include="Data\d_NPC_Classes.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Controllers\c_CombatDrones.cs" />
     <Compile Include="Controllers\c_Status.cs" />
     <Compile Include="Controllers\c_Routines.cs" />
+    <Compile Include="Modules\m_Weapons.cs" />
     <Compile Include="Modules\m_Shield.cs" />
     <Compile Include="Modules\m_Armor.cs" />
     <Compile Include="Modules\m_Propulsion.cs" />
@@ -153,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Priority_Targets.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Weapon_Types.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

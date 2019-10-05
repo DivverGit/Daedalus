@@ -22,7 +22,7 @@ namespace Daedalus
         private void UI_Load(object sender, EventArgs e)
         {
             Daedalus Daedalus = new Daedalus(this);
-
+            orbitRangeTextBox.Lines[0] = Settings.Default.orbitRange.ToString();
             initTabPages();
         }
 
@@ -147,7 +147,6 @@ namespace Daedalus
             else if (label == statusLabels.medSlot7) medSlot7ValueLabel.Text = value;
             else if (label == statusLabels.medSlot8) medSlot8ValueLabel.Text = value;
         }
-
         public void changeStatusLabelColour(statusLabels label, Color color)
         {
             if (label == statusLabels.shipName) shipNameValueLabel.ForeColor = color;
@@ -177,6 +176,19 @@ namespace Daedalus
         {
             Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
+        }
+        public float orbitRange()
+        {
+            float toReturn;
+            if (float.TryParse(orbitRangeTextBox.Lines[0], out toReturn))
+            {
+                Settings.Default.orbitRange = toReturn;
+                return toReturn;
+            }
+            else
+            {
+                return 500.0f;
+            }
         }
     }
 }

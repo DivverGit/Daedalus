@@ -1,4 +1,6 @@
 ﻿using Daedalus.Controllers;
+using Daedalus.Data;
+using Daedalus.Modules;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using System;
@@ -8,7 +10,7 @@ using System.Text;
 
 namespace Daedalus.Functions
 {
-    static class f_Modules
+    public static class f_Modules
     {
         static f_Modules()
         {
@@ -104,23 +106,39 @@ namespace Daedalus.Functions
 
             return ModulesFitted;
         }
-        public static float getModuleOptimalRange(SlotType slotType, int slot)
+        public static float getModuleOptimalRange(SlotType slotType, int slotIndex)
         {
             float optimalRange = 0;
 
-            IModule module = Daedalus.myShip.Module(slotType, slot);
+            IModule module = Daedalus.myShip.Module(slotType, slotIndex);
 
-            optimalRange = (float)module.OptimalRange;
+            if (GetWeaponInfo(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
+            {
+                ModuleCharge missile = module.Charge;
+                optimalRange = ((float)missile.MaxFlightTime * (float)missile.MaxVelocity);
+            }
+            else
+            {
+                optimalRange = (float)module.OptimalRange;
+            }
 
             return optimalRange;
         }
-        public static float getModuleFalloffRange(SlotType slotType, int slot)
+        public static float getModuleFalloffRange(SlotType slotType, int slotIndex)
         {
             float falloffRange = 0;
 
-            IModule module = Daedalus.myShip.Module(slotType, slot);
+            IModule module = Daedalus.myShip.Module(slotType, slotIndex);
 
-            falloffRange = (float)module.AccuracyFalloff;
+            if (GetWeaponInfo(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
+            {
+                ModuleCharge missile = module.Charge;
+                falloffRange = 0;
+            }
+            else
+            {
+                falloffRange = (float)module.AccuracyFalloff;
+            }
 
             return falloffRange;
         }
@@ -176,6 +194,60 @@ namespace Daedalus.Functions
                     Daedalus.DaedalusUI.newConsoleMessage("ShieldHardener enabled");
                     c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
                 }
+            }
+        }
+        public static void getArmorHardenerModules()
+        {
+            List<IModule> modules = f_Modules.GetLoSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.ToItem.GroupID == 328)
+                {
+                    Daedalus.DaedalusUI.newConsoleMessage("ArmorHardener enabled");
+                    c_Modules.armorHardeners.Add(new Modules.ArmorHardener(module.ToItem.Name, i));
+                }
+            }
+        }
+        public static void getWeaponModules()
+        {
+            List<IModule> modules = f_Modules.GetHiSlotModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if(module.IsValid)
+                {
+                    WeaponModule toAdd = GetWeaponInfo(SlotType.HiSlot, i);
+                    if (toAdd != null)
+                    {
+                        c_Modules.weaponModules.Add(toAdd);
+                        Daedalus.DaedalusUI.newConsoleMessage(toAdd.name + " registered");
+                    }
+                }
+            }
+        }
+        public static WeaponModule GetWeaponInfo(SlotType slotType, int slotIndex)
+        {
+            IModule module = Daedalus.myShip.Module(slotType, slotIndex);
+            if (d_Weapon_Types.EnergyTurrets.Contains(module.ToItem.GroupID))
+            {
+                return new WeaponModule(module.ToItem.Name, WeaponType.Energy_Turret, slotType, slotIndex);
+            }
+            else if (d_Weapon_Types.HybridTurrets.Contains(module.ToItem.GroupID))
+            {
+                return new WeaponModule(module.ToItem.Name, WeaponType.Hybrid_Turret, slotType, slotIndex);
+            }
+            else if (d_Weapon_Types.MissileLaunchers.Contains(module.ToItem.GroupID))
+            {
+                return new WeaponModule(module.ToItem.Name, WeaponType.Missile_Launcher, slotType, slotIndex);
+            }
+            else if (d_Weapon_Types.ProjectileTurret.Contains(module.ToItem.GroupID))
+            {
+                return new WeaponModule(module.ToItem.Name, WeaponType.Projectile_Turret, slotType, slotIndex);
+            }
+            else
+            {
+                return null;
             }
         }
     }

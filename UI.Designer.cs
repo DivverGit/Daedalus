@@ -90,12 +90,15 @@
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Console = new System.Windows.Forms.ListBox();
+            this.orbitRangeLabel = new System.Windows.Forms.Label();
+            this.orbitRangeTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.generalTabPage.SuspendLayout();
             this.stationTabPage.SuspendLayout();
             this.spaceTabPage.SuspendLayout();
             this.combatTabPage.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -121,7 +124,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tabControl4, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -175,7 +178,7 @@
             this.stationTabPage.Location = new System.Drawing.Point(4, 25);
             this.stationTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stationTabPage.Name = "stationTabPage";
-            this.stationTabPage.Size = new System.Drawing.Size(275, 206);
+            this.stationTabPage.Size = new System.Drawing.Size(274, 207);
             this.stationTabPage.TabIndex = 1;
             this.stationTabPage.Text = "Station";
             this.stationTabPage.UseVisualStyleBackColor = true;
@@ -186,7 +189,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(275, 206);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(274, 207);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // spaceTabPage
@@ -196,7 +199,7 @@
             this.spaceTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.spaceTabPage.Name = "spaceTabPage";
             this.spaceTabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.spaceTabPage.Size = new System.Drawing.Size(275, 206);
+            this.spaceTabPage.Size = new System.Drawing.Size(274, 207);
             this.spaceTabPage.TabIndex = 2;
             this.spaceTabPage.Text = "Space";
             this.spaceTabPage.UseVisualStyleBackColor = true;
@@ -205,16 +208,16 @@
             // 
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 2);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(269, 202);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(268, 203);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // combatTabPage
             // 
             this.combatTabPage.Controls.Add(this.tableLayoutPanel6);
             this.combatTabPage.Location = new System.Drawing.Point(4, 25);
-            this.combatTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combatTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.combatTabPage.Name = "combatTabPage";
             this.combatTabPage.Size = new System.Drawing.Size(274, 207);
             this.combatTabPage.TabIndex = 3;
@@ -223,12 +226,14 @@
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel6.Controls.Add(this.orbitRangeLabel, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.orbitRangeTextBox, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 3;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
@@ -252,9 +257,9 @@
             // 
             this.tabPage1.Controls.Add(this.tableLayoutPanel3);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(347, 207);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Status";
@@ -597,7 +602,7 @@
             this.medSlotTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.medSlotTabPage.Name = "medSlotTabPage";
             this.medSlotTabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.medSlotTabPage.Size = new System.Drawing.Size(351, 206);
+            this.medSlotTabPage.Size = new System.Drawing.Size(348, 207);
             this.medSlotTabPage.TabIndex = 1;
             this.medSlotTabPage.Text = "Medium";
             this.medSlotTabPage.UseVisualStyleBackColor = true;
@@ -637,7 +642,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(345, 202);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(342, 203);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // medSlot1Label
@@ -805,7 +810,7 @@
             this.loSlotTabPage.Location = new System.Drawing.Point(4, 25);
             this.loSlotTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.loSlotTabPage.Name = "loSlotTabPage";
-            this.loSlotTabPage.Size = new System.Drawing.Size(351, 206);
+            this.loSlotTabPage.Size = new System.Drawing.Size(348, 207);
             this.loSlotTabPage.TabIndex = 2;
             this.loSlotTabPage.Text = "Low";
             this.loSlotTabPage.UseVisualStyleBackColor = true;
@@ -825,9 +830,9 @@
             // 
             this.tabPage2.Controls.Add(this.Console);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(419, 207);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Log";
@@ -840,10 +845,31 @@
             this.Console.FormattingEnabled = true;
             this.Console.ItemHeight = 16;
             this.Console.Location = new System.Drawing.Point(4, 4);
-            this.Console.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Console.Margin = new System.Windows.Forms.Padding(4);
             this.Console.Name = "Console";
             this.Console.Size = new System.Drawing.Size(411, 199);
             this.Console.TabIndex = 0;
+            // 
+            // orbitRangeLabel
+            // 
+            this.orbitRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.orbitRangeLabel.AutoSize = true;
+            this.orbitRangeLabel.Location = new System.Drawing.Point(20, 7);
+            this.orbitRangeLabel.Name = "orbitRangeLabel";
+            this.orbitRangeLabel.Size = new System.Drawing.Size(110, 17);
+            this.orbitRangeLabel.TabIndex = 1;
+            this.orbitRangeLabel.Text = "Orbit Range (m)";
+            // 
+            // orbitRangeTextBox
+            // 
+            this.orbitRangeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.orbitRangeTextBox.Location = new System.Drawing.Point(153, 3);
+            this.orbitRangeTextBox.Name = "orbitRangeTextBox";
+            this.orbitRangeTextBox.Size = new System.Drawing.Size(118, 22);
+            this.orbitRangeTextBox.TabIndex = 2;
+            this.orbitRangeTextBox.Text = "500";
             // 
             // UI
             // 
@@ -851,7 +877,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1444, 240);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UI";
             this.Text = "UI";
             this.TopMost = true;
@@ -862,6 +888,8 @@
             this.stationTabPage.ResumeLayout(false);
             this.spaceTabPage.ResumeLayout(false);
             this.combatTabPage.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -943,5 +971,7 @@
         private System.Windows.Forms.Label medSlot5ValueLabel;
         private System.Windows.Forms.Label medSlot4ValueLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label orbitRangeLabel;
+        private System.Windows.Forms.TextBox orbitRangeTextBox;
     }
 }

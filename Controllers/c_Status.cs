@@ -24,8 +24,8 @@ namespace Daedalus.Controllers
             f_Modules.getArmorRepairModules();
             f_Modules.getShieldBoosterModules();
             f_Modules.getShieldHardenerModules();
+            f_Modules.getWeaponModules();
         }
-
         public static void Pulse()
         {
             updateHighPowerModules();
@@ -196,6 +196,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot8, Color.DarkGray);
         }
+
         public static string myShipName;
         public static double shieldCurrent;
         public static double shieldMaximum;

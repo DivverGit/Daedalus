@@ -12,16 +12,9 @@ namespace Daedalus.Controllers
     static class c_Targets
     {
         // Variables
-        private static List<Entity> allEntities = new List<Entity>();
         public static List<Entity> enemyNpcEntities = new List<Entity>();
         public static List<Entity> targets = new List<Entity>();
         public static bool redAlert = false;
-
-        static c_Targets()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             using (new FrameLock(true))
@@ -60,7 +53,7 @@ namespace Daedalus.Controllers
                 }
             }
 
-            // If no targets locked and more than one enemy npc then start locking target
+            // If no targets locked and there's at least one enemy npc then start locking target
             Entity target;
             if (targetsLockedIDs.Count == 0 && targetsLockingIDs.Count == 0 && enemyNpcEntities.Count > 0)
             {

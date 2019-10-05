@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<Weapons>
+  <!-- Missile Launchers -->
+  <MissileLauncher Name="Light Missile Launchers">509</MissileLauncher>
+  <MissileLauncher Name="Rocket Launchers">507</MissileLauncher>
+  <MissileLauncher Name="Rapid Light Missile Launchers">511</MissileLauncher>
+  <MissileLauncher Name="Heavy Assault Missile Launchers">771</MissileLauncher>
+  <MissileLauncher Name="Heavy Missile Launchers">510</MissileLauncher>
+  <MissileLauncher Name="Cruise Missile Launchers">506</MissileLauncher>
+  <MissileLauncher Name="Rapid Heavy Missile Launcher">1245</MissileLauncher>
+  <MissileLauncher Name="Rapid Torpedo Launchers">1673</MissileLauncher>
+  <MissileLauncher Name="Torpedo Launchers">508</MissileLauncher>
+  <!-- Projectile Turrets -->
+  <ProjectileTurret Name="Projectile Turret">55</ProjectileTurret>
+  <!-- Hybrid Turrets -->
+  <HybridTurret Name="Projectile Turret">74</HybridTurret>
+  <!-- Energy Turrets -->
+  <EnergyTurret Name="Projectile Turret">53</EnergyTurret>
+</Weapons>

@@ -25,10 +25,15 @@ namespace Daedalus.Routines
             if (!initComplete)
             {
                 initComplete = true;
+                Daedalus.me.SetVelocity(100);
             }
             if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) != "Warping")
             {
-                if (c_Targets.redAlert) c_Routines.activeRoutine = Routine.Combat_Brawl;
+                if (c_Targets.redAlert)
+                {
+                    initComplete = false;
+                    c_Routines.activeRoutine = Routine.Combat_Brawl;
+                }
                 c_Targets.Pulse();
                 c_Status.Pulse();
             }

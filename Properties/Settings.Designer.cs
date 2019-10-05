@@ -25,13 +25,13 @@ namespace Daedalus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool propulsionAlwaysOn {
+        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
+        public float orbitRange {
             get {
-                return ((bool)(this["propulsionAlwaysOn"]));
+                return ((float)(this["orbitRange"]));
             }
             set {
-                this["propulsionAlwaysOn"] = value;
+                this["orbitRange"] = value;
             }
         }
     }

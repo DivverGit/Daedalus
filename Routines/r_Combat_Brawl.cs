@@ -32,18 +32,14 @@ namespace Daedalus.Routines
             c_Status.Pulse();
             c_Targets.Pulse();
             if(c_Modules.afterburners.Count > 0) c_Modules.PropulsionPulse();
-            if (c_Modules.armorRepairers.Count > 0)  c_Modules.ArmorPulse();
-            if (c_Modules.shieldBoosters.Count > 0) c_Modules.ShieldPulse();
+            if (c_Modules.armorHardeners.Count > 0 || c_Modules.armorRepairers.Count > 0)   c_Modules.ArmorPulse();
+            if (c_Modules.shieldBoosters.Count > 0 || c_Modules.shieldHardeners.Count > 0)  c_Modules.ShieldPulse();
 
             ManageHiSlotModules();
         }
 
-        private static float optimalRange = 0.0f;
-        private static float falloffRange = 0.0f;
         private static float orbitRange = 0.0f;
         private static long orbitTargetID;
-        private static float distanceToTarget;
-        private static float engageRange = 0.0f;
         public static void ManageHiSlotModules()
         {
             // If we have targets locked
@@ -53,35 +49,24 @@ namespace Daedalus.Routines
                 Entity target = f_Entities.GetEntityByID(c_Targets.targetsLockedIDs[0]);
 
                 // Calibrate falloff, optimal and orbit ranges
-                falloffRange = f_Modules.getModuleFalloffRange(SlotType.HiSlot, 0);
-                optimalRange = f_Modules.getModuleOptimalRange(SlotType.HiSlot, 0);
-                orbitRange = optimalRange;
+                orbitRange = Daedalus.DaedalusUI.orbitRange();
 
-                distanceToTarget = (float)f_Entities.DistanceFromPlayerToEntity(target);
-                engageRange = optimalRange + falloffRange;
-
-                // If we have targets locked
-                if (target.IsActiveTarget)
+                if(target.IsValid)
                 {
-                    // Let's orbit target zero
-                    if (orbitTargetID != target.ID)
+                    // If we have targets locked
+                    if (target.IsActiveTarget)
                     {
-                        orbitTargetID = target.ID;
-                        target.Orbit(Convert.ToInt32(orbitRange));
-                    }
-
-                    // Let's fire if in engagement range
-                    List<IModule> modules = f_Modules.GetHiSlotModules();
-                    foreach (IModule module in modules)
-                    {
-                        if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
+                        // Let's orbit target zero
+                        if (orbitTargetID != target.ID)
                         {
-                            if (distanceToTarget < engageRange) module.Activate();
+                            orbitTargetID = target.ID;
+                            target.Orbit(Convert.ToInt32(orbitRange));
                         }
+                        c_Modules.WeaponPulse(target);
                     }
+                    // Target is not the active target so let's make it
+                    else if (!target.IsActiveTarget) target.MakeActiveTarget();
                 }
-                // Target is not the active target so let's make it
-                else if (!target.IsActiveTarget) target.MakeActiveTarget();
             }
         }
     }

@@ -82,5 +82,23 @@ namespace Daedalus.Functions
             }
             return toReturn;
         }
+        public static Dictionary<Entity, double> GetNpcEntitiesSortedByHitchance()
+        {
+            Dictionary<Entity, double> toReturn = new Dictionary<Entity, double>();
+            List<Entity> npcEntities = new List<Entity>();
+            // Get all enemy npcs from NPC_Types.xml list
+            foreach (long groupID in d_NPC_Types.All)
+            {
+                List<Entity> entities = Daedalus.eve.QueryEntities("GroupID = " + groupID);
+                if (entities.Count > 0) npcEntities.AddRange(entities);
+            }
+
+            foreach (Entity npc in npcEntities)
+            {
+
+            }
+
+            return toReturn;
+        }
     }
 }
