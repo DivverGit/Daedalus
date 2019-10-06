@@ -12,12 +12,6 @@ namespace Daedalus.Behaviours
     static class b_Station
     {
         public static bool InitComplete = false;
-
-        static b_Station()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             if (!InitComplete)
