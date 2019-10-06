@@ -1,19 +1,8 @@
-﻿using Daedalus.Behaviours;
-using Daedalus.Data;
-using Daedalus.Functions;
+﻿using Daedalus.Functions;
 using Daedalus.Modules;
-using Daedalus.Routines;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
-using LavishVMAPI;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Daedalus.Controllers
 {

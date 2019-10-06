@@ -1,18 +1,7 @@
-﻿using Daedalus.Behaviours;
-using Daedalus.Data;
-using Daedalus.Functions;
-using Daedalus.Routines;
-using EVE.ISXEVE;
+﻿using Daedalus.Functions;
 using EVE.ISXEVE.Interfaces;
-using LavishVMAPI;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Daedalus.Controllers
 {
@@ -35,8 +24,6 @@ namespace Daedalus.Controllers
         public static void ui_refreshHighPowerModules()
         {
             List<IModule> modules = new List<IModule>();
-
-            // Refresh hi slot modules
             modules = f_Modules.GetHighPowerModules();
 
             if (modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot1, modules[0].ToItem.Name);
@@ -117,6 +104,7 @@ namespace Daedalus.Controllers
         {
             List<IModule> modules = new List<IModule>();
             modules = f_Modules.GetMediumPowerModules();
+
             if (modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot1, modules[0].ToItem.Name);
             if (modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot2, modules[1].ToItem.Name);
             if (modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot3, modules[2].ToItem.Name);
@@ -204,7 +192,6 @@ namespace Daedalus.Controllers
         public static double structurePercent;
         public static void ui_refreshShipData()
         {
-            // Variables
             myShipName = Daedalus.myShip.Name;
             shieldCurrent = Daedalus.myShip.Shield;
             shieldMaximum = Daedalus.myShip.MaxShield;
@@ -216,7 +203,6 @@ namespace Daedalus.Controllers
             structureMaximum = Daedalus.myShip.MaxStructure;
             structurePercent = Daedalus.myShip.StructurePct;
 
-            // Set all the labels
             Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.shipName, myShipName);
             Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.shield, shieldCurrent.ToString("#") + " / " + shieldMaximum.ToString("#") + " (" + shieldPercent.ToString("#") + "%)");
             Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.armor, armorCurrent.ToString("#") + " / " + armorMaximum.ToString("#") + " (" + armorPercent.ToString("#") + "%)");

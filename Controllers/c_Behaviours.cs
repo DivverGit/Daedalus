@@ -10,6 +10,7 @@ namespace Daedalus.Controllers
         Station,
         undefined
     };
+
     public static class c_Behaviours
     {
         private static bool inTransition = false;
