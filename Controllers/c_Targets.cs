@@ -7,9 +7,16 @@ namespace Daedalus.Controllers
 {
     static class c_Targets
     {
-        public static bool redAlert = false;
+        #region Variables
         public static List<Entity> enemyNpcEntities = new List<Entity>();
+        private static double maxTargetRange;
+        private static double maxTargetsLocked;
+        public static bool redAlert = false;
         public static List<Entity> targets = new List<Entity>();
+        public static List<long> targetsLockedIDs = new List<long>();
+        public static List<long> targetsLockingIDs = new List<long>();
+        #endregion
+
         public static void Pulse()
         {
             enemyNpcEntities = f_Entities.GetNpcEntities();
@@ -23,11 +30,6 @@ namespace Daedalus.Controllers
                 redAlert = false;
             }
         }
-
-        private static double maxTargetRange;
-        private static double maxTargetsLocked;
-        public static List<long> targetsLockedIDs = new List<long>();
-        public static List<long> targetsLockingIDs = new List<long>();
         public static void DoTargeting()
         {
             maxTargetRange = Daedalus.myShip.MaxTargetRange;
@@ -44,7 +46,7 @@ namespace Daedalus.Controllers
             }
 
             Entity target;
-            if (targetsLockedIDs.Count == 0 && targetsLockingIDs.Count == 0 && enemyNpcEntities.Count > 0)
+            if (targetsLockedIDs.Count < maxTargetsLocked && targetsLockingIDs.Count < maxTargetsLocked && enemyNpcEntities.Count > 0)
             {
                 target = enemyNpcEntities[0];
                 if (!targetsLockingIDs.Contains(target.ID) && f_Entities.GetDistanceBetween(target) < maxTargetRange)

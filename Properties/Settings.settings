@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="orbitRange" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">1500</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>
