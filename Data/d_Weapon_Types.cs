@@ -1,10 +1,8 @@
-﻿using Daedalus;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
 
 namespace Daedalus.Data
@@ -32,7 +30,6 @@ namespace Daedalus.Data
             }
         }
 
-
         private static List<long> _HybridTurrets;
         public static List<long> HybridTurrets
         {
@@ -54,7 +51,6 @@ namespace Daedalus.Data
             }
         }
 
-
         private static List<long> _MissileLaunchers;
         public static List<long> MissileLaunchers
         {
@@ -75,7 +71,6 @@ namespace Daedalus.Data
                 return _MissileLaunchers;
             }
         }
-
 
         private static List<long> _ProjectileTurret;
         public static List<long> ProjectileTurret

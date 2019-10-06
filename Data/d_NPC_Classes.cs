@@ -1,53 +1,14 @@
-﻿using Daedalus;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
 
 namespace Daedalus.Data
 {
     public static class d_NPC_Classes
     {
-        private static Dictionary<Int64, string> _All;
-        public static Dictionary<Int64, string> All
-        {
-            get
-            {
-                if (_All == null)
-                {
-                    var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("NPC_Classes.xml"));
-
-                    using (Stream stream = assembly.GetManifestResourceStream(resourceName)) 
-                    {
-                        XElement dataDoc = XElement.Load(stream);
-                        _All = (from a in dataDoc.Descendants("Group")
-                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => a.ID, a => a.Class);
-                    }
-                }
-                return _All;
-            }
-        }
-
-        public static string getNpcClass(long groupID)
-        {
-            string toReturn = null;
-
-            List<long> keys = All.Keys.ToList<long>();
-            List<string> values = All.Values.ToList<string>();
-            for (int i = 0; i < keys.Count; i++)
-            {
-                if(keys[i] == groupID)
-                {
-                    toReturn = values[i];
-                }
-            }
-            return toReturn;
-        }
-
         public static readonly List<String> FactionSpawns = new List<string>
         {
             "Sentient",
@@ -57,33 +18,6 @@ namespace Daedalus.Data
             "Dark Blood",
             "Domination",
             "Psycho"
-        };
-        public static readonly List<String> OfficerSpawns = new List<string>
-        {
-            "Ahremen Arkah",
-            "Brokara Ryver",
-            "Brynn Jerdola",
-            "Chelm Soran",
-            "Cormack Vaaja",
-            "Draclira Merlonne",
-            "Estamel Tharchon",
-            "Gotan Kreiss",
-            "Hakim Stormare",
-            "Kaikka Peunato",
-            "Mizuro Cybon",
-            "Raysere Giant",
-            "Selynne Mardakar",
-            "Setele Schellan",
-            "Tairei Namazoth",
-            "Thon Eney",
-            "Tobias Kruzhoryy",
-            "Tuvan Orth",
-            "Unit D-34343",
-            "Unit F-435454",
-            "Unit P-343554",
-            "Unit W-634",
-            "Vepas Minimala",
-            "Vizan Ankonin"
         };
         public static readonly List<String> HaulerSpawns = new List<string>
         {
@@ -177,6 +111,64 @@ namespace Daedalus.Data
             "Serpentis Transporter",
             "Serpentis Trucker"
         };
+        public static readonly List<String> OfficerSpawns = new List<string>
+        {
+            "Ahremen Arkah",
+            "Brokara Ryver",
+            "Brynn Jerdola",
+            "Chelm Soran",
+            "Cormack Vaaja",
+            "Draclira Merlonne",
+            "Estamel Tharchon",
+            "Gotan Kreiss",
+            "Hakim Stormare",
+            "Kaikka Peunato",
+            "Mizuro Cybon",
+            "Raysere Giant",
+            "Selynne Mardakar",
+            "Setele Schellan",
+            "Tairei Namazoth",
+            "Thon Eney",
+            "Tobias Kruzhoryy",
+            "Tuvan Orth",
+            "Unit D-34343",
+            "Unit F-435454",
+            "Unit P-343554",
+            "Unit W-634",
+            "Vepas Minimala",
+            "Vizan Ankonin"
+        };
+
+        private static Dictionary<Int64, string> _All;
+        public static Dictionary<Int64, string> All
+        {
+            get
+            {
+                if (_All == null)
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("NPC_Classes.xml"));
+
+                    using (Stream stream = assembly.GetManifestResourceStream(resourceName)) 
+                    {
+                        XElement dataDoc = XElement.Load(stream);
+                        _All = (from a in dataDoc.Descendants("Group")
+                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => a.ID, a => a.Class);
+                    }
+                }
+                return _All;
+            }
+        }
+        public static string GetNpcClass(long groupID)
+        {
+            List<long> keys = All.Keys.ToList<long>();
+            List<string> values = All.Values.ToList<string>();
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if(keys[i] == groupID)  return values[i];
+            }
+            return null;
+        }
 
     }
 }

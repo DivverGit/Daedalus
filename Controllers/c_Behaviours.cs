@@ -1,49 +1,40 @@
 ﻿using Daedalus.Behaviours;
-using Daedalus.Functions;
-using Daedalus.Controllers;
-using EVE.ISXEVE;
-using LavishVMAPI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Daedalus.Controllers
 {
+    public enum Behaviour
+    {
+        Combat,
+        Space,
+        Station,
+        undefined
+    };
     public static class c_Behaviours
     {
-        public static bool InitComplete = false;
         private static bool inTransition = false;
         private static DateTime transitionEndTime;
 
-        static c_Behaviours()
-        {
-            if (!InitComplete)
-            {
-                InitComplete = true;
-            }
-        }
-
-        public enum Behaviour {
-            Combat,
-            Space,
-            Station,
-            undefined
-        };
         public static Behaviour previousBehaviour = Behaviour.undefined;
         public static Behaviour activeBehaviour = Behaviour.undefined;
 
+        public static bool InitComplete = false;
         public static void Pulse()
         {
-            if (inTransition) checkInTransition();
+            if(!InitComplete)
+            {
+                InitComplete = true;
+            }
+
+            if (inTransition) CheckInTransition();
             else if (!inTransition)
             {
-                checkActiveBehaviour();
-                pulseActiveBehaviour();
+                CheckActiveBehaviour();
+                PulseActiveBehaviour();
             }
         }
 
-        private static void checkActiveBehaviour()
+        private static void CheckActiveBehaviour()
         {
             // If we're in station and not in space then we're in station! duh!
             if (Daedalus.me.InStation && !Daedalus.me.InSpace)
@@ -54,7 +45,7 @@ namespace Daedalus.Controllers
                     activeBehaviour = Behaviour.Station;
                     c_Routines.activeRoutine = Routine.Station_Idle;
                     b_Station.InitComplete = false;
-                    setInTransition();
+                    SetInTransition();
                 }
             }
             // Else if we're not in station and we're in space then we're in space! duh!
@@ -66,7 +57,7 @@ namespace Daedalus.Controllers
                     activeBehaviour = Behaviour.Space;
                     c_Routines.activeRoutine = Routine.Space_Idle;
                     b_Space.InitComplete = false;
-                    setInTransition();
+                    SetInTransition();
                 }
                 else if (activeBehaviour != Behaviour.Combat && c_Targets.redAlert)
                 {
@@ -74,31 +65,25 @@ namespace Daedalus.Controllers
                     activeBehaviour = Behaviour.Combat;
                     c_Routines.activeRoutine = Routine.Combat_Idle;
                     b_Combat.InitComplete = false;
-                    setInTransition();
+                    SetInTransition();
                 }
             }
         }
-
-        private static void pulseActiveBehaviour()
+        private static void CheckInTransition()
+        {
+            if (DateTime.Now > transitionEndTime) inTransition = false;
+        }
+        private static void PulseActiveBehaviour()
         {
             if (activeBehaviour == Behaviour.Space) b_Space.Pulse();
             else if (activeBehaviour == Behaviour.Station) b_Station.Pulse();
             else if (activeBehaviour == Behaviour.Combat) b_Combat.Pulse();
         }
-
-        private static void setInTransition()
+        private static void SetInTransition()
         {
             inTransition = true;
             transitionEndTime = DateTime.Now.AddSeconds(5.0f);
             Daedalus.DaedalusUI.newConsoleMessage("Transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
-        }
-
-        private static void checkInTransition()
-        {
-            if(DateTime.Now > transitionEndTime)
-            {
-                inTransition = false;
-            }
         }
     }
 }

@@ -23,16 +23,16 @@ namespace Daedalus.Controllers
         public static Routine activeRoutine = Routine.undefined;
         public static void Pulse()
         {
-            if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Space)
+            if (c_Behaviours.activeBehaviour == Behaviour.Space)
             {
                 if (activeRoutine == Routine.Space_Idle) r_Space_Idle.Pulse();
                 else if (activeRoutine == Routine.Space_Warp) r_Space_Warp.Pulse();
             }
-            else if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Station)
+            else if (c_Behaviours.activeBehaviour == Behaviour.Station)
             {
                 if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
             }
-            else if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Combat)
+            else if (c_Behaviours.activeBehaviour == Behaviour.Combat)
             {
                 if (activeRoutine == Routine.Combat_Idle) r_Combat_Idle.Pulse();
                 else if (activeRoutine == Routine.Combat_Brawl) r_Combat_Brawl.Pulse();

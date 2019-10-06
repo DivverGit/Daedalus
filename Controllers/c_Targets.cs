@@ -54,7 +54,7 @@ namespace Daedalus.Controllers
                 if (!targetsLockingIDs.Contains(target.ID) && f_Entities.GetDistanceBetween(target) < maxTargetRange)
                 {
                     targetsLockingIDs.Add(target.ID);
-                    string npcClass = d_NPC_Classes.getNpcClass(target.GroupID);
+                    string npcClass = d_NPC_Classes.GetNpcClass(target.GroupID);
                     Daedalus.DaedalusUI.newConsoleMessage("Target is " + target.Name + " (" + npcClass + ")");
                     target.LockTarget();
                 }
