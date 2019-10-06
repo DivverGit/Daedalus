@@ -18,10 +18,27 @@ namespace Daedalus.Functions
     }
     public static class f_Entities
     {
+        public static double GetDistanceBetween(Entity entity)
+        {
+            if (!entity.IsValid) return 0;
+            return Daedalus.eve.DistanceBetween(Daedalus.me.ToEntity.ID, entity.ID);
+        }
+        public static double GetDistanceBetween(Entity entityA, Entity entityB)
+        {
+            return Daedalus.eve.DistanceBetween(entityA.ID, entityB.ID);
+        }
+        public static Entity GetEntityByID(long id)
+        {
+            foreach (Entity entity in Cache.allEntities())
+            {
+                if (entity.ID == id) return entity;
+            }
+            return null;
+        }
         public static EntityMode GetEntityMode(Entity entity)
         {
             int mode = entity.Mode;
-            switch(mode)
+            switch (mode)
             {
                 case 0:
                     return EntityMode.Aligned;
@@ -37,27 +54,9 @@ namespace Daedalus.Functions
                     return EntityMode.undefined;
             }
         }
-        public static Entity GetEntityByID(long id)
-        {
-            foreach(Entity entity in Cache.allEntities())
-            {
-                if (entity.ID == id) return entity;
-            }
-            return null;
-        }
-        public static double GetDistanceBetween(Entity entity)
-        {
-            if (!entity.IsValid) return 0;
-            return Daedalus.eve.DistanceBetween(Daedalus.me.ToEntity.ID, entity.ID);
-        }
-        public static double DistanceBetween(Entity entityA, Entity entityB)
-        {
-            return Daedalus.eve.DistanceBetween(entityA.ID, entityB.ID);
-        }
         public static List<Entity> GetNpcEntities()
         {
             List<Entity> toReturn = new List<Entity>();
-            // Get all enemy npcs from NPC_Types.xml list
             foreach (Entity entity in Cache.allEntities())
             {
                 if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
