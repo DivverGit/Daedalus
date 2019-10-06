@@ -31,13 +31,4 @@ namespace Daedalus.Modules
             slotIndex = aSlotIndex;
         }
     }
-
-    public static class m_Weapons
-    {
-        static m_Weapons()
-        {
-            // Init
-        }
-
-    }
 }

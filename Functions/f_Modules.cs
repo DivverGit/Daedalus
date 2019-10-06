@@ -12,217 +12,134 @@ namespace Daedalus.Functions
 {
     public static class f_Modules
     {
-        static f_Modules()
-        {
-            // Init
-        }
-
-        public static List<IModule> GetMiningLasers()
-        {
-            List<IModule> MiningLasers = new List<IModule>();
-            List<IModule> ModulesFitted = Daedalus.myShip.GetModules();
-            foreach (IModule Module in ModulesFitted)
-            {
-                if (Module.MiningAmount > 0)
-                {
-                    MiningLasers.Add(Module);
-                }
-            }
-            return MiningLasers;
-        }
-        public static bool UsesCrystals(IModule MiningLaser)
-        {
-            if (MiningLaser.ChargeSize > 0) return true;
-            else
-            {
-                return false;
-            }
-        }
         public static List<IModule> GetAllModules()
         {
-            List<IModule> ModulesFitted = new List<IModule>();
-
-            int i;
+            List<IModule> modulesFitted = new List<IModule>();
 
             // Get hi slot modules
-            for(i = 0; i < 8; i++)
+            for(int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
             }
 
             // Get med slot modules
-            for (i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
             }
 
             // Get lo slot modules
-            for (i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
             }
 
-            return ModulesFitted;
+            return modulesFitted;
         }
-        public static List<IModule> GetHiSlotModules()
+        public static List<IModule> GetHighPowerModules()
         {
-            List<IModule> ModulesFitted = new List<IModule>();
-
-            int i;
-
-            // Get hi slot modules
-            for (i = 0; i < 8; i++)
+            List<IModule> modulesFitted = new List<IModule>();
+            for (int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.HiSlot, i));
             }
-
-            return ModulesFitted;
+            return modulesFitted;
         }
-        public static List<IModule> GetMedSlotModules()
+        public static List<IModule> GetMediumPowerModules()
         {
-            List<IModule> ModulesFitted = new List<IModule>();
-
-            int i;
-
-            // Get med slot modules
-            for (i = 0; i < 8; i++)
+            List<IModule> modulesFitted = new List<IModule>();
+            for (int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.MedSlot, i));
             }
-
-            return ModulesFitted;
+            return modulesFitted;
         }
-        public static List<IModule> GetLoSlotModules()
+        public static List<IModule> GetLowPowerModules()
         {
-            List<IModule> ModulesFitted = new List<IModule>();
-
-            int i;
-
-            // Get lo slot modules
-            for (i = 0; i < 8; i++)
+            List<IModule> modulesFitted = new List<IModule>();
+            for (int i = 0; i < 8; i++)
             {
-                ModulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
+                modulesFitted.Add(Daedalus.myShip.Module(SlotType.LoSlot, i));
             }
-
-            return ModulesFitted;
+            return modulesFitted;
         }
-        public static float getModuleOptimalRange(SlotType slotType, int slotIndex)
+        public static float GetModuleOptimalRange(SlotType slotType, int slotIndex)
         {
-            float optimalRange = 0;
-
             IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-
             if (GetWeaponInfo(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
             {
                 ModuleCharge missile = module.Charge;
-                optimalRange = ((float)missile.MaxFlightTime * (float)missile.MaxVelocity);
+                return ((float)missile.MaxFlightTime * (float)missile.MaxVelocity);
             }
             else
             {
-                optimalRange = (float)module.OptimalRange;
+                return (float)module.OptimalRange;
             }
-
-            return optimalRange;
         }
-        public static float getModuleFalloffRange(SlotType slotType, int slotIndex)
+        public static float GetModuleFalloffRange(SlotType slotType, int slotIndex)
         {
-            float falloffRange = 0;
-
             IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-
-            if (GetWeaponInfo(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
-            {
-                ModuleCharge missile = module.Charge;
-                falloffRange = 0;
-            }
+            if (GetWeaponInfo(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher)   return (float)module.AccuracyFalloff;
             else
             {
-                falloffRange = (float)module.AccuracyFalloff;
+                return 0.0f;
             }
-
-            return falloffRange;
         }
-        public static void getAfterburnerModules()
+        public static void GetAfterburnerModules()
         {
-            List<IModule> modules = f_Modules.GetMedSlotModules();
+            List<IModule> modules = f_Modules.GetMediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 46)
-                {
-                    Daedalus.DaedalusUI.newConsoleMessage("Afterburner enabled");
-                    c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
-                }
+                if (module.ToItem.GroupID == 46)    c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
             }
         }
-        public static void getArmorRepairModules()
+        public static void GetArmorRepairModules()
         {
-            List<IModule> modules = f_Modules.GetLoSlotModules();
+            List<IModule> modules = f_Modules.GetLowPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 62)
-                {
-                    double armorRepaired = Convert.ToDouble(module.ArmorHPRepaired);
-                    Daedalus.DaedalusUI.newConsoleMessage("ArmorRepair enabled - " + armorRepaired.ToString("#") + " HP");
-                    c_Modules.armorRepairers.Add(new Modules.ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
-                }
+                if (module.ToItem.GroupID == 62)    c_Modules.armorRepairers.Add(new Modules.ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
             }
         }
-        public static void getShieldBoosterModules()
+        public static void GetShieldBoosterModules()
         {
-            List<IModule> modules = f_Modules.GetMedSlotModules();
+            List<IModule> modules = f_Modules.GetMediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 40)
-                {
-                    double shieldBoosted = Convert.ToDouble(module.ShieldBonus);
-                    Daedalus.DaedalusUI.newConsoleMessage("ShieldBooster enabled - " + shieldBoosted.ToString("#") + " HP");
-                    c_Modules.shieldBoosters.Add(new Modules.ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
-                }
+                if (module.ToItem.GroupID == 40)    c_Modules.shieldBoosters.Add(new Modules.ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
             }
         }
-        public static void getShieldHardenerModules()
+        public static void GetShieldHardenerModules()
         {
-            List<IModule> modules = f_Modules.GetMedSlotModules();
+            List<IModule> modules = f_Modules.GetMediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 77)
-                {
-                    Daedalus.DaedalusUI.newConsoleMessage("ShieldHardener enabled");
-                    c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
-                }
+                if (module.ToItem.GroupID == 77)    c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
             }
         }
-        public static void getArmorHardenerModules()
+        public static void GetArmorHardenerModules()
         {
-            List<IModule> modules = f_Modules.GetLoSlotModules();
+            List<IModule> modules = f_Modules.GetLowPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 328)
-                {
-                    Daedalus.DaedalusUI.newConsoleMessage("ArmorHardener enabled");
-                    c_Modules.armorHardeners.Add(new Modules.ArmorHardener(module.ToItem.Name, i));
-                }
+                if (module.ToItem.GroupID == 328)   c_Modules.armorHardeners.Add(new Modules.ArmorHardener(module.ToItem.Name, i));
             }
         }
-        public static void getWeaponModules()
+        public static void GetWeaponModules()
         {
-            List<IModule> modules = f_Modules.GetHiSlotModules();
+            List<IModule> modules = f_Modules.GetHighPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
                 if(module.IsValid)
                 {
                     WeaponModule toAdd = GetWeaponInfo(SlotType.HiSlot, i);
-                    if (toAdd != null)
-                    {
-                        c_Modules.weaponModules.Add(toAdd);
-                        Daedalus.DaedalusUI.newConsoleMessage(toAdd.name + " registered");
-                    }
+                    if (toAdd != null)  c_Modules.weaponModules.Add(toAdd);
                 }
             }
         }

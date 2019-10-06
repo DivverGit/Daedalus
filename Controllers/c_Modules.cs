@@ -84,10 +84,10 @@ namespace Daedalus.Controllers
                 weaponIModule = Daedalus.myShip.Module(weaponModule.slotType, weaponModule.slotIndex);
                 if (weaponIModule.IsValid && !weaponIModule.IsActive && !weaponIModule.IsReloadingAmmo)
                 {
-                    float falloffRange = f_Modules.getModuleFalloffRange(weaponModule.slotType, weaponModule.slotIndex);
-                    float optimalRange = f_Modules.getModuleOptimalRange(weaponModule.slotType, weaponModule.slotIndex);
+                    float falloffRange = f_Modules.GetModuleFalloffRange(weaponModule.slotType, weaponModule.slotIndex);
+                    float optimalRange = f_Modules.GetModuleOptimalRange(weaponModule.slotType, weaponModule.slotIndex);
                     float engageRange = (falloffRange + optimalRange);
-                    float distanceToTarget = (float)f_Entities.DistanceFromPlayerToEntity(target);
+                    float distanceToTarget = (float)f_Entities.GetDistanceBetween(target);
                     if (distanceToTarget < engageRange) weaponIModule.Activate();
                 }
             }

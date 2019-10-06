@@ -12,24 +12,15 @@ namespace Daedalus.Routines
 {
     static class r_Space_Idle
     {
-        // Variables
         private static bool initComplete = false;
-
-        static r_Space_Idle()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             if (!initComplete)
             {
                 initComplete = true;
             }
-            if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) == "Warping")
-            {
-                c_Routines.activeRoutine = Routine.Space_Warp;
-            }
+
+            if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) == EntityMode.Warping)    c_Routines.activeRoutine = Routine.Space_Warp;
             else
             {
                 c_Targets.Pulse();

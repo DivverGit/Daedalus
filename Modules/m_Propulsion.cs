@@ -19,13 +19,4 @@ namespace Daedalus.Modules
             Slot_Index = slot;
         }
     }
-
-    public static class m_Propulsion
-    {
-        static m_Propulsion()
-        {
-            // Init
-        }
-
-    }
 }

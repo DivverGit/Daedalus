@@ -83,18 +83,15 @@
     <Compile Include="Data\d_Priority_Targets.cs" />
     <Compile Include="Data\d_NPC_Types.cs" />
     <Compile Include="Data\d_NPC_Classes.cs" />
-    <Compile Include="Data\d_Charges.cs" />
-    <Compile Include="Functions\f_Asteroids.cs" />
+    <Compile Include="Cache.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
     <Compile Include="Functions\f_Entities.cs" />
     <Compile Include="Functions\f_EVECommands.cs" />
-    <Compile Include="Functions\f_Inventory.cs" />
     <Compile Include="Functions\f_Modules.cs" />
-    <Compile Include="Functions\f_WarpTo.cs" />
+    <Compile Include="Functions\f_Movement.cs" />
     <Compile Include="Controllers\c_Behaviours.cs" />
     <Compile Include="Controllers\c_Targets.cs" />
-    <Compile Include="Controllers\c_CombatDrones.cs" />
     <Compile Include="Controllers\c_Status.cs" />
     <Compile Include="Controllers\c_Routines.cs" />
     <Compile Include="Modules\m_Weapons.cs" />
@@ -108,7 +105,6 @@
     <Compile Include="Routines\r_Space_Warp.cs" />
     <Compile Include="Routines\r_Space_Idle.cs" />
     <Compile Include="Routines\r_Station_Idle.cs" />
-    <Compile Include="Routines\r_Station_Leave.cs" />
     <Compile Include="UI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,7 +125,6 @@
       <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <EmbeddedResource Include="Data\Charges.xml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

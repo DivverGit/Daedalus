@@ -32,13 +32,4 @@ namespace Daedalus.Modules
             Repair_Amount = repairAmount;
         }
     }
-
-    public static class m_Armor
-    {
-        static m_Armor()
-        {
-            // Init
-        }
-
-    }
 }

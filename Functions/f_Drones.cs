@@ -8,19 +8,17 @@ namespace Daedalus.Functions
 {
     static class f_Drones
     {
-        static f_Drones()
-        {
-            // Init
-        }
-
-        public static void ReturnAllDronesToBay()
-        {
-            Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
-        }
-
-        public static void EngageTarget()
+        public static void Engage()
         {
             Daedalus.eve.Execute(ExecuteCommand.CmdDronesEngage);
+        }
+        public static void Launch()
+        {
+            Daedalus.myShip.LaunchAllDrones();
+        }
+        public static void ReturnToBay()
+        {
+            Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
         }
     }
 }

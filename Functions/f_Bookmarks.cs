@@ -8,17 +8,16 @@ namespace Daedalus.Functions
 {
     public static class f_Bookmarks
     {
-        public static List<BookMark> SafeSpots;
-
+        public static List<BookMark> safeSpots;
         public static void GetSafeSpots()
         {
-            List<BookMark> SafeSpots = new List<BookMark>();
-            List<BookMark> AllBookMarks = Daedalus.eve.GetBookmarks();
-            foreach(BookMark Bkmk in AllBookMarks)
+            safeSpots = new List<BookMark>();
+            List<BookMark> allBookmarks = Daedalus.eve.GetBookmarks();
+            foreach(BookMark bookmark in allBookmarks)
             {
-                if(Bkmk.Label.ToLower().Contains("safe") && Bkmk.SolarSystemID == Daedalus.me.SolarSystemID)
+                if(bookmark.Label.ToLower().Contains("safe") && bookmark.SolarSystemID == Daedalus.me.SolarSystemID)
                 {
-                    SafeSpots.Add(Bkmk);
+                    safeSpots.Add(bookmark);
                 }
             }
         }

@@ -12,22 +12,15 @@ namespace Daedalus.Routines
 {
     static class r_Combat_Idle
     {
-        // Variables
         private static bool initComplete = false;
-
-        static r_Combat_Idle()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             if (!initComplete)
             {
                 initComplete = true;
-                Daedalus.me.SetVelocity(100);
             }
-            if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) != "Warping")
+
+            if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) != EntityMode.Warping)
             {
                 if (c_Targets.redAlert)
                 {

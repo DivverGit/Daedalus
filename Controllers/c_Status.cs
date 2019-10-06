@@ -20,37 +20,36 @@ namespace Daedalus.Controllers
     {
         static c_Status()
         {
-            f_Modules.getAfterburnerModules();
-            f_Modules.getArmorRepairModules();
-            f_Modules.getShieldBoosterModules();
-            f_Modules.getShieldHardenerModules();
-            f_Modules.getWeaponModules();
+            f_Modules.GetAfterburnerModules();
+            f_Modules.GetArmorRepairModules();
+            f_Modules.GetShieldBoosterModules();
+            f_Modules.GetShieldHardenerModules();
+            f_Modules.GetWeaponModules();
         }
         public static void Pulse()
         {
-            updateHighPowerModules();
-            updateMediumPowerModules();
-            updateShipData();
+            ui_refreshHighPowerModules();
+            ui_refreshMediumPowerModules();
+            ui_refreshShipData();
         }
-        public static void updateHighPowerModules()
+        public static void ui_refreshHighPowerModules()
         {
-            List<IModule> Modules = new List<IModule>();
+            List<IModule> modules = new List<IModule>();
 
             // Refresh hi slot modules
-            Modules = f_Modules.GetHiSlotModules();
+            modules = f_Modules.GetHighPowerModules();
 
-            if (Modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot1, Modules[0].ToItem.Name);
-            if (Modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot2, Modules[1].ToItem.Name);
-            if (Modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, Modules[2].ToItem.Name);
-            if (Modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot4, Modules[3].ToItem.Name);
-            if (Modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot5, Modules[4].ToItem.Name);
-            if (Modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot6, Modules[5].ToItem.Name);
-            if (Modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot7, Modules[6].ToItem.Name);
-            if (Modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot8, Modules[7].ToItem.Name);
+            if (modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot1, modules[0].ToItem.Name);
+            if (modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot2, modules[1].ToItem.Name);
+            if (modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot3, modules[2].ToItem.Name);
+            if (modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot4, modules[3].ToItem.Name);
+            if (modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot5, modules[4].ToItem.Name);
+            if (modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot6, modules[5].ToItem.Name);
+            if (modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot7, modules[6].ToItem.Name);
+            if (modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.hiSlot8, modules[7].ToItem.Name);
 
             IModule module;
-
-            module = Modules[0];
+            module = modules[0];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot1, Color.Green);
@@ -58,7 +57,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot1, Color.DarkGray);
 
-            module = Modules[1];
+            module = modules[1];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot2, Color.Green);
@@ -66,7 +65,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot2, Color.DarkGray);
 
-            module = Modules[2];
+            module = modules[2];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot3, Color.Green);
@@ -74,7 +73,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot3, Color.DarkGray);
 
-            module = Modules[3];
+            module = modules[3];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot4, Color.Green);
@@ -82,7 +81,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot4, Color.DarkGray);
 
-            module = Modules[4];
+            module = modules[4];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot5, Color.Green);
@@ -90,7 +89,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot5, Color.DarkGray);
 
-            module = Modules[5];
+            module = modules[5];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot6, Color.Green);
@@ -98,7 +97,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot6, Color.DarkGray);
 
-            module = Modules[6];
+            module = modules[6];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot7, Color.Green);
@@ -106,7 +105,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot7, Color.DarkGray);
 
-            module = Modules[7];
+            module = modules[7];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot8, Color.Green);
@@ -114,25 +113,21 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.hiSlot8, Color.DarkGray);
         }
-        public static void updateMediumPowerModules()
+        public static void ui_refreshMediumPowerModules()
         {
-            List<IModule> Modules = new List<IModule>();
-
-            // Refresh hi slot modules
-            Modules = f_Modules.GetMedSlotModules();
-
-            if (Modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot1, Modules[0].ToItem.Name);
-            if (Modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot2, Modules[1].ToItem.Name);
-            if (Modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot3, Modules[2].ToItem.Name);
-            if (Modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot4, Modules[3].ToItem.Name);
-            if (Modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot5, Modules[4].ToItem.Name);
-            if (Modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot6, Modules[5].ToItem.Name);
-            if (Modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot7, Modules[6].ToItem.Name);
-            if (Modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot8, Modules[7].ToItem.Name);
+            List<IModule> modules = new List<IModule>();
+            modules = f_Modules.GetMediumPowerModules();
+            if (modules[0].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot1, modules[0].ToItem.Name);
+            if (modules[1].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot2, modules[1].ToItem.Name);
+            if (modules[2].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot3, modules[2].ToItem.Name);
+            if (modules[3].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot4, modules[3].ToItem.Name);
+            if (modules[4].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot5, modules[4].ToItem.Name);
+            if (modules[5].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot6, modules[5].ToItem.Name);
+            if (modules[6].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot7, modules[6].ToItem.Name);
+            if (modules[7].IsValid) Daedalus.DaedalusUI.changeStatusLabel(UI.statusLabels.medSlot8, modules[7].ToItem.Name);
 
             IModule module;
-
-            module = Modules[0];
+            module = modules[0];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot1, Color.Green);
@@ -140,7 +135,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot1, Color.DarkGray);
 
-            module = Modules[1];
+            module = modules[1];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot2, Color.Green);
@@ -148,7 +143,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot2, Color.DarkGray);
 
-            module = Modules[2];
+            module = modules[2];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot3, Color.Green);
@@ -156,7 +151,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot3, Color.DarkGray);
 
-            module = Modules[3];
+            module = modules[3];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot4, Color.Green);
@@ -164,7 +159,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot4, Color.DarkGray);
 
-            module = Modules[4];
+            module = modules[4];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot5, Color.Green);
@@ -172,7 +167,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot5, Color.DarkGray);
 
-            module = Modules[5];
+            module = modules[5];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot6, Color.Green);
@@ -180,7 +175,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot6, Color.DarkGray);
 
-            module = Modules[6];
+            module = modules[6];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot7, Color.Green);
@@ -188,7 +183,7 @@ namespace Daedalus.Controllers
             }
             else if (!module.IsValid) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot7, Color.DarkGray);
 
-            module = Modules[7];
+            module = modules[7];
             if (module.IsValid && module.IsActivatable)
             {
                 if (module.IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(UI.statusLabels.medSlot8, Color.Green);
@@ -207,7 +202,7 @@ namespace Daedalus.Controllers
         public static double structureCurrent;
         public static double structureMaximum;
         public static double structurePercent;
-        public static void updateShipData()
+        public static void ui_refreshShipData()
         {
             // Variables
             myShipName = Daedalus.myShip.Name;

@@ -8,15 +8,19 @@ using System.Text;
 
 namespace Daedalus.Controllers
 {
+    public enum Routine
+    {
+        Combat_Idle,
+        Combat_Brawl,
+        Space_Idle,
+        Space_Warp,
+        Station_Idle,
+        undefined
+    };
+
     public static class c_Routines
     {
         public static Routine activeRoutine = Routine.undefined;
-
-        static c_Routines()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Space)
@@ -27,7 +31,6 @@ namespace Daedalus.Controllers
             else if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Station)
             {
                 if (activeRoutine == Routine.Station_Idle) r_Station_Idle.Pulse();
-                else if (activeRoutine == Routine.Station_Leave) r_Station_Leave.Pulse();
             }
             else if (c_Behaviours.activeBehaviour == c_Behaviours.Behaviour.Combat)
             {
@@ -36,14 +39,4 @@ namespace Daedalus.Controllers
             }
         }
     }
-
-    public enum Routine {
-        Combat_Idle,
-        Combat_Brawl,
-        Space_Idle,
-        Space_Warp,
-        Station_Idle,
-        Station_Leave,
-        undefined
-    };
 }

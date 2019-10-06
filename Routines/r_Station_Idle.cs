@@ -12,22 +12,15 @@ namespace Daedalus.Routines
 {
     static class r_Station_Idle
     {
-        // Variables
         private static bool initComplete = false;
-
-        static r_Station_Idle()
-        {
-            // Init
-        }
-
         public static void Pulse()
         {
             if (!initComplete)
             {
                 initComplete = true;
-
-                c_Status.Pulse();
             }
+
+            c_Status.Pulse();
         }
     }
 }
