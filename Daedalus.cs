@@ -21,7 +21,7 @@ namespace Daedalus
 
         // Pulse variables
         private static DateTime nextPulse;
-        private static int pulseRate = 1;
+        private static double pulseRate = 1.5;
 
         // Misc variables
         public static bool paused = false;
@@ -35,7 +35,7 @@ namespace Daedalus
             // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
 
-            DaedalusUI.newConsoleMessage("Daedalus 03/10/2019");
+            DaedalusUI.newConsoleMessage("Daedalus 06/10/2019, Alpha 1, Update 5");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
@@ -82,7 +82,7 @@ namespace Daedalus
 
                     DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + c_Behaviours.activeBehaviour.ToString() + "] [Routine: " + c_Routines.activeRoutine.ToString() + "]";
 
-                    if (!paused)    c_Behaviours.Pulse();
+                    c_Behaviours.Pulse();
                 }
                 return;
             }

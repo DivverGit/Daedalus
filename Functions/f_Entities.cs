@@ -74,11 +74,11 @@ namespace Daedalus.Functions
         public static List<Entity> GetNpcEntities()
         {
             List<Entity> toReturn = new List<Entity>();
+            List<Entity> AllEntities = Daedalus.eve.QueryEntities();
             // Get all enemy npcs from NPC_Types.xml list
-            foreach(long groupID in d_NPC_Types.All)
+            foreach (Entity entity in AllEntities)
             {
-                List<Entity> entities = Daedalus.eve.QueryEntities("GroupID = " + groupID);
-                if(entities.Count > 0)  toReturn.AddRange(entities);
+                if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
             }
             return toReturn;
         }
