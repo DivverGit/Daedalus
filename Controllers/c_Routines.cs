@@ -29,7 +29,7 @@ namespace Daedalus.Controllers
             else if (c_Behaviours.activeBehaviour == Behaviour.Combat)
             {
                 if (activeRoutine == Routine.Combat_Idle) r_Combat_Idle.Pulse();
-                else if (activeRoutine == Routine.Combat_Brawl) r_Combat_Brawl.Pulse();
+                else if (activeRoutine == Routine.Combat_Brawl) r_Combat_Active.Pulse();
             }
         }
     }

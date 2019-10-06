@@ -24,6 +24,15 @@ namespace Daedalus.Functions
         {
             return Daedalus.eve.DistanceBetween(entityA.ID, entityB.ID);
         }
+        public static List<Entity> GetEntitiesWithinDistance(List<Entity> entitiesList, double distance)
+        {
+            List<Entity> toReturn = new List<Entity>();
+            foreach (Entity entity in entitiesList)
+            {
+                if (f_Entities.GetDistanceBetween(entity) < distance) toReturn.Add(entity);
+            }
+            return toReturn;
+        }
         public static Entity GetEntityByID(long id)
         {
             foreach (Entity entity in Cache.allEntities())
@@ -31,6 +40,14 @@ namespace Daedalus.Functions
                 if (entity.ID == id) return entity;
             }
             return null;
+        }
+        public static bool GetEntityExistsByID(List<Entity> entities, long id)
+        {
+            foreach (Entity entity in entities)
+            {
+                if (entity.ID == id) return true;
+            }
+            return false;
         }
         public static EntityMode GetEntityMode(Entity entity)
         {
@@ -51,10 +68,10 @@ namespace Daedalus.Functions
                     return EntityMode.undefined;
             }
         }
-        public static List<Entity> GetNpcEntities()
+        public static List<Entity> GetNpcEntities(List<Entity> entitiesList)
         {
             List<Entity> toReturn = new List<Entity>();
-            foreach (Entity entity in Cache.allEntities())
+            foreach (Entity entity in entitiesList)
             {
                 if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
             }
