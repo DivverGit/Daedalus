@@ -66,15 +66,15 @@ namespace Daedalus.Controllers
         }
 
         private static IModule weaponIModule;
-        public static void WeaponPulse(Entity target)
+        public static void WeaponsPulse(Entity target)
         {
             foreach (WeaponModule weaponModule in weaponModules)
             {
                 weaponIModule = Daedalus.myShip.Module(weaponModule.slotType, weaponModule.slotIndex);
                 if (weaponIModule.IsValid && !weaponIModule.IsActive && !weaponIModule.IsReloadingAmmo)
                 {
-                    float falloffRange = f_Modules.GetModuleFalloffRange(weaponModule.slotType, weaponModule.slotIndex);
-                    float optimalRange = f_Modules.GetModuleOptimalRange(weaponModule.slotType, weaponModule.slotIndex);
+                    float falloffRange = f_Modules.GetAttributes.FalloffRange(weaponModule.slotType, weaponModule.slotIndex);
+                    float optimalRange = f_Modules.GetAttributes.OptimalRange(weaponModule.slotType, weaponModule.slotIndex);
                     float engageRange = (falloffRange + optimalRange);
                     float distanceToTarget = (float)f_Entities.GetDistanceBetween(target);
                     if (distanceToTarget < engageRange) weaponIModule.Activate();

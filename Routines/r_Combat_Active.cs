@@ -50,7 +50,7 @@ namespace Daedalus.Routines
                             orbitTargetID = primaryTarget.ID;
                             f_Movement.Orbit(primaryTarget, Convert.ToInt32(UI.orbitRange));
                         }
-                        c_Modules.WeaponPulse(primaryTarget);
+                        c_Modules.WeaponsPulse(primaryTarget);
                     }
                     else if (!primaryTarget.IsActiveTarget)
                     {

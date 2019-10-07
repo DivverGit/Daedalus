@@ -10,16 +10,62 @@ namespace Daedalus.Functions
 {
     public static class f_Modules
     {
+        public class GetAttributes
+        {
+            public static float FalloffRange(SlotType slotType, int slotIndex)
+            {
+                IModule module = Daedalus.myShip.Module(slotType, slotIndex);
+                if (GetWeaponType(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher) return (float)module.AccuracyFalloff;
+                else
+                {
+                    return 0.0f;
+                }
+            }
+            public static float OptimalRange(SlotType slotType, int slotIndex)
+            {
+                IModule module = Daedalus.myShip.Module(slotType, slotIndex);
+                if (GetWeaponType(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
+                {
+                    ModuleCharge missile = module.Charge;
+                    return ((float)missile.MaxFlightTime * (float)missile.MaxVelocity);
+                }
+                else
+                {
+                    return (float)module.OptimalRange;
+                }
+            }
+            public static float TrackingSpeed(SlotType slotType, int slotIndex)
+            {
+                IModule module = Daedalus.myShip.Module(slotType, slotIndex);
+                if (GetWeaponType(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher)
+                {
+                    return (float)module.TrackingSpeed;
+                }
+                else
+                {
+                    return 0.0f;
+                }
+            }
+        }
+
+        public static void DeactivateAllModules()
+        {
+            List<IModule> allModules = Daedalus.myShip.GetModules();
+            foreach (IModule module in allModules)
+            {
+                if (module.IsActive) module.Deactivate();
+            }
+        }
         public static void GetAfterburnerModules()
         {
-            List<IModule> modules = f_Modules.GetMediumPowerModules();
+            List<IModule> modules = f_Modules.MediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
                 if (module.ToItem.GroupID == 46) c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
             }
         }
-        public static List<IModule> GetAllModules()
+        public static List<IModule> AllModules()
         {
             List<IModule> modulesFitted = new List<IModule>();
 
@@ -45,7 +91,7 @@ namespace Daedalus.Functions
         }
         public static void GetArmorHardenerModules()
         {
-            List<IModule> modules = f_Modules.GetLowPowerModules();
+            List<IModule> modules = f_Modules.LowPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
@@ -54,14 +100,14 @@ namespace Daedalus.Functions
         }
         public static void GetArmorRepairModules()
         {
-            List<IModule> modules = f_Modules.GetLowPowerModules();
+            List<IModule> modules = f_Modules.LowPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
                 if (module.ToItem.GroupID == 62) c_Modules.armorRepairers.Add(new Modules.ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
             }
         }
-        public static List<IModule> GetHighPowerModules()
+        public static List<IModule> HighPowerModules()
         {
             List<IModule> modulesFitted = new List<IModule>();
             for (int i = 0; i < 8; i++)
@@ -70,7 +116,7 @@ namespace Daedalus.Functions
             }
             return modulesFitted;
         }
-        public static List<IModule> GetLowPowerModules()
+        public static List<IModule> LowPowerModules()
         {
             List<IModule> modulesFitted = new List<IModule>();
             for (int i = 0; i < 8; i++)
@@ -79,7 +125,7 @@ namespace Daedalus.Functions
             }
             return modulesFitted;
         }
-        public static List<IModule> GetMediumPowerModules()
+        public static List<IModule> MediumPowerModules()
         {
             List<IModule> modulesFitted = new List<IModule>();
             for (int i = 0; i < 8; i++)
@@ -88,31 +134,9 @@ namespace Daedalus.Functions
             }
             return modulesFitted;
         }
-        public static float GetModuleFalloffRange(SlotType slotType, int slotIndex)
-        {
-            IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-            if (GetWeaponInfo(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher) return (float)module.AccuracyFalloff;
-            else
-            {
-                return 0.0f;
-            }
-        }
-        public static float GetModuleOptimalRange(SlotType slotType, int slotIndex)
-        {
-            IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-            if (GetWeaponInfo(slotType, slotIndex).weaponType == WeaponType.Missile_Launcher)
-            {
-                ModuleCharge missile = module.Charge;
-                return ((float)missile.MaxFlightTime * (float)missile.MaxVelocity);
-            }
-            else
-            {
-                return (float)module.OptimalRange;
-            }
-        }
         public static void GetShieldBoosterModules()
         {
-            List<IModule> modules = f_Modules.GetMediumPowerModules();
+            List<IModule> modules = f_Modules.MediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
@@ -121,14 +145,27 @@ namespace Daedalus.Functions
         }
         public static void GetShieldHardenerModules()
         {
-            List<IModule> modules = f_Modules.GetMediumPowerModules();
+            List<IModule> modules = f_Modules.MediumPowerModules();
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
                 if (module.ToItem.GroupID == 77)    c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
             }
         }
-        public static WeaponModule GetWeaponInfo(SlotType slotType, int slotIndex)
+        public static void GetWeaponModules()
+        {
+            List<IModule> modules = f_Modules.HighPowerModules();
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IModule module = modules[i];
+                if (module.IsValid)
+                {
+                    WeaponModule toAdd = GetWeaponType(SlotType.HiSlot, i);
+                    if (toAdd != null) c_Modules.weaponModules.Add(toAdd);
+                }
+            }
+        }
+        public static WeaponModule GetWeaponType(SlotType slotType, int slotIndex)
         {
             IModule module = Daedalus.myShip.Module(slotType, slotIndex);
             if (d_Weapon_Types.EnergyTurrets.Contains(module.ToItem.GroupID))
@@ -150,19 +187,6 @@ namespace Daedalus.Functions
             else
             {
                 return null;
-            }
-        }
-        public static void GetWeaponModules()
-        {
-            List<IModule> modules = f_Modules.GetHighPowerModules();
-            for (int i = 0; i < modules.Count; i++)
-            {
-                IModule module = modules[i];
-                if(module.IsValid)
-                {
-                    WeaponModule toAdd = GetWeaponInfo(SlotType.HiSlot, i);
-                    if (toAdd != null)  c_Modules.weaponModules.Add(toAdd);
-                }
             }
         }
     }
