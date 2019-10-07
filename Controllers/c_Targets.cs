@@ -41,7 +41,7 @@ namespace Daedalus.Controllers
             maxMeTargetsLocked = Daedalus.me.MaxLockedTargets;
             maxShipTargetsLocked = Daedalus.myShip.MaxLockedTargets;
 
-            // Step 1: Check for priority targets within targeting range
+            // Step 1: If priority targets within targeting range
             if (priorityNpcEntitiesInRange.Count > 0)
             {
                 optimalTargets = priorityNpcEntitiesInRange
@@ -51,7 +51,7 @@ namespace Daedalus.Controllers
                         .ToList();
                 Daedalus.DaedalusUI.setTargetsList(optimalTargets);
             }
-            // Step 2: Check for other targets within targeting range
+            // Step 2: If no priority within targeting range but still targets within targeting range
             else if (priorityNpcEntitiesInRange.Count == 0 && enemyNpcEntitiesInRange.Count > 0)
             {
                 if (UI.selectedTargetingProfile == TargetingProfile.byClass)
