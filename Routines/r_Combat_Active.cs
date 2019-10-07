@@ -19,6 +19,7 @@ namespace Daedalus.Routines
             if (!initComplete)
             {
                 initComplete = true;
+                Daedalus.DaedalusUI.newConsoleMessage("Switched to Routine.Combat_Active");
             }
 
             if (!c_Targets.redAlert) c_Routines.activeRoutine = Routine.Combat_Idle;

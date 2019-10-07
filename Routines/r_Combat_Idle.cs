@@ -18,6 +18,7 @@ namespace Daedalus.Routines
             if (!initComplete)
             {
                 initComplete = true;
+                Daedalus.DaedalusUI.newConsoleMessage("Switched to Routine.Combat_Idle");
             }
 
             if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) != EntityMode.Warping)

@@ -17,7 +17,9 @@ namespace Daedalus.Functions
     {
         public static List<Entity> AllEntities()
         {
-            return Daedalus.eve.QueryEntities();
+            List<Entity> toReturn = Daedalus.eve.QueryEntities();
+            if (toReturn == null) if (toReturn == null) return new List<Entity>();
+            return toReturn;
         }
         public static double GetDistanceBetween(Entity entity)
         {
@@ -86,13 +88,11 @@ namespace Daedalus.Functions
         public static List<Entity> GetNpcEntities(List<Entity> entitiesList)
         {
             List<Entity> toReturn = new List<Entity>();
-            if(entitiesList.Count > 0)
+            foreach (Entity entity in entitiesList)
             {
-                foreach (Entity entity in entitiesList)
-                {
-                    if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
-                }
+                if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
             }
+            if (toReturn == null) return new List<Entity>();
             return toReturn;
         }
     }

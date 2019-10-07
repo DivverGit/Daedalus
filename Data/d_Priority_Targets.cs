@@ -28,5 +28,13 @@ namespace Daedalus.Data
                 return _All;
             }
         }
+        public static bool IsPriority(string name)
+        {
+            if (All.Contains(name)) return true;
+            else
+            {
+                return false;
+            }
+        }
     }
 }

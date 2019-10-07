@@ -139,8 +139,8 @@ namespace Daedalus.Data
             "Vizan Ankonin"
         };
 
-        private static Dictionary<Int64, string> _all;
-        public static Dictionary<Int64, string> all
+        private static Dictionary<Int64, int> _all;
+        public static Dictionary<Int64, int> all
         {
             get
             {
@@ -153,35 +153,21 @@ namespace Daedalus.Data
                     {
                         XElement dataDoc = XElement.Load(stream);
                         _all = (from a in dataDoc.Descendants("Group")
-                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => a.ID, a => a.Class);
+                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = Convert.ToInt32(a.Attribute("Class").Value) }).ToDictionary(a => a.ID, a => a.Class);
                     }
                 }
                 return _all;
             }
         }
-        public static string GetNpcClass(long groupID)
+        public static int GetNpcClass(long groupID)
         {
             List<long> keys = all.Keys.ToList<long>();
-            List<string> values = all.Values.ToList<string>();
+            List<int> values = all.Values.ToList<int>();
             for (int i = 0; i < keys.Count; i++)
             {
                 if(keys[i] == groupID)  return values[i];
             }
-            return null;
-        }
-
-        public static int GetNpcClassOrder(string shipClass)
-        {
-            if (shipClass == "Frigate") return 0;
-            else if (shipClass == "Destroyer") return 1;
-            else if (shipClass == "Cruiser") return 2;
-            else if (shipClass == "BattleCruiser") return 3;
-            else if (shipClass == "BattleShip") return 4;
-            else if (shipClass == "Capital") return 5;
-            else
-            {
-                return 6;
-            }
+            return 6;
         }
 
     }

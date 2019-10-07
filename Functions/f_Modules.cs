@@ -12,19 +12,6 @@ namespace Daedalus.Functions
     {
         public class GetAttributes
         {
-            public static float HitChance(SlotType slotType, int slotIndex)
-            {
-                IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-                if (GetWeaponType(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher)
-                {
-
-                    return 0.0f;
-                }
-                else
-                {
-                    return 0.0f;
-                }
-            }
             public static float FalloffRange(SlotType slotType, int slotIndex)
             {
                 IModule module = Daedalus.myShip.Module(slotType, slotIndex);
@@ -45,18 +32,6 @@ namespace Daedalus.Functions
                 else
                 {
                     return (float)module.OptimalRange;
-                }
-            }
-            public static float TrackingSpeed(SlotType slotType, int slotIndex)
-            {
-                IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-                if (GetWeaponType(slotType, slotIndex).weaponType != WeaponType.Missile_Launcher)
-                {
-                    return (float)module.TrackingSpeed;
-                }
-                else
-                {
-                    return 0.0f;
                 }
             }
         }

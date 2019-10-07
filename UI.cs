@@ -111,9 +111,19 @@ namespace Daedalus
             targetsListBox.Items.Clear();
             foreach (EnemyNPC target in targets)
             {
-                targetsListBox.Items.Add(target.entity.Name + " (" + target.shipClass + ") - " + target.distance.ToString("#") + "m");
+                targetsListBox.Items.Add(target.entity.Name + " (" + target.shipClass + ") - " + target.distance.ToString("#") + "m - isPriority=" + target.isPriority.ToString());
             }
             targetsListBox.Refresh();
+        }
+
+        private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string toCopy = "";
+            foreach(var line in Console.Items)
+            {
+                toCopy += line + "\n";
+            }
+            Clipboard.SetText(toCopy);
         }
     }
     public enum StatusLabel

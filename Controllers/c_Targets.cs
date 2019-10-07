@@ -11,7 +11,6 @@ namespace Daedalus.Controllers
         #region Variables
         private static List<Entity> enemyNpcEntities = new List<Entity>();
         private static List<EnemyNPC> enemyNpcEntitiesInRange = new List<EnemyNPC>();
-        private static List<EnemyNPC> priorityNpcEntitiesInRange = new List<EnemyNPC>();
         public static List<EnemyNPC> optimalTargets = new List<EnemyNPC>();
         private static double maxTargetRange;
         private static double maxMeTargetsLocked;
@@ -22,8 +21,7 @@ namespace Daedalus.Controllers
         public static void Pulse()
         {
             enemyNpcEntities = f_Entities.GetNpcEntities(f_Entities.AllEntities());
-            enemyNpcEntitiesInRange = GetEnemiesInRange(false);
-            priorityNpcEntitiesInRange = GetEnemiesInRange(true);
+            enemyNpcEntitiesInRange = GetEnemiesInRange();
             if (enemyNpcEntities.Count > 0)
             {
                 redAlert = true;
@@ -40,25 +38,16 @@ namespace Daedalus.Controllers
             maxMeTargetsLocked = Daedalus.me.MaxLockedTargets;
             maxShipTargetsLocked = Daedalus.myShip.MaxLockedTargets;
 
-            // Step 1: If priority targets within targeting range
-            if (priorityNpcEntitiesInRange.Count > 0)
-            {
-                optimalTargets = priorityNpcEntitiesInRange
-                        .Where(t => !t.entity.IsMoribund)
-                        .OrderBy(t => t.distance)
-                        .Take((int)System.Math.Min(maxMeTargetsLocked, maxShipTargetsLocked))
-                        .ToList();
-                Daedalus.DaedalusUI.setTargetsList(optimalTargets);
-            }
-            // Step 2: If no priority within targeting range but still targets within targeting range
-            else if (priorityNpcEntitiesInRange.Count == 0 && enemyNpcEntitiesInRange.Count > 0)
+            // Step 1: If targets within targeting range
+            if (enemyNpcEntitiesInRange.Count > 0)
             {
                 if (UI.selectedTargetingProfile == TargetingProfile.byClass)
                 {
                     optimalTargets = enemyNpcEntitiesInRange
-                            .Where(t => !t.entity.IsMoribund)
-                            .OrderBy(t => t.shipClassOrder)
-                            .ThenBy(t => t.distance)
+                            .Where(npc => !npc.entity.IsMoribund)
+                            .OrderBy(npc => npc.shipClass)
+                            .ThenBy(npc => npc.distance)
+                            .ThenBy(npc => npc.isPriority)
                             .Take((int)System.Math.Min(maxMeTargetsLocked, maxShipTargetsLocked))
                             .ToList();
                     Daedalus.DaedalusUI.setTargetsList(optimalTargets);
@@ -66,20 +55,21 @@ namespace Daedalus.Controllers
                 else if (UI.selectedTargetingProfile == TargetingProfile.byDistance)
                 {
                     optimalTargets = enemyNpcEntitiesInRange
-                            .Where(t => !t.entity.IsMoribund)
-                            .OrderBy(t => t.distance)
+                            .Where(npc => !npc.entity.IsMoribund)
+                            .OrderBy(npc => npc.distance)
+                            .ThenBy(npc => npc.isPriority)
                             .Take((int)System.Math.Min(maxMeTargetsLocked, maxShipTargetsLocked))
                             .ToList();
                     Daedalus.DaedalusUI.setTargetsList(optimalTargets);
                 }
             }
-            // Step 3: If no targets within targeting range then if targets outside of it, approach the nearest one
+            // Step 2: If no targets within targeting range then if targets outside of it, approach the nearest one
             else if (enemyNpcEntitiesInRange.Count == 0 && enemyNpcEntities.Count > 0)
             {
                 if (f_Entities.GetEntityMode(Daedalus.me.ToEntity) != EntityMode.Approaching) f_Movement.Approach(enemyNpcEntities[0]);
             }
 
-            // Step 4: Unlock any locked targets that are not optimal targets
+            // Step 3: Unlock any locked targets that are not optimal targets
             List<Entity> lockedTargets = Daedalus.me.GetTargets();
             foreach (Entity target in lockedTargets)
             {
@@ -88,28 +78,36 @@ namespace Daedalus.Controllers
                 {
                     if (enemyNPC.entity.ID == target.ID) found = true;
                 }
-                if (!found) target.UnlockTarget();
+                if (!found)
+                {
+                    Daedalus.DaedalusUI.newConsoleMessage(target.Name + " is no longer optimal, unlocking now");
+                    target.UnlockTarget();
+                }
             }
 
-            // Step 5: Lock optimal targets
+            // Step 4: Lock optimal targets
             foreach (EnemyNPC optimalTarget in optimalTargets)
             {
-                if (!optimalTarget.entity.IsLockedTarget && !optimalTarget.entity.BeingTargeted) optimalTarget.entity.LockTarget();
+                if (!optimalTarget.entity.IsLockedTarget && !optimalTarget.entity.BeingTargeted)
+                {
+                    Daedalus.DaedalusUI.newConsoleMessage(optimalTarget.entity.Name + " is not locked or locking, locking now");
+                    optimalTarget.entity.LockTarget();
+                }
             }
         }
-        private static List<EnemyNPC> GetEnemiesInRange(bool priorityOnly)
+        private static List<EnemyNPC> GetEnemiesInRange()
         {
             List<EnemyNPC> toReturn = new List<EnemyNPC>();
-            List<Entity> entities = new List<Entity>();
-            if (!priorityOnly) entities = f_Entities.GetEntitiesWithinDistance(enemyNpcEntities, maxTargetRange);
-            else
-            {
-                entities = f_Entities.GetEntitiesWithinDistance(enemyNpcEntities, maxTargetRange, d_Priority_Targets.All);
-            }
+            List<Entity> entities = f_Entities.GetEntitiesWithinDistance(enemyNpcEntities, maxTargetRange);
 
             foreach (Entity entity in entities)
             {
-                toReturn.Add(new EnemyNPC(f_Entities.GetDistanceBetween(entity), entity, d_NPC_Classes.GetNpcClass(entity.GroupID)));
+                toReturn.Add(new EnemyNPC(
+                    f_Entities.GetDistanceBetween(entity),
+                    entity,
+                    d_NPC_Classes.GetNpcClass(entity.GroupID),
+                    d_Priority_Targets.IsPriority(entity.Name)
+                    ));
             }
             return toReturn;
         }
@@ -119,14 +117,14 @@ namespace Daedalus.Controllers
     {
         public double distance { get; set; }
         public Entity entity { get; set; }
-        public string shipClass { get; set; }
-        public int shipClassOrder { get; set; }
-        public EnemyNPC(double aDistance, Entity aEntity, string aShipClass)
+        public int shipClass { get; set; }
+        public bool isPriority { get; set; }
+        public EnemyNPC(double Distance, Entity anEntity, int ShipClass, bool IsPriority)
         {
-            distance = aDistance;
-            entity = aEntity;
-            shipClass = aShipClass;
-            shipClassOrder = d_NPC_Classes.GetNpcClassOrder(aShipClass);
+            distance = Distance;
+            entity = anEntity;
+            shipClass = ShipClass;
+            isPriority = IsPriority;
         }
     }
 }

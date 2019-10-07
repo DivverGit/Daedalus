@@ -77,7 +77,11 @@ namespace Daedalus.Controllers
                     float optimalRange = f_Modules.GetAttributes.OptimalRange(weaponModule.slotType, weaponModule.slotIndex);
                     float engageRange = (falloffRange + optimalRange);
                     float distanceToTarget = (float)f_Entities.GetDistanceBetween(target);
-                    if (distanceToTarget < engageRange) weaponIModule.Activate();
+                    if (distanceToTarget < engageRange)
+                    {
+                        Daedalus.DaedalusUI.newConsoleMessage(weaponModule.slotType.ToString() + weaponModule.slotIndex.ToString() + " firing at " + target.Name);
+                        weaponIModule.Activate();
+                    }
                 }
             }
         }

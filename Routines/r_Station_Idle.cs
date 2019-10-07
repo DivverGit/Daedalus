@@ -18,6 +18,7 @@ namespace Daedalus.Routines
             if (!initComplete)
             {
                 initComplete = true;
+                Daedalus.DaedalusUI.newConsoleMessage("Switched to Routine.Station_Idle");
             }
 
             c_Status.Pulse();
