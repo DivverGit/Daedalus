@@ -86,9 +86,12 @@ namespace Daedalus.Functions
         public static List<Entity> GetNpcEntities(List<Entity> entitiesList)
         {
             List<Entity> toReturn = new List<Entity>();
-            foreach (Entity entity in entitiesList)
+            if(entitiesList.Count > 0)
             {
-                if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
+                foreach (Entity entity in entitiesList)
+                {
+                    if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
+                }
             }
             return toReturn;
         }

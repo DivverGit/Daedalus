@@ -15,6 +15,7 @@ namespace Daedalus.Modules
         public WeaponType weaponType { get; set; }
         public SlotType slotType { get; set; }
         public int slotIndex { get; set; }
+        public float hitChance { get; set; }
         public WeaponModule(string aName, WeaponType aWeaponType, SlotType aSlotType, int aSlotIndex)
         {
             name = aName;

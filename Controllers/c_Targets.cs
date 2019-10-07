@@ -12,7 +12,6 @@ namespace Daedalus.Controllers
         private static List<Entity> enemyNpcEntities = new List<Entity>();
         private static List<EnemyNPC> enemyNpcEntitiesInRange = new List<EnemyNPC>();
         private static List<EnemyNPC> priorityNpcEntitiesInRange = new List<EnemyNPC>();
-        private static List<EnemyNPC> existingTargets = new List<EnemyNPC>();
         public static List<EnemyNPC> optimalTargets = new List<EnemyNPC>();
         private static double maxTargetRange;
         private static double maxMeTargetsLocked;
