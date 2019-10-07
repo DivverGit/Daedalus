@@ -9,6 +9,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using EVE.ISXEVE;
+using Daedalus.Data;
+using Daedalus.Functions;
 
 namespace Daedalus
 {
@@ -18,81 +21,17 @@ namespace Daedalus
         {
             InitializeComponent();
         }
-
         private void UI_Load(object sender, EventArgs e)
         {
             Daedalus Daedalus = new Daedalus(this);
-            orbitRangeTextBox.Lines[0] = Settings.Default.orbitRange.ToString();
-            initTabPages();
+
+            double newValue = Settings.Default.orbitRange;
+            orbitTrackbar_Update(newValue);
+
+            profileComboBox.SelectedIndex = 0;
         }
 
-        // Tab functions
-        public TabPage General;
-        public TabPage Station;
-        public TabPage Space;
-        public TabPage Combat;
-        private void initTabPages()
-        {
-            General = tabControl1.TabPages[0];
-            Station = tabControl1.TabPages[1];
-            Space = tabControl1.TabPages[2];
-            Combat = tabControl1.TabPages[3];
-
-            showHideTabPage(General, true);
-            showHideTabPage(Station, true);
-            showHideTabPage(Space, true);
-            showHideTabPage(Combat, true);
-        }
-        private void showHideTabPage(TabPage page, bool hide)
-        {
-            if (page == General)
-            {
-                if(hide)    tabControl1.TabPages.Remove(General);
-                else
-                {
-                    tabControl1.TabPages.Insert(0, General);
-                }
-            }
-            else if (page == Station)
-            {
-                if (hide) tabControl1.TabPages.Remove(Station);
-                else
-                {
-                    tabControl1.TabPages.Insert(0, Station);
-                }
-            }
-            else if (page == Space)
-            {
-                if (hide) tabControl1.TabPages.Remove(Space);
-                else
-                {
-                    tabControl1.TabPages.Insert(0, Space);
-                }
-            }
-            else if (page == Combat)
-            {
-                if (hide) tabControl1.TabPages.Remove(Combat);
-                else
-                {
-                    tabControl1.TabPages.Insert(0, Combat);
-                }
-            }
-        }
-        public void switchTabPage(TabPage page)
-        {
-            TabPage[] tabPages = { General, Station, Space, Combat };
-
-            foreach(TabPage tabPage in tabPages)
-            {
-                if (tabPage != page) showHideTabPage(tabPage, true);
-                else
-                {
-                    showHideTabPage(tabPage, false);
-                }
-            }
-        }
-
-        // Label functions
+        // Labels
         public enum statusLabels
         {
             shipName,
@@ -171,24 +110,46 @@ namespace Daedalus
             else if (label == statusLabels.medSlot8) medSlot8ValueLabel.ForeColor = color;
         }
 
-        // Misc functions
+        // Preferences
+        public static double orbitRange;
+        public static TargetingProfile selectedTargetingProfile = TargetingProfile.byDistance;
+        private void orbitTrackbar_Scroll(object sender, EventArgs e)
+        {
+            double newValue = orbitTrackbar.Value;
+            orbitTrackbar_Update(newValue);
+        }
+        private void orbitTrackbar_Update(double newValue)
+        {
+            orbitRange = newValue;
+            orbitValueLabel.Text = newValue.ToString() + "m";
+            Settings.Default.orbitRange = newValue;
+            Settings.Default.Save();
+        }
+        private void profileComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (profileComboBox.SelectedItem.ToString() == "by Class") selectedTargetingProfile = TargetingProfile.byClass;
+            else if (profileComboBox.SelectedItem.ToString() == "by Distance") selectedTargetingProfile = TargetingProfile.byDistance;
+        }
+
+        // Log & Targets
         public void newConsoleMessage(string input)
         {
             Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
-        public float orbitRange()
+        public void setTargetsList(List<EnemyNPC> targets)
         {
-            float toReturn;
-            if (float.TryParse(orbitRangeTextBox.Lines[0], out toReturn))
+            targetsListBox.Items.Clear();
+            foreach (EnemyNPC target in targets)
             {
-                Settings.Default.orbitRange = toReturn;
-                return toReturn;
+                targetsListBox.Items.Add(target.entity.Name + " (" + target.shipClass + ") - " + target.distance.ToString("#") + "m");
             }
-            else
-            {
-                return 500.0f;
-            }
+            targetsListBox.Refresh();
         }
+    }
+    public enum TargetingProfile
+    {
+        byClass,
+        byDistance
     }
 }

@@ -17,7 +17,6 @@ namespace Daedalus.Behaviours
             if (!InitComplete)
             {
                 InitComplete = true;
-                Daedalus.DaedalusUI.switchTabPage(Daedalus.DaedalusUI.Station);
             }
             c_Routines.Pulse();
         }

@@ -5,7 +5,7 @@ namespace Daedalus.Controllers
     public enum Routine
     {
         Combat_Idle,
-        Combat_Brawl,
+        Combat_Active,
         Space_Idle,
         Space_Warp,
         Station_Idle,
@@ -29,7 +29,7 @@ namespace Daedalus.Controllers
             else if (c_Behaviours.activeBehaviour == Behaviour.Combat)
             {
                 if (activeRoutine == Routine.Combat_Idle) r_Combat_Idle.Pulse();
-                else if (activeRoutine == Routine.Combat_Brawl) r_Combat_Active.Pulse();
+                else if (activeRoutine == Routine.Combat_Active) r_Combat_Active.Pulse();
             }
         }
     }

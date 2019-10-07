@@ -30,14 +30,13 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.generalTabPage = new System.Windows.Forms.TabPage();
+            this.preferencesTabPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.stationTabPage = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.spaceTabPage = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.combatTabPage = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.profileComboBox = new System.Windows.Forms.ComboBox();
+            this.profileLabel = new System.Windows.Forms.Label();
+            this.orbitLabel = new System.Windows.Forms.Label();
+            this.orbitTrackbar = new System.Windows.Forms.TrackBar();
+            this.orbitValueLabel = new System.Windows.Forms.Label();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -88,17 +87,15 @@
             this.medSlot4ValueLabel = new System.Windows.Forms.Label();
             this.loSlotTabPage = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.logTabPage = new System.Windows.Forms.TabPage();
             this.Console = new System.Windows.Forms.ListBox();
-            this.orbitRangeLabel = new System.Windows.Forms.Label();
-            this.orbitRangeTextBox = new System.Windows.Forms.TextBox();
+            this.targetsTabPage = new System.Windows.Forms.TabPage();
+            this.targetsListBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.generalTabPage.SuspendLayout();
-            this.stationTabPage.SuspendLayout();
-            this.spaceTabPage.SuspendLayout();
-            this.combatTabPage.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
+            this.preferencesTabPage.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orbitTrackbar)).BeginInit();
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -108,7 +105,8 @@
             this.medSlotTabPage.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tabControl4.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.logTabPage.SuspendLayout();
+            this.targetsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -133,10 +131,7 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.generalTabPage);
-            this.tabControl1.Controls.Add(this.stationTabPage);
-            this.tabControl1.Controls.Add(this.spaceTabPage);
-            this.tabControl1.Controls.Add(this.combatTabPage);
+            this.tabControl1.Controls.Add(this.preferencesTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(436, 2);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -145,102 +140,97 @@
             this.tabControl1.Size = new System.Drawing.Size(282, 236);
             this.tabControl1.TabIndex = 1;
             // 
-            // generalTabPage
+            // preferencesTabPage
             // 
-            this.generalTabPage.Controls.Add(this.tableLayoutPanel2);
-            this.generalTabPage.Location = new System.Drawing.Point(4, 25);
-            this.generalTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.generalTabPage.Name = "generalTabPage";
-            this.generalTabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.generalTabPage.Size = new System.Drawing.Size(274, 207);
-            this.generalTabPage.TabIndex = 0;
-            this.generalTabPage.Text = "General";
-            this.generalTabPage.UseVisualStyleBackColor = true;
+            this.preferencesTabPage.Controls.Add(this.tableLayoutPanel2);
+            this.preferencesTabPage.Location = new System.Drawing.Point(4, 25);
+            this.preferencesTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.preferencesTabPage.Name = "preferencesTabPage";
+            this.preferencesTabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.preferencesTabPage.Size = new System.Drawing.Size(274, 207);
+            this.preferencesTabPage.TabIndex = 0;
+            this.preferencesTabPage.Text = "Preferences";
+            this.preferencesTabPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel2.Controls.Add(this.profileComboBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.profileLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.orbitLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.orbitTrackbar, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.orbitValueLabel, 1, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(268, 203);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // stationTabPage
+            // profileComboBox
             // 
-            this.stationTabPage.Controls.Add(this.flowLayoutPanel2);
-            this.stationTabPage.Location = new System.Drawing.Point(4, 25);
-            this.stationTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.stationTabPage.Name = "stationTabPage";
-            this.stationTabPage.Size = new System.Drawing.Size(274, 207);
-            this.stationTabPage.TabIndex = 1;
-            this.stationTabPage.Text = "Station";
-            this.stationTabPage.UseVisualStyleBackColor = true;
+            this.profileComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.profileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.profileComboBox.FormattingEnabled = true;
+            this.profileComboBox.Items.AddRange(new object[] {
+            "by Class",
+            "by Distance"});
+            this.profileComboBox.Location = new System.Drawing.Point(103, 3);
+            this.profileComboBox.Name = "profileComboBox";
+            this.profileComboBox.Size = new System.Drawing.Size(162, 24);
+            this.profileComboBox.TabIndex = 0;
+            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.profileComboBox_SelectedIndexChanged);
             // 
-            // flowLayoutPanel2
+            // profileLabel
             // 
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(274, 207);
-            this.flowLayoutPanel2.TabIndex = 0;
+            this.profileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.profileLabel.AutoSize = true;
+            this.profileLabel.Location = new System.Drawing.Point(24, 4);
+            this.profileLabel.Name = "profileLabel";
+            this.profileLabel.Size = new System.Drawing.Size(73, 17);
+            this.profileLabel.TabIndex = 1;
+            this.profileLabel.Text = "Targeting:";
             // 
-            // spaceTabPage
+            // orbitLabel
             // 
-            this.spaceTabPage.Controls.Add(this.flowLayoutPanel1);
-            this.spaceTabPage.Location = new System.Drawing.Point(4, 25);
-            this.spaceTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.spaceTabPage.Name = "spaceTabPage";
-            this.spaceTabPage.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.spaceTabPage.Size = new System.Drawing.Size(274, 207);
-            this.spaceTabPage.TabIndex = 2;
-            this.spaceTabPage.Text = "Space";
-            this.spaceTabPage.UseVisualStyleBackColor = true;
+            this.orbitLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.orbitLabel.AutoSize = true;
+            this.orbitLabel.Location = new System.Drawing.Point(54, 29);
+            this.orbitLabel.Name = "orbitLabel";
+            this.orbitLabel.Size = new System.Drawing.Size(43, 17);
+            this.orbitLabel.TabIndex = 2;
+            this.orbitLabel.Text = "Orbit:";
             // 
-            // flowLayoutPanel1
+            // orbitTrackbar
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 2);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(268, 203);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.orbitTrackbar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orbitTrackbar.LargeChange = 1000;
+            this.orbitTrackbar.Location = new System.Drawing.Point(103, 28);
+            this.orbitTrackbar.Maximum = 50000;
+            this.orbitTrackbar.Minimum = 500;
+            this.orbitTrackbar.Name = "orbitTrackbar";
+            this.orbitTrackbar.Size = new System.Drawing.Size(162, 19);
+            this.orbitTrackbar.SmallChange = 500;
+            this.orbitTrackbar.TabIndex = 3;
+            this.orbitTrackbar.Value = 500;
+            this.orbitTrackbar.Scroll += new System.EventHandler(this.orbitTrackbar_Scroll);
             // 
-            // combatTabPage
+            // orbitValueLabel
             // 
-            this.combatTabPage.Controls.Add(this.tableLayoutPanel6);
-            this.combatTabPage.Location = new System.Drawing.Point(4, 25);
-            this.combatTabPage.Margin = new System.Windows.Forms.Padding(4);
-            this.combatTabPage.Name = "combatTabPage";
-            this.combatTabPage.Size = new System.Drawing.Size(274, 207);
-            this.combatTabPage.TabIndex = 3;
-            this.combatTabPage.Text = "Combat";
-            this.combatTabPage.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.orbitRangeLabel, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.orbitRangeTextBox, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(274, 207);
-            this.tableLayoutPanel6.TabIndex = 0;
+            this.orbitValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.orbitValueLabel.AutoSize = true;
+            this.orbitValueLabel.Location = new System.Drawing.Point(103, 54);
+            this.orbitValueLabel.Name = "orbitValueLabel";
+            this.orbitValueLabel.Size = new System.Drawing.Size(114, 17);
+            this.orbitValueLabel.TabIndex = 4;
+            this.orbitValueLabel.Text = "orbitRangeValue";
             // 
             // tabControl3
             // 
@@ -817,7 +807,8 @@
             // 
             // tabControl4
             // 
-            this.tabControl4.Controls.Add(this.tabPage2);
+            this.tabControl4.Controls.Add(this.logTabPage);
+            this.tabControl4.Controls.Add(this.targetsTabPage);
             this.tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl4.Location = new System.Drawing.Point(3, 2);
             this.tabControl4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -826,17 +817,17 @@
             this.tabControl4.Size = new System.Drawing.Size(427, 236);
             this.tabControl4.TabIndex = 4;
             // 
-            // tabPage2
+            // logTabPage
             // 
-            this.tabPage2.Controls.Add(this.Console);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(419, 207);
-            this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "Log";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.logTabPage.Controls.Add(this.Console);
+            this.logTabPage.Location = new System.Drawing.Point(4, 25);
+            this.logTabPage.Margin = new System.Windows.Forms.Padding(4);
+            this.logTabPage.Name = "logTabPage";
+            this.logTabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.logTabPage.Size = new System.Drawing.Size(419, 207);
+            this.logTabPage.TabIndex = 0;
+            this.logTabPage.Text = "Log";
+            this.logTabPage.UseVisualStyleBackColor = true;
             // 
             // Console
             // 
@@ -850,26 +841,25 @@
             this.Console.Size = new System.Drawing.Size(411, 199);
             this.Console.TabIndex = 0;
             // 
-            // orbitRangeLabel
+            // targetsTabPage
             // 
-            this.orbitRangeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.orbitRangeLabel.AutoSize = true;
-            this.orbitRangeLabel.Location = new System.Drawing.Point(20, 7);
-            this.orbitRangeLabel.Name = "orbitRangeLabel";
-            this.orbitRangeLabel.Size = new System.Drawing.Size(110, 17);
-            this.orbitRangeLabel.TabIndex = 1;
-            this.orbitRangeLabel.Text = "Orbit Range (m)";
+            this.targetsTabPage.Controls.Add(this.targetsListBox);
+            this.targetsTabPage.Location = new System.Drawing.Point(4, 25);
+            this.targetsTabPage.Name = "targetsTabPage";
+            this.targetsTabPage.Size = new System.Drawing.Size(419, 207);
+            this.targetsTabPage.TabIndex = 1;
+            this.targetsTabPage.Text = "Targets";
+            this.targetsTabPage.UseVisualStyleBackColor = true;
             // 
-            // orbitRangeTextBox
+            // targetsListBox
             // 
-            this.orbitRangeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.orbitRangeTextBox.Location = new System.Drawing.Point(153, 3);
-            this.orbitRangeTextBox.Name = "orbitRangeTextBox";
-            this.orbitRangeTextBox.Size = new System.Drawing.Size(118, 22);
-            this.orbitRangeTextBox.TabIndex = 2;
-            this.orbitRangeTextBox.Text = "500";
+            this.targetsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.targetsListBox.FormattingEnabled = true;
+            this.targetsListBox.ItemHeight = 16;
+            this.targetsListBox.Location = new System.Drawing.Point(0, 0);
+            this.targetsListBox.Name = "targetsListBox";
+            this.targetsListBox.Size = new System.Drawing.Size(419, 207);
+            this.targetsListBox.TabIndex = 0;
             // 
             // UI
             // 
@@ -884,12 +874,10 @@
             this.Load += new System.EventHandler(this.UI_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.generalTabPage.ResumeLayout(false);
-            this.stationTabPage.ResumeLayout(false);
-            this.spaceTabPage.ResumeLayout(false);
-            this.combatTabPage.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
+            this.preferencesTabPage.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orbitTrackbar)).EndInit();
             this.tabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -902,7 +890,8 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tabControl4.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.logTabPage.ResumeLayout(false);
+            this.targetsTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -912,9 +901,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListBox Console;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage generalTabPage;
-        private System.Windows.Forms.TabPage stationTabPage;
-        private System.Windows.Forms.TabPage spaceTabPage;
+        private System.Windows.Forms.TabPage preferencesTabPage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label shipNameLabel;
@@ -925,7 +912,6 @@
         private System.Windows.Forms.Label shieldValueLabel;
         private System.Windows.Forms.Label armorValueLabel;
         private System.Windows.Forms.Label hullValueLabel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label hiSlot1Label;
         private System.Windows.Forms.Label hiSlot2Label;
         private System.Windows.Forms.Label hiSlot3Label;
@@ -947,12 +933,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TabPage medSlotTabPage;
         private System.Windows.Forms.TabPage loSlotTabPage;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TabPage combatTabPage;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabControl tabControl4;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage logTabPage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label medSlot1Label;
         private System.Windows.Forms.Label medSlot2Label;
@@ -970,8 +954,12 @@
         private System.Windows.Forms.Label medSlot3ValueLabel;
         private System.Windows.Forms.Label medSlot5ValueLabel;
         private System.Windows.Forms.Label medSlot4ValueLabel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Label orbitRangeLabel;
-        private System.Windows.Forms.TextBox orbitRangeTextBox;
+        private System.Windows.Forms.ComboBox profileComboBox;
+        private System.Windows.Forms.Label profileLabel;
+        private System.Windows.Forms.Label orbitLabel;
+        private System.Windows.Forms.TrackBar orbitTrackbar;
+        private System.Windows.Forms.Label orbitValueLabel;
+        private System.Windows.Forms.TabPage targetsTabPage;
+        private System.Windows.Forms.ListBox targetsListBox;
     }
 }

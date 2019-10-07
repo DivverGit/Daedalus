@@ -9,7 +9,7 @@ namespace Daedalus.Data
 {
     public static class d_NPC_Classes
     {
-        public static readonly List<String> FactionSpawns = new List<string>
+        public static readonly List<String> factionSpawns = new List<string>
         {
             "Sentient",
             "Dread Guristas",
@@ -19,7 +19,7 @@ namespace Daedalus.Data
             "Domination",
             "Psycho"
         };
-        public static readonly List<String> HaulerSpawns = new List<string>
+        public static readonly List<String> haulerSpawns = new List<string>
         {
             "Angel Bulker",
             "Angel Carrier",
@@ -111,7 +111,7 @@ namespace Daedalus.Data
             "Serpentis Transporter",
             "Serpentis Trucker"
         };
-        public static readonly List<String> OfficerSpawns = new List<string>
+        public static readonly List<String> officerSpawns = new List<string>
         {
             "Ahremen Arkah",
             "Brokara Ryver",
@@ -139,12 +139,12 @@ namespace Daedalus.Data
             "Vizan Ankonin"
         };
 
-        private static Dictionary<Int64, string> _All;
-        public static Dictionary<Int64, string> All
+        private static Dictionary<Int64, string> _all;
+        public static Dictionary<Int64, string> all
         {
             get
             {
-                if (_All == null)
+                if (_all == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
                     string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("NPC_Classes.xml"));
@@ -152,22 +152,36 @@ namespace Daedalus.Data
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName)) 
                     {
                         XElement dataDoc = XElement.Load(stream);
-                        _All = (from a in dataDoc.Descendants("Group")
+                        _all = (from a in dataDoc.Descendants("Group")
                                 select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => a.ID, a => a.Class);
                     }
                 }
-                return _All;
+                return _all;
             }
         }
         public static string GetNpcClass(long groupID)
         {
-            List<long> keys = All.Keys.ToList<long>();
-            List<string> values = All.Values.ToList<string>();
+            List<long> keys = all.Keys.ToList<long>();
+            List<string> values = all.Values.ToList<string>();
             for (int i = 0; i < keys.Count; i++)
             {
                 if(keys[i] == groupID)  return values[i];
             }
             return null;
+        }
+
+        public static int GetNpcClassOrder(string shipClass)
+        {
+            if (shipClass == "Frigate") return 0;
+            else if (shipClass == "Destroyer") return 1;
+            else if (shipClass == "Cruiser") return 2;
+            else if (shipClass == "BattleCruiser") return 3;
+            else if (shipClass == "BattleShip") return 4;
+            else if (shipClass == "Capital") return 5;
+            else
+            {
+                return 6;
+            }
         }
 
     }

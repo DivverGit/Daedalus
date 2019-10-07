@@ -35,7 +35,7 @@ namespace Daedalus
             // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
 
-            DaedalusUI.newConsoleMessage("Daedalus 06/10/2019, Alpha 1, Update 5");
+            DaedalusUI.newConsoleMessage("Daedalus, Update 6 (07/10/2019)");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }

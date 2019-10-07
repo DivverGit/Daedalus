@@ -26,9 +26,9 @@ namespace Daedalus.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public float orbitRange {
+        public double orbitRange {
             get {
-                return ((float)(this["orbitRange"]));
+                return ((double)(this["orbitRange"]));
             }
             set {
                 this["orbitRange"] = value;

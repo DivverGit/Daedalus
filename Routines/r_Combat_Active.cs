@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Daedalus.Properties;
 
 namespace Daedalus.Routines
 {
@@ -35,27 +36,28 @@ namespace Daedalus.Routines
         private static long orbitTargetID;
         public static void DoCombat()
         {
-            List<Entity> targets = Daedalus.me.GetTargets();
+            List<EnemyNPC> targets = c_Targets.optimalTargets;
             if (targets.Count > 0)
             {
-                Entity target = targets[0];
-                if(target.IsValid)
+                Entity primaryTarget = targets[0].entity;
+
+                if (primaryTarget.IsLockedTarget)
                 {
-                    if (target.IsActiveTarget)
+                    if (primaryTarget.IsActiveTarget)
                     {
-                        if (orbitTargetID != target.ID)
+                        if (orbitTargetID != primaryTarget.ID)
                         {
-                            orbitTargetID = target.ID;
-                            f_Movement.Orbit(target, Convert.ToInt32(Daedalus.DaedalusUI.orbitRange()));
+                            orbitTargetID = primaryTarget.ID;
+                            f_Movement.Orbit(primaryTarget, Convert.ToInt32(UI.orbitRange));
                         }
-                        c_Modules.WeaponPulse(target);
+                        c_Modules.WeaponPulse(primaryTarget);
                     }
-                    else if (!target.IsActiveTarget)
+                    else if (!primaryTarget.IsActiveTarget)
                     {
-                        Daedalus.DaedalusUI.newConsoleMessage("Target is not active, MakeActiveTarget()");
-                        target.MakeActiveTarget();
+                        primaryTarget.MakeActiveTarget();
                     }
                 }
+                else if (primaryTarget.BeingTargeted) return;
             }
         }
     }

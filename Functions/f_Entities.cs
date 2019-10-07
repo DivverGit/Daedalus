@@ -15,6 +15,10 @@ namespace Daedalus.Functions
     }
     public static class f_Entities
     {
+        public static List<Entity> AllEntities()
+        {
+            return Daedalus.eve.QueryEntities();
+        }
         public static double GetDistanceBetween(Entity entity)
         {
             if (!entity.IsValid) return 0;
@@ -33,9 +37,20 @@ namespace Daedalus.Functions
             }
             return toReturn;
         }
+        public static List<Entity> GetEntitiesWithinDistance(List<Entity> entitiesList, double distance, List<string> filteredByList)
+        {
+            List<Entity> toReturn = new List<Entity>();
+            foreach (Entity entity in entitiesList)
+            {
+                if (f_Entities.GetDistanceBetween(entity) < distance &&
+                    d_Priority_Targets.All.Contains(entity.Name))
+                    toReturn.Add(entity);
+            }
+            return toReturn;
+        }
         public static Entity GetEntityByID(long id)
         {
-            foreach (Entity entity in Cache.allEntities())
+            foreach (Entity entity in f_Entities.AllEntities())
             {
                 if (entity.ID == id) return entity;
             }

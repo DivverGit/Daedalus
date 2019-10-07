@@ -25,7 +25,7 @@ namespace Daedalus.Routines
                 if (c_Targets.redAlert)
                 {
                     initComplete = false;
-                    c_Routines.activeRoutine = Routine.Combat_Brawl;
+                    c_Routines.activeRoutine = Routine.Combat_Active;
                 }
                 c_Targets.Pulse();
                 c_Status.Pulse();

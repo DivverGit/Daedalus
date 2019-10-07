@@ -1,4 +1,5 @@
-﻿using EVE.ISXEVE;
+﻿using Daedalus.Data;
+using EVE.ISXEVE;
 
 namespace Daedalus.Functions
 {
@@ -17,7 +18,7 @@ namespace Daedalus.Functions
         public static void Orbit(Entity entity, int distance = 1000)
         {
             entity.Orbit(distance);
-            Program.DaedalusUI.newConsoleMessage("Orbiting " + entity.Name + " at " + distance.ToString() + "m");
+            Program.DaedalusUI.newConsoleMessage("Orbiting " + entity.Name + " (" + d_NPC_Classes.GetNpcClass(entity.GroupID) + ") at " + distance.ToString() + "m");
         }
         public static void Warp(Entity entity)
         {
