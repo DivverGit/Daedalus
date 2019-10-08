@@ -7,176 +7,222 @@ namespace Daedalus.Controllers
 {
     public static class c_Modules
     {
-        public static List<Afterburner> afterburners = new List<Afterburner>();
-        public static List<ArmorHardener> armorHardeners = new List<ArmorHardener>();
-        public static List<ArmorRepairer> armorRepairers = new List<ArmorRepairer>();
-        public static List<ShieldBooster> shieldBoosters = new List<ShieldBooster>();
-        public static List<ShieldHardener> shieldHardeners = new List<ShieldHardener>();
-        public static List<WeaponModule> weaponModules = new List<WeaponModule>();
-
-        private static IModule armorHardenerIModule;
-        private static IModule armorRepairerIModule;
-        public static void ArmorPulse()
+        public static List<Module> modules = new List<Module>();
+        public static void Pulse()
         {
-            foreach (ArmorHardener armorHardener in armorHardeners)
+            DefensePulse();
+            PropulsionPulse();
+            UtilityPulse();
+        }
+
+        public static void DefensePulse()
+        {
+            foreach (Module moduleObject in modules)
             {
-                armorHardenerIModule = Daedalus.myShip.Module(SlotType.LoSlot, armorHardener.Slot_Index);
-                if (!armorHardenerIModule.IsActive) armorHardenerIModule.Activate();
-            }
-            foreach (ArmorRepairer armorRepairer in armorRepairers)
-            {
-                armorRepairerIModule = Daedalus.myShip.Module(SlotType.LoSlot, armorRepairer.Slot_Index);
-                double currentArmor = c_Status.armorCurrent;
-                double maximumArmor = c_Status.armorMaximum;
-                double deficit = (maximumArmor - currentArmor);
-                if (deficit > armorRepairer.Repair_Amount && !armorRepairerIModule.IsActive && !armorRepairerIModule.IsDeactivating) armorRepairerIModule.Activate();
-                else if (deficit < armorRepairer.Repair_Amount && armorRepairerIModule.IsActive && !armorRepairerIModule.IsDeactivating) armorRepairerIModule.Deactivate();
+                if (moduleObject is Module.ArmorHardener)
+                {
+                    Module.ArmorHardener armorHardenerObject = moduleObject as Module.ArmorHardener;
+                    IModule module = Daedalus.myShip.Module(SlotType.LoSlot, armorHardenerObject.Slot_Index);
+                    if (!module.IsActive) module.Activate();
+                }
+                else if (moduleObject is Module.ArmorRepairer)
+                {
+                    Module.ArmorRepairer armorRepairerObject = moduleObject as Module.ArmorRepairer;
+                    IModule module = Daedalus.myShip.Module(SlotType.LoSlot, armorRepairerObject.Slot_Index);
+                    double currentArmor = c_Status.armorCurrent;
+                    double maximumArmor = c_Status.armorMaximum;
+                    double deficit = (maximumArmor - currentArmor);
+                    if (deficit > armorRepairerObject.Repair_Amount && !module.IsActive && !module.IsDeactivating) module.Activate();
+                    else if (deficit < armorRepairerObject.Repair_Amount && module.IsActive && !module.IsDeactivating) module.Deactivate();
+                }
+                else if (moduleObject is Module.BastionModule)
+                {
+                    Module.BastionModule bastionModuleObject = moduleObject as Module.BastionModule;
+                    IModule module = Daedalus.myShip.Module(SlotType.HiSlot, bastionModuleObject.Slot_Index);
+                    if (!module.IsActive) module.Activate();
+                }
+                else if (moduleObject is Module.ShieldBooster)
+                {
+                    Module.ShieldBooster shieldBoosterObject = moduleObject as Module.ShieldBooster;
+                    IModule module = Daedalus.myShip.Module(SlotType.MedSlot, shieldBoosterObject.Slot_Index);
+                    double currentShield = c_Status.shieldCurrent;
+                    double maximumShield = c_Status.shieldMaximum;
+                    double deficit = (maximumShield - currentShield);
+                    if (deficit > shieldBoosterObject.Boost_Amount && !module.IsActive && !module.IsDeactivating) module.Activate();
+                    else if (deficit < shieldBoosterObject.Boost_Amount && module.IsActive && !module.IsDeactivating) module.Deactivate();
+                }
+                else if (moduleObject is Module.ShieldHardener)
+                {
+                    Module.ShieldHardener shieldHardenerObject = moduleObject as Module.ShieldHardener;
+                    IModule module = Daedalus.myShip.Module(SlotType.MedSlot, shieldHardenerObject.Slot_Index);
+                    if (!module.IsActive) module.Activate();
+                }
             }
         }
 
-        private static IModule afterburnerIModule;
+        public static void OffensePulse(Entity target)
+        {
+            foreach (Module moduleObject in modules)
+            {
+                if (moduleObject is Module.MissileLauncher)
+                {
+                    Module.MissileLauncher missileLauncherObject = moduleObject as Module.MissileLauncher;
+                    IModule module = Daedalus.myShip.Module(missileLauncherObject.slotType, missileLauncherObject.slotIndex);
+                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
+                    {
+                        double engageRange = missileLauncherObject.maxFlightRange;
+                        double distanceToTarget = f_Entities.GetDistanceBetween(target);
+                        if (distanceToTarget < engageRange) module.Activate();
+                    }
+                }
+                else if (moduleObject is Module.Turret)
+                {
+                    Module.Turret turretObject = moduleObject as Module.Turret;
+                    IModule module = Daedalus.myShip.Module(turretObject.slotType, turretObject.slotIndex);
+                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
+                    {
+                        double? falloffRange = turretObject.falloffRange;
+                        double? optimalRange = turretObject.optimalRange;
+                        double? engageRange = (falloffRange + optimalRange);
+                        double distanceToTarget = f_Entities.GetDistanceBetween(target);
+                        if (distanceToTarget < engageRange) module.Activate();
+                    }
+                }
+            }
+        }
+
         public static void PropulsionPulse()
         {
-            foreach (Afterburner afterburner in afterburners)
+            foreach (Module moduleObject in modules)
             {
-                afterburnerIModule = Daedalus.myShip.Module(SlotType.MedSlot, afterburner.Slot_Index);
-                if (!afterburnerIModule.IsActive) afterburnerIModule.Activate();
-            }
-        }
-
-        private static IModule shieldBoosterIModule;
-        private static IModule shieldHardenerIModule;
-        public static void ShieldPulse()
-        {
-            foreach (ShieldBooster shieldBooster in shieldBoosters)
-            {
-                shieldBoosterIModule = Daedalus.myShip.Module(SlotType.MedSlot, shieldBooster.Slot_Index);
-                double currentShield = c_Status.shieldCurrent;
-                double maximumShield = c_Status.shieldMaximum;
-                double deficit = (maximumShield - currentShield);
-                if (deficit > shieldBooster.Boost_Amount && !shieldBoosterIModule.IsActive && !shieldBoosterIModule.IsDeactivating) shieldBoosterIModule.Activate();
-                else if (deficit < shieldBooster.Boost_Amount && shieldBoosterIModule.IsActive && !shieldBoosterIModule.IsDeactivating) shieldBoosterIModule.Deactivate();
-            }
-            foreach (ShieldHardener shieldHardener in shieldHardeners)
-            {
-                shieldHardenerIModule = Daedalus.myShip.Module(SlotType.MedSlot, shieldHardener.Slot_Index);
-                if (!shieldHardenerIModule.IsActive) shieldHardenerIModule.Activate();
-            }
-        }
-
-        private static IModule weaponIModule;
-        public static void WeaponsPulse(Entity target)
-        {
-            foreach (WeaponModule weaponModule in weaponModules)
-            {
-                weaponIModule = Daedalus.myShip.Module(weaponModule.slotType, weaponModule.slotIndex);
-                if (weaponIModule.IsValid && !weaponIModule.IsActive && !weaponIModule.IsReloadingAmmo)
+                if(moduleObject is Module.Afterburner)
                 {
-                    float falloffRange = f_Modules.GetAttributes.FalloffRange(weaponModule.slotType, weaponModule.slotIndex);
-                    float optimalRange = f_Modules.GetAttributes.OptimalRange(weaponModule.slotType, weaponModule.slotIndex);
-                    float engageRange = (falloffRange + optimalRange);
-                    float distanceToTarget = (float)f_Entities.GetDistanceBetween(target);
-                    if (distanceToTarget < engageRange) weaponIModule.Activate();
+                    Module.Afterburner afterburnerObject = moduleObject as Module.Afterburner;
+                    IModule module = Daedalus.myShip.Module(SlotType.MedSlot, afterburnerObject.Slot_Index);
+                    if (!module.IsActive) module.Activate();
+                }
+            }
+        }
+
+        public static void UtilityPulse()
+        {
+            foreach (Module moduleObject in modules)
+            {
+                if (moduleObject is Module.TrackingComputer)
+                {
+                    Module.TrackingComputer trackingComputerObject = moduleObject as Module.TrackingComputer;
+                    IModule module = Daedalus.myShip.Module(SlotType.MedSlot, trackingComputerObject.Slot_Index);
+                    if (!module.IsActive) module.Activate();
                 }
             }
         }
     }
 
-    public class Afterburner
+    public class Module
     {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public Afterburner(string name, int slot)
+        public class Afterburner : Module
         {
-            Name = name;
-            Slot_Index = slot;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public Afterburner(string name_value, int slotIndex_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+            }
         }
-    }
-    public class ArmorHardener
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public ArmorHardener(string name, int slot)
+        public class ArmorHardener : Module
         {
-            Name = name;
-            Slot_Index = slot;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public ArmorHardener(string name_value, int slotIndex_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+            }
         }
-    }
-    public class ArmorRepairer
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public double Repair_Amount { get; set; }
-        public ArmorRepairer(string name, int slot, double repairAmount)
+        public class ArmorRepairer : Module
         {
-            Name = name;
-            Slot_Index = slot;
-            Repair_Amount = repairAmount;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public double Repair_Amount { get; set; }
+            public ArmorRepairer(string name_value, int slotIndex_value, double repairAmount_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+                Repair_Amount = repairAmount_value;
+            }
         }
-    }
-    public class BastionModule
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public BastionModule(string name, int slot)
+        public class BastionModule : Module
         {
-            Name = name;
-            Slot_Index = slot;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public BastionModule(string name_value, int slotIndex_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+            }
         }
-    }
-    public class ShieldBooster
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public double Boost_Amount { get; set; }
-        public ShieldBooster(string name, int slot, double boostAmount)
+        public class MissileLauncher : Module
         {
-            Name = name;
-            Slot_Index = slot;
-            Boost_Amount = boostAmount;
+            public string name { get; set; }
+            public int slotIndex { get; set; }
+            public SlotType slotType { get; set; }
+            public double maxFlightRange { get; set; }
+            public MissileLauncher(string name_value, int slotIndex_value, SlotType slotType_value, double maxFlightRange_value)
+            {
+                name = name_value;
+                slotIndex = slotIndex_value;
+                slotType = slotType_value;
+                maxFlightRange = maxFlightRange_value;
+            }
         }
-    }
-    public class ShieldHardener
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public ShieldHardener(string name, int slot)
+        public class ShieldBooster : Module
         {
-            Name = name;
-            Slot_Index = slot;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public double Boost_Amount { get; set; }
+            public ShieldBooster(string name_value, int slotIndex_value, double boostAmount_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+                Boost_Amount = boostAmount_value;
+            }
         }
-    }
-    public class TrackingComputer
-    {
-        public string Name { get; set; }
-        public int Slot_Index { get; set; }
-        public TrackingComputer(string name, int slot)
+        public class ShieldHardener : Module
         {
-            Name = name;
-            Slot_Index = slot;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public ShieldHardener(string name_value, int slotIndex_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+            }
         }
-    }
-    public class WeaponModule
-    {
-        public string name { get; set; }
-        public WeaponType weaponType { get; set; }
-        public SlotType slotType { get; set; }
-        public int slotIndex { get; set; }
-        public float hitChance { get; set; }
-        public WeaponModule(string aName, WeaponType aWeaponType, SlotType aSlotType, int aSlotIndex)
+        public class TrackingComputer : Module
         {
-            name = aName;
-            weaponType = aWeaponType;
-            slotType = aSlotType;
-            slotIndex = aSlotIndex;
+            public string Name { get; set; }
+            public int Slot_Index { get; set; }
+            public TrackingComputer(string name_value, int slotIndex_value)
+            {
+                Name = name_value;
+                Slot_Index = slotIndex_value;
+            }
         }
-    }
-
-    public enum WeaponType
-    {
-        Energy_Turret,
-        Hybrid_Turret,
-        Missile_Launcher,
-        Projectile_Turret
+        public class Turret : Module
+        {
+            public string name { get; set; }
+            public int slotIndex { get; set; }
+            public SlotType slotType { get; set; }
+            public double? falloffRange { get; set; }
+            public double? optimalRange { get; set; }
+            public Turret(string name_value, int slotIndex_value, SlotType slotType_value, double? falloffRange_value, double? optimalRange_value)
+            {
+                name = name_value;
+                slotIndex = slotIndex_value;
+                slotType = slotType_value;
+                falloffRange = falloffRange_value;
+                optimalRange = optimalRange_value;
+            }
+        }
     }
 }

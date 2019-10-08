@@ -24,12 +24,9 @@ namespace Daedalus.Routines
 
             if (!c_Targets.redAlert) c_Routines.activeRoutine = Routine.Combat_Idle;
 
+            c_Modules.Pulse();
             c_Status.Pulse();
             c_Targets.Pulse();
-
-            if(c_Modules.afterburners.Count > 0) c_Modules.PropulsionPulse();
-            if (c_Modules.armorHardeners.Count > 0 || c_Modules.armorRepairers.Count > 0)   c_Modules.ArmorPulse();
-            if (c_Modules.shieldBoosters.Count > 0 || c_Modules.shieldHardeners.Count > 0)  c_Modules.ShieldPulse();
 
             DoCombat();
         }
@@ -51,7 +48,7 @@ namespace Daedalus.Routines
                             orbitTargetID = primaryTarget.ID;
                             f_Movement.Orbit(primaryTarget, Convert.ToInt32(UI.orbitRange));
                         }
-                        c_Modules.WeaponsPulse(primaryTarget);
+                        c_Modules.OffensePulse(primaryTarget);
                     }
                     else if (!primaryTarget.IsActiveTarget)
                     {

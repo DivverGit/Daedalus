@@ -1,4 +1,5 @@
 ﻿using EVE.ISXEVE;
+using EVE.ISXEVE.Interfaces;
 using System.Collections.Generic;
 
 namespace Daedalus.Functions
@@ -10,33 +11,18 @@ namespace Daedalus.Functions
             public static void Engage()
             {
                 Daedalus.eve.Execute(ExecuteCommand.CmdDronesEngage);
+                Daedalus.DaedalusUI.newConsoleMessage("f_Drones: Engaging");
             }
             public static void Launch()
             {
                 Daedalus.myShip.LaunchAllDrones();
+                Daedalus.DaedalusUI.newConsoleMessage("f_Drones: Launching");
             }
             public static void ReturnToBay()
             {
                 Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
+                Daedalus.DaedalusUI.newConsoleMessage("f_Drones: Returning");
             }
         }
-    }
-
-    public class Drone
-    {
-        public Entity entity { get; set; }
-        public DroneType droneType { get; set; }
-        public Drone(Entity anEntity, DroneType Type)
-        {
-            entity = anEntity;
-            droneType = Type;
-        }
-    }
-    public enum DroneType
-    {
-        Light,
-        Medium,
-        Heavy,
-        Sentry
     }
 }

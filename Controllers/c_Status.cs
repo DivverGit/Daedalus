@@ -9,11 +9,7 @@ namespace Daedalus.Controllers
     {
         static c_Status()
         {
-            f_Modules.GetAfterburnerModules();
-            f_Modules.GetArmorRepairModules();
-            f_Modules.GetShieldBoosterModules();
-            f_Modules.GetShieldHardenerModules();
-            f_Modules.GetWeaponModules();
+            f_Modules.GetAllModules();
         }
         public static void Pulse()
         {

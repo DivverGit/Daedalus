@@ -3,15 +3,8 @@ using Daedalus.Routines;
 using Daedalus.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using EVE.ISXEVE;
-using Daedalus.Data;
-using Daedalus.Functions;
 
 namespace Daedalus
 {
@@ -29,6 +22,8 @@ namespace Daedalus
             orbitTrackbar_Update(newValue);
 
             profileComboBox.SelectedIndex = 0;
+
+            //d_ESI.QueryESI(17609, QueryType.byTypeid);
         }
 
         // Labels

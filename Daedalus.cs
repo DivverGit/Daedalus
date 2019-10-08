@@ -4,9 +4,8 @@ using System;
 
 namespace Daedalus
 {
-    using Behaviours;
     using Controllers;
-    using Functions;
+    using Data;
 
     public class Daedalus
     {
