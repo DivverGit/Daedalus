@@ -1,6 +1,5 @@
 ﻿using Daedalus.Controllers;
 using Daedalus.Data;
-using Daedalus.Modules;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using System;
@@ -50,7 +49,7 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 46) c_Modules.afterburners.Add(new Modules.Afterburner(module.ToItem.Name, i));
+                if (module.ToItem.GroupID == 46) c_Modules.afterburners.Add(new Afterburner(module.ToItem.Name, i));
             }
         }
         public static List<IModule> AllModules()
@@ -83,7 +82,7 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 328) c_Modules.armorHardeners.Add(new Modules.ArmorHardener(module.ToItem.Name, i));
+                if (module.ToItem.GroupID == 328) c_Modules.armorHardeners.Add(new ArmorHardener(module.ToItem.Name, i));
             }
         }
         public static void GetArmorRepairModules()
@@ -92,7 +91,7 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 62) c_Modules.armorRepairers.Add(new Modules.ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
+                if (module.ToItem.GroupID == 62) c_Modules.armorRepairers.Add(new ArmorRepairer(module.ToItem.Name, i, Convert.ToDouble(module.ArmorHPRepaired)));
             }
         }
         public static List<IModule> HighPowerModules()
@@ -128,7 +127,7 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 40)    c_Modules.shieldBoosters.Add(new Modules.ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
+                if (module.ToItem.GroupID == 40)    c_Modules.shieldBoosters.Add(new ShieldBooster(module.ToItem.Name, i, Convert.ToDouble(module.ShieldBonus)));
             }
         }
         public static void GetShieldHardenerModules()
@@ -137,7 +136,7 @@ namespace Daedalus.Functions
             for (int i = 0; i < modules.Count; i++)
             {
                 IModule module = modules[i];
-                if (module.ToItem.GroupID == 77)    c_Modules.shieldHardeners.Add(new Modules.ShieldHardener(module.ToItem.Name, i));
+                if (module.ToItem.GroupID == 77)    c_Modules.shieldHardeners.Add(new ShieldHardener(module.ToItem.Name, i));
             }
         }
         public static void GetWeaponModules()

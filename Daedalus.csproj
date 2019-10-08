@@ -99,10 +99,6 @@
     <Compile Include="Controllers\c_Targets.cs" />
     <Compile Include="Controllers\c_Status.cs" />
     <Compile Include="Controllers\c_Routines.cs" />
-    <Compile Include="Modules\m_Weapons.cs" />
-    <Compile Include="Modules\m_Shield.cs" />
-    <Compile Include="Modules\m_Armor.cs" />
-    <Compile Include="Modules\m_Propulsion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routines\r_Combat_Active.cs" />

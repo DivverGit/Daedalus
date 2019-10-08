@@ -1,5 +1,4 @@
 ﻿using Daedalus.Functions;
-using Daedalus.Modules;
 using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using System.Collections.Generic;
@@ -14,16 +13,6 @@ namespace Daedalus.Controllers
         public static List<ShieldBooster> shieldBoosters = new List<ShieldBooster>();
         public static List<ShieldHardener> shieldHardeners = new List<ShieldHardener>();
         public static List<WeaponModule> weaponModules = new List<WeaponModule>();
-
-        private static IModule afterburnerIModule;
-        public static void PropulsionPulse()
-        {
-            foreach (Afterburner afterburner in afterburners)
-            {
-                afterburnerIModule = Daedalus.myShip.Module(SlotType.MedSlot, afterburner.Slot_Index);
-                if (!afterburnerIModule.IsActive) afterburnerIModule.Activate();
-            }
-        }
 
         private static IModule armorHardenerIModule;
         private static IModule armorRepairerIModule;
@@ -42,6 +31,16 @@ namespace Daedalus.Controllers
                 double deficit = (maximumArmor - currentArmor);
                 if (deficit > armorRepairer.Repair_Amount && !armorRepairerIModule.IsActive && !armorRepairerIModule.IsDeactivating) armorRepairerIModule.Activate();
                 else if (deficit < armorRepairer.Repair_Amount && armorRepairerIModule.IsActive && !armorRepairerIModule.IsDeactivating) armorRepairerIModule.Deactivate();
+            }
+        }
+
+        private static IModule afterburnerIModule;
+        public static void PropulsionPulse()
+        {
+            foreach (Afterburner afterburner in afterburners)
+            {
+                afterburnerIModule = Daedalus.myShip.Module(SlotType.MedSlot, afterburner.Slot_Index);
+                if (!afterburnerIModule.IsActive) afterburnerIModule.Activate();
             }
         }
 
@@ -81,5 +80,103 @@ namespace Daedalus.Controllers
                 }
             }
         }
+    }
+
+    public class Afterburner
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public Afterburner(string name, int slot)
+        {
+            Name = name;
+            Slot_Index = slot;
+        }
+    }
+    public class ArmorHardener
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public ArmorHardener(string name, int slot)
+        {
+            Name = name;
+            Slot_Index = slot;
+        }
+    }
+    public class ArmorRepairer
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public double Repair_Amount { get; set; }
+        public ArmorRepairer(string name, int slot, double repairAmount)
+        {
+            Name = name;
+            Slot_Index = slot;
+            Repair_Amount = repairAmount;
+        }
+    }
+    public class BastionModule
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public BastionModule(string name, int slot)
+        {
+            Name = name;
+            Slot_Index = slot;
+        }
+    }
+    public class ShieldBooster
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public double Boost_Amount { get; set; }
+        public ShieldBooster(string name, int slot, double boostAmount)
+        {
+            Name = name;
+            Slot_Index = slot;
+            Boost_Amount = boostAmount;
+        }
+    }
+    public class ShieldHardener
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public ShieldHardener(string name, int slot)
+        {
+            Name = name;
+            Slot_Index = slot;
+        }
+    }
+    public class TrackingComputer
+    {
+        public string Name { get; set; }
+        public int Slot_Index { get; set; }
+        public TrackingComputer(string name, int slot)
+        {
+            Name = name;
+            Slot_Index = slot;
+        }
+    }
+    public class WeaponModule
+    {
+        public string name { get; set; }
+        public WeaponType weaponType { get; set; }
+        public SlotType slotType { get; set; }
+        public int slotIndex { get; set; }
+        public float hitChance { get; set; }
+        public WeaponModule(string aName, WeaponType aWeaponType, SlotType aSlotType, int aSlotIndex)
+        {
+            name = aName;
+            weaponType = aWeaponType;
+            slotType = aSlotType;
+            slotIndex = aSlotIndex;
+        }
+    }
+
+    public enum WeaponType
+    {
+        Energy_Turret,
+        Hybrid_Turret,
+        Missile_Launcher,
+        Projectile_Turret
     }
 }
