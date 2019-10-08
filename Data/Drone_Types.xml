@@ -1,0 +1,39 @@
+﻿<?xml version="1.0"?>
+<DroneTypes>
+  <!-- Light -->
+  <Group DroneType="Light" Name="Hobgoblin I" />
+  <Group DroneType="Light" Name="Hobgoblin II" />
+  <Group DroneType="Light" Name="Hornet I" />
+  <Group DroneType="Light" Name="Hornet II" />
+  <Group DroneType="Light" Name="Acolyte I" />
+  <Group DroneType="Light" Name="Acolyte II" />
+  <Group DroneType="Light" Name="Warrior I" />
+  <Group DroneType="Light" Name="Warrior II" />
+  <!-- Medium -->
+  <Group DroneType="Medium" Name="Hammerhead I" />
+  <Group DroneType="Medium" Name="Hammerhead II" />
+  <Group DroneType="Medium" Name="Vespa I" />
+  <Group DroneType="Medium" Name="Vespa II" />
+  <Group DroneType="Medium" Name="Infiltrator I" />
+  <Group DroneType="Medium" Name="Infiltrator II" />
+  <Group DroneType="Medium" Name="Valkyrie I" />
+  <Group DroneType="Medium" Name="Valkyrie II" />
+  <!-- Heavy -->
+  <Group DroneType="Heavy" Name="Ogre I" />
+  <Group DroneType="Heavy" Name="Ogre II" />
+  <Group DroneType="Heavy" Name="Wasp I" />
+  <Group DroneType="Heavy" Name="Wasp II" />
+  <Group DroneType="Heavy" Name="Praetor I" />
+  <Group DroneType="Heavy" Name="Praetor II" />
+  <Group DroneType="Heavy" Name="Berserker I" />
+  <Group DroneType="Heavy" Name="Berserker II" />
+  <!-- Sentry -->
+  <Group DroneType="Sentry" Name="Warden I" />
+  <Group DroneType="Sentry" Name="Warden II" />
+  <Group DroneType="Sentry" Name="Garde I" />
+  <Group DroneType="Sentry" Name="Garde II" />
+  <Group DroneType="Sentry" Name="Curator I" />
+  <Group DroneType="Sentry" Name="Curator II" />
+  <Group DroneType="Sentry" Name="Bouncer I" />
+  <Group DroneType="Sentry" Name="Bouncer II" />
+</DroneTypes>

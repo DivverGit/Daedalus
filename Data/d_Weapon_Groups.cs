@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Daedalus.Data
 {
-    public static class d_Weapon_Types
+    public static class d_Weapon_Groups
     {
         private static List<long> _EnergyTurrets;
         public static List<long> EnergyTurrets
@@ -17,7 +17,7 @@ namespace Daedalus.Data
                 if (_EnergyTurrets == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Types.xml"));
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Groups.xml"));
 
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                     {
@@ -38,7 +38,7 @@ namespace Daedalus.Data
                 if (_HybridTurrets == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Types.xml"));
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Groups.xml"));
 
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                     {
@@ -59,7 +59,7 @@ namespace Daedalus.Data
                 if (_MissileLaunchers == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Types.xml"));
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Groups.xml"));
 
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName)) 
                     {
@@ -80,7 +80,7 @@ namespace Daedalus.Data
                 if (_ProjectileTurret == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Types.xml"));
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Weapon_Groups.xml"));
 
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                     {

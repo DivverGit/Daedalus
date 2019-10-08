@@ -85,7 +85,8 @@
     <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Controllers\c_Modules.cs" />
     <Compile Include="Daedalus.cs" />
-    <Compile Include="Data\d_Weapon_Types.cs" />
+    <Compile Include="Data\d_Drone_Types.cs" />
+    <Compile Include="Data\d_Weapon_Groups.cs" />
     <Compile Include="Data\d_Priority_Targets.cs" />
     <Compile Include="Data\d_NPC_Types.cs" />
     <Compile Include="Data\d_NPC_Classes.cs" />
@@ -154,7 +155,10 @@
     <EmbeddedResource Include="Data\Priority_Targets.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Weapon_Types.xml" />
+    <EmbeddedResource Include="Data\Weapon_Groups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Drone_Types.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />

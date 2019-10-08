@@ -212,4 +212,6 @@
   <Type Name="Asteroid Serpentis Titan">1690</Type>
   <Type Name="Asteroid Rogue Drone Carrier">1691</Type>
   <Type Name="Asteroid Rogue Drone Supercarrier">1692</Type>
+  <!-- Abyssal Deadspace -->
+  <Type Name="Abyssal Ships">1982</Type>
 </Targets>

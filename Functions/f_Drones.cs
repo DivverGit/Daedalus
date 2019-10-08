@@ -20,11 +20,6 @@ namespace Daedalus.Functions
                 Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
             }
         }
-
-        public static Dictionary<string, DroneType> all = new Dictionary<string, DroneType>
-        {
-            { "Test", DroneType.Light }
-        };
     }
 
     public class Drone

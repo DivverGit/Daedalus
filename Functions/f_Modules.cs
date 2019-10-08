@@ -155,19 +155,19 @@ namespace Daedalus.Functions
         public static WeaponModule GetWeaponType(SlotType slotType, int slotIndex)
         {
             IModule module = Daedalus.myShip.Module(slotType, slotIndex);
-            if (d_Weapon_Types.EnergyTurrets.Contains(module.ToItem.GroupID))
+            if (d_Weapon_Groups.EnergyTurrets.Contains(module.ToItem.GroupID))
             {
                 return new WeaponModule(module.ToItem.Name, WeaponType.Energy_Turret, slotType, slotIndex);
             }
-            else if (d_Weapon_Types.HybridTurrets.Contains(module.ToItem.GroupID))
+            else if (d_Weapon_Groups.HybridTurrets.Contains(module.ToItem.GroupID))
             {
                 return new WeaponModule(module.ToItem.Name, WeaponType.Hybrid_Turret, slotType, slotIndex);
             }
-            else if (d_Weapon_Types.MissileLaunchers.Contains(module.ToItem.GroupID))
+            else if (d_Weapon_Groups.MissileLaunchers.Contains(module.ToItem.GroupID))
             {
                 return new WeaponModule(module.ToItem.Name, WeaponType.Missile_Launcher, slotType, slotIndex);
             }
-            else if (d_Weapon_Types.ProjectileTurret.Contains(module.ToItem.GroupID))
+            else if (d_Weapon_Groups.ProjectileTurret.Contains(module.ToItem.GroupID))
             {
                 return new WeaponModule(module.ToItem.Name, WeaponType.Projectile_Turret, slotType, slotIndex);
             }
