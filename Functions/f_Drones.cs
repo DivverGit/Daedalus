@@ -2,7 +2,7 @@
 
 namespace Daedalus.Functions
 {
-    static class f_Drones
+    public static class f_Drones
     {
         public static void Engage()
         {
@@ -16,5 +16,15 @@ namespace Daedalus.Functions
         {
             Daedalus.eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
         }
+    }
+
+    public class Drone
+    {
+        public Entity entity { get; set; }
+        public DroneType type { get; set; }
+    }
+    public enum DroneType
+    {
+
     }
 }

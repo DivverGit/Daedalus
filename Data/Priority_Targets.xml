@@ -143,9 +143,10 @@
   <!-- Web -->
   <Target Name="Angel Stasis Tower" />
   <Target Name="Blood Stasis Tower" />
+  <Target Name="Caldari Stasis Tower" />
   <Target Name="Drone Stasis Tower" />
   <Target Name="Guristas Stasis Tower" />
-  <Target Name="Sansha Stasis Towe" />
+  <Target Name="Sansha Stasis Tower" />
   <Target Name="Serpentis Stasis Tower" />
   <!-- Other -->
   <Target Name="True Sansha's Slavehunter" />

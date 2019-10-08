@@ -29,6 +29,8 @@ namespace Daedalus.Controllers
             }
             else
             {
+                optimalTargets = new List<EnemyNPC>();
+                Daedalus.DaedalusUI.setTargetsList(optimalTargets);
                 redAlert = false;
             }
         }
@@ -45,9 +47,9 @@ namespace Daedalus.Controllers
                 {
                     optimalTargets = enemyNpcEntitiesInRange
                             .Where(npc => !npc.entity.IsMoribund)
-                            .OrderBy(npc => npc.shipClass)
+                            .OrderByDescending(npc => npc.isPriority )
+                            .ThenBy(npc => npc.shipClass)
                             .ThenBy(npc => npc.distance)
-                            .ThenBy(npc => npc.isPriority)
                             .Take((int)System.Math.Min(maxMeTargetsLocked, maxShipTargetsLocked))
                             .ToList();
                     Daedalus.DaedalusUI.setTargetsList(optimalTargets);
@@ -56,8 +58,8 @@ namespace Daedalus.Controllers
                 {
                     optimalTargets = enemyNpcEntitiesInRange
                             .Where(npc => !npc.entity.IsMoribund)
-                            .OrderBy(npc => npc.distance)
-                            .ThenBy(npc => npc.isPriority)
+                            .OrderByDescending(npc => npc.isPriority)
+                            .ThenBy(npc => npc.distance)
                             .Take((int)System.Math.Min(maxMeTargetsLocked, maxShipTargetsLocked))
                             .ToList();
                     Daedalus.DaedalusUI.setTargetsList(optimalTargets);
@@ -78,21 +80,13 @@ namespace Daedalus.Controllers
                 {
                     if (enemyNPC.entity.ID == target.ID) found = true;
                 }
-                if (!found)
-                {
-                    Daedalus.DaedalusUI.newConsoleMessage(target.Name + " is no longer optimal, unlocking now");
-                    target.UnlockTarget();
-                }
+                if (!found) target.UnlockTarget();
             }
 
             // Step 4: Lock optimal targets
             foreach (EnemyNPC optimalTarget in optimalTargets)
             {
-                if (!optimalTarget.entity.IsLockedTarget && !optimalTarget.entity.BeingTargeted)
-                {
-                    Daedalus.DaedalusUI.newConsoleMessage(optimalTarget.entity.Name + " is not locked or locking, locking now");
-                    optimalTarget.entity.LockTarget();
-                }
+                if (!optimalTarget.entity.IsLockedTarget && !optimalTarget.entity.BeingTargeted)    optimalTarget.entity.LockTarget();
             }
         }
         private static List<EnemyNPC> GetEnemiesInRange()

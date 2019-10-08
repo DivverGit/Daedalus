@@ -16,7 +16,7 @@ namespace Daedalus.Data
                 if (_All == null)
                 {
                     var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("NPC_Types.xml"));
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("Priority_Targets.xml"));
 
                     using (Stream stream = assembly.GetManifestResourceStream(resourceName)) 
                     {
@@ -30,7 +30,10 @@ namespace Daedalus.Data
         }
         public static bool IsPriority(string name)
         {
-            if (All.Contains(name)) return true;
+            if (All.Contains(name))
+            {
+                return true;
+            }
             else
             {
                 return false;

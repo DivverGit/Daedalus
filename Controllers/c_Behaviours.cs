@@ -84,7 +84,7 @@ namespace Daedalus.Controllers
         {
             inTransition = true;
             transitionEndTime = DateTime.Now.AddSeconds(5.0f);
-            Daedalus.DaedalusUI.newConsoleMessage("Transitioning from " + previousBehaviour.ToString() + " to " + activeBehaviour.ToString());
+            Daedalus.DaedalusUI.newConsoleMessage("Transitioning from Behaviour." + previousBehaviour.ToString() + " to Behaviour." + activeBehaviour.ToString());
         }
     }
 }

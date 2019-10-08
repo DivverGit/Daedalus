@@ -10,7 +10,11 @@ namespace Daedalus.Behaviours
         {
             if (!InitComplete)
             {
-                if (c_Behaviours.previousBehaviour == Behaviour.Combat) f_Modules.DeactivateAllModules();
+                if (c_Behaviours.previousBehaviour == Behaviour.Combat)
+                {
+                    f_Modules.DeactivateAllModules();
+                    f_EVECommands.ReloadAll();
+                }
                 InitComplete = true;
             }
             c_Routines.Pulse();

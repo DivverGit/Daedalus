@@ -38,7 +38,7 @@ namespace Daedalus.Controllers
 
             for(int i = 0; i < 8; i++)
             {
-                if (modules[i].IsValid)
+                if (modules[i].IsValid && !modules[i].IsActivatable)
                 {
                     Daedalus.DaedalusUI.changeStatusLabel(StatusLabels.highPowerSlotLabels[i], modules[i].ToItem.Name);
                     if (modules[i].IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(StatusLabels.highPowerSlotLabels[i], Color.Green);
@@ -68,7 +68,7 @@ namespace Daedalus.Controllers
 
             for (int i = 0; i < 8; i++)
             {
-                if (modules[i].IsValid)
+                if (modules[i].IsValid && !modules[i].IsActivatable)
                 {
                     Daedalus.DaedalusUI.changeStatusLabel(StatusLabels.mediumPowerSlotLabels[i], modules[i].ToItem.Name);
                     if (modules[i].IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(StatusLabels.mediumPowerSlotLabels[i], Color.Green);

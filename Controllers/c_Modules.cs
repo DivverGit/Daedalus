@@ -18,7 +18,7 @@ namespace Daedalus.Controllers
         private static IModule afterburnerIModule;
         public static void PropulsionPulse()
         {
-            foreach(Afterburner afterburner in afterburners)
+            foreach (Afterburner afterburner in afterburners)
             {
                 afterburnerIModule = Daedalus.myShip.Module(SlotType.MedSlot, afterburner.Slot_Index);
                 if (!afterburnerIModule.IsActive) afterburnerIModule.Activate();
@@ -77,11 +77,7 @@ namespace Daedalus.Controllers
                     float optimalRange = f_Modules.GetAttributes.OptimalRange(weaponModule.slotType, weaponModule.slotIndex);
                     float engageRange = (falloffRange + optimalRange);
                     float distanceToTarget = (float)f_Entities.GetDistanceBetween(target);
-                    if (distanceToTarget < engageRange)
-                    {
-                        Daedalus.DaedalusUI.newConsoleMessage(weaponModule.slotType.ToString() + weaponModule.slotIndex.ToString() + " firing at " + target.Name);
-                        weaponIModule.Activate();
-                    }
+                    if (distanceToTarget < engageRange) weaponIModule.Activate();
                 }
             }
         }
