@@ -18,10 +18,12 @@ namespace Daedalus
         {
             Daedalus Daedalus = new Daedalus(this);
 
-            double newValue = Settings.Default.orbitRange;
+            double newValue = Settings.Default.movementRange;
             orbitTrackbar_Update(newValue);
 
-            profileComboBox.SelectedIndex = 0;
+            movementComboBox.SelectedIndex = Settings.Default.movementIndex;
+            propulsionComboBox.SelectedIndex = Settings.Default.propulsionIndex;
+            targetingComboBox.SelectedIndex = Settings.Default.targetingIndex;
 
             //d_ESI.QueryESI(17609, QueryType.byTypeid);
         }
@@ -75,7 +77,6 @@ namespace Daedalus
         }
 
         // Preferences
-        public static double orbitRange;
         public static TargetingProfile selectedTargetingProfile = TargetingProfile.byDistance;
         private void orbitTrackbar_Scroll(object sender, EventArgs e)
         {
@@ -84,15 +85,36 @@ namespace Daedalus
         }
         private void orbitTrackbar_Update(double newValue)
         {
-            orbitRange = newValue;
+            orbitTrackbar.Value = Convert.ToInt32(newValue);
             orbitValueLabel.Text = newValue.ToString() + "m";
-            Settings.Default.orbitRange = newValue;
+            Settings.Default.movementRange = newValue;
             Settings.Default.Save();
         }
-        private void profileComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void movementComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (profileComboBox.SelectedItem.ToString() == "by Class") selectedTargetingProfile = TargetingProfile.byClass;
-            else if (profileComboBox.SelectedItem.ToString() == "by Distance") selectedTargetingProfile = TargetingProfile.byDistance;
+            if (movementComboBox.SelectedIndex == 0) Settings.Default.movementIndex = 0;
+            else if (movementComboBox.SelectedIndex == 1) Settings.Default.movementIndex = 1;
+            Settings.Default.Save();
+        }
+        private void propulsionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (targetingComboBox.SelectedIndex == 0) Settings.Default.propulsionIndex = 0;
+            else if (targetingComboBox.SelectedIndex == 1) Settings.Default.propulsionIndex = 1;
+            Settings.Default.Save();
+        }
+        private void targetingComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (targetingComboBox.SelectedIndex == 0)
+            {
+                selectedTargetingProfile = TargetingProfile.byClass;
+                Settings.Default.targetingIndex = 0;
+            }
+            else if (targetingComboBox.SelectedIndex == 1)
+            {
+                selectedTargetingProfile = TargetingProfile.byDistance;
+                Settings.Default.targetingIndex = 1;
+            }
+            Settings.Default.Save();
         }
 
         // Log & Targets

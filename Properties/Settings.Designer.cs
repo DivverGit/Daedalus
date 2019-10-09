@@ -26,12 +26,48 @@ namespace Daedalus.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public double orbitRange {
+        public double movementRange {
             get {
-                return ((double)(this["orbitRange"]));
+                return ((double)(this["movementRange"]));
             }
             set {
-                this["orbitRange"] = value;
+                this["movementRange"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int movementIndex {
+            get {
+                return ((int)(this["movementIndex"]));
+            }
+            set {
+                this["movementIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int propulsionIndex {
+            get {
+                return ((int)(this["propulsionIndex"]));
+            }
+            set {
+                this["propulsionIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int targetingIndex {
+            get {
+                return ((int)(this["targetingIndex"]));
+            }
+            set {
+                this["targetingIndex"] = value;
             }
         }
     }

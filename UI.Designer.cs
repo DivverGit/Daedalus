@@ -33,11 +33,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.preferencesTabPage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.profileComboBox = new System.Windows.Forms.ComboBox();
             this.profileLabel = new System.Windows.Forms.Label();
             this.orbitLabel = new System.Windows.Forms.Label();
+            this.targetingComboBox = new System.Windows.Forms.ComboBox();
+            this.movementComboBox = new System.Windows.Forms.ComboBox();
             this.orbitTrackbar = new System.Windows.Forms.TrackBar();
             this.orbitValueLabel = new System.Windows.Forms.Label();
+            this.propulsionLabel = new System.Windows.Forms.Label();
+            this.propulsionComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -161,42 +164,33 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.profileComboBox, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.profileLabel, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.orbitLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.profileLabel, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.orbitLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.targetingComboBox, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.movementComboBox, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.orbitTrackbar, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.orbitValueLabel, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.orbitValueLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.propulsionLabel, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.propulsionComboBox, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(268, 203);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // profileComboBox
-            // 
-            this.profileComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.profileComboBox.FormattingEnabled = true;
-            this.profileComboBox.Items.AddRange(new object[] {
-            "by Class",
-            "by Distance"});
-            this.profileComboBox.Location = new System.Drawing.Point(103, 3);
-            this.profileComboBox.Name = "profileComboBox";
-            this.profileComboBox.Size = new System.Drawing.Size(162, 24);
-            this.profileComboBox.TabIndex = 0;
-            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.profileComboBox_SelectedIndexChanged);
             // 
             // profileLabel
             // 
             this.profileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.profileLabel.AutoSize = true;
-            this.profileLabel.Location = new System.Drawing.Point(24, 4);
+            this.profileLabel.Location = new System.Drawing.Point(24, 106);
             this.profileLabel.Name = "profileLabel";
             this.profileLabel.Size = new System.Drawing.Size(73, 17);
             this.profileLabel.TabIndex = 1;
@@ -206,35 +200,87 @@
             // 
             this.orbitLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.orbitLabel.AutoSize = true;
-            this.orbitLabel.Location = new System.Drawing.Point(54, 29);
+            this.orbitLabel.Location = new System.Drawing.Point(20, 6);
             this.orbitLabel.Name = "orbitLabel";
-            this.orbitLabel.Size = new System.Drawing.Size(43, 17);
+            this.orbitLabel.Size = new System.Drawing.Size(77, 17);
             this.orbitLabel.TabIndex = 2;
-            this.orbitLabel.Text = "Orbit:";
+            this.orbitLabel.Text = "Movement:";
+            // 
+            // targetingComboBox
+            // 
+            this.targetingComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.targetingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.targetingComboBox.FormattingEnabled = true;
+            this.targetingComboBox.Items.AddRange(new object[] {
+            "by Class",
+            "by Distance"});
+            this.targetingComboBox.Location = new System.Drawing.Point(103, 103);
+            this.targetingComboBox.Name = "targetingComboBox";
+            this.targetingComboBox.Size = new System.Drawing.Size(162, 24);
+            this.targetingComboBox.TabIndex = 0;
+            this.targetingComboBox.SelectedIndexChanged += new System.EventHandler(this.targetingComboBox_SelectedIndexChanged);
+            // 
+            // movementComboBox
+            // 
+            this.movementComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.movementComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.movementComboBox.FormattingEnabled = true;
+            this.movementComboBox.Items.AddRange(new object[] {
+            "Keep At Range",
+            "Orbit"});
+            this.movementComboBox.Location = new System.Drawing.Point(103, 3);
+            this.movementComboBox.Name = "movementComboBox";
+            this.movementComboBox.Size = new System.Drawing.Size(162, 24);
+            this.movementComboBox.TabIndex = 5;
+            this.movementComboBox.SelectedIndexChanged += new System.EventHandler(this.movementComboBox_SelectedIndexChanged);
             // 
             // orbitTrackbar
             // 
             this.orbitTrackbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orbitTrackbar.LargeChange = 1000;
-            this.orbitTrackbar.Location = new System.Drawing.Point(103, 28);
-            this.orbitTrackbar.Maximum = 50000;
-            this.orbitTrackbar.Minimum = 500;
+            this.orbitTrackbar.LargeChange = 5000;
+            this.orbitTrackbar.Location = new System.Drawing.Point(103, 33);
+            this.orbitTrackbar.Maximum = 100000;
+            this.orbitTrackbar.Minimum = 1000;
             this.orbitTrackbar.Name = "orbitTrackbar";
-            this.orbitTrackbar.Size = new System.Drawing.Size(162, 19);
-            this.orbitTrackbar.SmallChange = 500;
+            this.orbitTrackbar.Size = new System.Drawing.Size(162, 24);
+            this.orbitTrackbar.SmallChange = 1000;
             this.orbitTrackbar.TabIndex = 3;
-            this.orbitTrackbar.Value = 500;
+            this.orbitTrackbar.Value = 1000;
             this.orbitTrackbar.Scroll += new System.EventHandler(this.orbitTrackbar_Scroll);
             // 
             // orbitValueLabel
             // 
-            this.orbitValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.orbitValueLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.orbitValueLabel.AutoSize = true;
-            this.orbitValueLabel.Location = new System.Drawing.Point(103, 54);
+            this.orbitValueLabel.Location = new System.Drawing.Point(52, 36);
             this.orbitValueLabel.Name = "orbitValueLabel";
-            this.orbitValueLabel.Size = new System.Drawing.Size(114, 17);
+            this.orbitValueLabel.Size = new System.Drawing.Size(45, 17);
             this.orbitValueLabel.TabIndex = 4;
-            this.orbitValueLabel.Text = "orbitRangeValue";
+            this.orbitValueLabel.Text = "range";
+            // 
+            // propulsionLabel
+            // 
+            this.propulsionLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.propulsionLabel.AutoSize = true;
+            this.propulsionLabel.Location = new System.Drawing.Point(18, 76);
+            this.propulsionLabel.Name = "propulsionLabel";
+            this.propulsionLabel.Size = new System.Drawing.Size(79, 17);
+            this.propulsionLabel.TabIndex = 6;
+            this.propulsionLabel.Text = "Propulsion:";
+            // 
+            // propulsionComboBox
+            // 
+            this.propulsionComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propulsionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.propulsionComboBox.FormattingEnabled = true;
+            this.propulsionComboBox.Items.AddRange(new object[] {
+            "Always On",
+            "Combat Only"});
+            this.propulsionComboBox.Location = new System.Drawing.Point(103, 73);
+            this.propulsionComboBox.Name = "propulsionComboBox";
+            this.propulsionComboBox.Size = new System.Drawing.Size(162, 24);
+            this.propulsionComboBox.TabIndex = 7;
+            this.propulsionComboBox.SelectedIndexChanged += new System.EventHandler(this.propulsionComboBox_SelectedIndexChanged);
             // 
             // tabControl3
             // 
@@ -975,7 +1021,7 @@
         private System.Windows.Forms.Label medSlot3ValueLabel;
         private System.Windows.Forms.Label medSlot5ValueLabel;
         private System.Windows.Forms.Label medSlot4ValueLabel;
-        private System.Windows.Forms.ComboBox profileComboBox;
+        private System.Windows.Forms.ComboBox targetingComboBox;
         private System.Windows.Forms.Label profileLabel;
         private System.Windows.Forms.Label orbitLabel;
         private System.Windows.Forms.TrackBar orbitTrackbar;
@@ -984,5 +1030,8 @@
         private System.Windows.Forms.ListBox targetsListBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
+        private System.Windows.Forms.ComboBox movementComboBox;
+        private System.Windows.Forms.Label propulsionLabel;
+        private System.Windows.Forms.ComboBox propulsionComboBox;
     }
 }

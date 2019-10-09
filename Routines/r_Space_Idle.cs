@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Daedalus.Properties;
 
 namespace Daedalus.Routines
 {
@@ -24,9 +25,9 @@ namespace Daedalus.Routines
             if(f_Entities.GetEntityMode(Daedalus.me.ToEntity) == EntityMode.Warping)    c_Routines.activeRoutine = Routine.Space_Warp;
             else
             {
+                if(Settings.Default.propulsionIndex == 0) c_Modules.PropulsionPulse();
                 c_Targets.Pulse();
                 c_Status.Pulse();
-                c_Modules.PropulsionPulse();
             }
         }
     }

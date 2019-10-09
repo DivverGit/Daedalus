@@ -6,6 +6,7 @@ namespace Daedalus
 {
     using Controllers;
     using Data;
+    using global::Daedalus.Functions;
 
     public class Daedalus
     {
@@ -80,7 +81,7 @@ namespace Daedalus
                     myShip = new EVE.ISXEVE.Ship();
 
                     DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + c_Behaviours.activeBehaviour.ToString() + "] [Routine: " + c_Routines.activeRoutine.ToString() + "]";
-
+                    DaedalusUI.newConsoleMessage(me.InStation.ToString());
                     c_Behaviours.Pulse();
                 }
                 return;

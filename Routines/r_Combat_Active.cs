@@ -31,7 +31,7 @@ namespace Daedalus.Routines
             DoCombat();
         }
 
-        private static long orbitTargetID;
+        private static long movementTargetID;
         public static void DoCombat()
         {
             List<EnemyNPC> targets = c_Targets.optimalTargets;
@@ -44,10 +44,20 @@ namespace Daedalus.Routines
                     Daedalus.DaedalusUI.newConsoleMessage("r_Combat_Active: Primary is locked");
                     if (primaryTarget.IsActiveTarget)
                     {
-                        if (orbitTargetID != primaryTarget.ID)
+                        if (movementTargetID != primaryTarget.ID)
                         {
-                            orbitTargetID = primaryTarget.ID;
-                            f_Movement.Orbit(primaryTarget, Convert.ToInt32(UI.orbitRange));
+                            movementTargetID = primaryTarget.ID;
+
+                            int movementRange = Convert.ToInt32(Settings.Default.movementRange);
+                            switch (Settings.Default.movementIndex)
+                            {
+                                case 0:
+                                    f_Movement.KeepAtRange(primaryTarget, movementRange);
+                                    break;
+                                case 1:
+                                    f_Movement.Orbit(primaryTarget, movementRange);
+                                    break;
+                            }
                         }
                         Daedalus.DaedalusUI.newConsoleMessage("r_Combat_Active: OffensePulse()");
                         c_Modules.OffensePulse(primaryTarget);
