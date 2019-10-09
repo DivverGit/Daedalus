@@ -10,11 +10,15 @@ namespace Daedalus.Controllers
         public static List<Module> modules = new List<Module>();
         public static void Pulse()
         {
-            DefensePulse();
-            PropulsionPulse();
-            UtilityPulse();
+            if(!Daedalus.me.ToEntity.IsCloaked)
+            {
+                DefensePulse();
+                PropulsionPulse();
+                UtilityPulse();
+            }
         }
 
+        public static bool bastionAppropriate = false;
         public static void DefensePulse()
         {
             foreach (Module moduleObject in modules)
@@ -23,7 +27,7 @@ namespace Daedalus.Controllers
                 {
                     Module.ArmorHardener armorHardenerObject = moduleObject as Module.ArmorHardener;
                     IModule module = Daedalus.myShip.Module(SlotType.LoSlot, armorHardenerObject.Slot_Index);
-                    if (!module.IsActive) module.Activate();
+                    if (!module.IsActive && module.IsOnline) module.Activate();
                 }
                 else if (moduleObject is Module.ArmorRepairer)
                 {
@@ -32,14 +36,15 @@ namespace Daedalus.Controllers
                     double currentArmor = c_Status.armorCurrent;
                     double maximumArmor = c_Status.armorMaximum;
                     double deficit = (maximumArmor - currentArmor);
-                    if (deficit > armorRepairerObject.Repair_Amount && !module.IsActive && !module.IsDeactivating) module.Activate();
-                    else if (deficit < armorRepairerObject.Repair_Amount && module.IsActive && !module.IsDeactivating) module.Deactivate();
+                    if (deficit > armorRepairerObject.Repair_Amount && !module.IsActive && !module.IsDeactivating && module.IsOnline) module.Activate();
+                    else if (deficit < armorRepairerObject.Repair_Amount && module.IsActive && !module.IsDeactivating && module.IsOnline) module.Deactivate();
                 }
                 else if (moduleObject is Module.BastionModule)
                 {
                     Module.BastionModule bastionModuleObject = moduleObject as Module.BastionModule;
                     IModule module = Daedalus.myShip.Module(SlotType.HiSlot, bastionModuleObject.Slot_Index);
-                    if (!module.IsActive) module.Activate();
+                    if (!module.IsActive && module.IsOnline && bastionAppropriate) module.Activate();
+                    else if (module.IsActive && !bastionAppropriate) module.Deactivate();
                 }
                 else if (moduleObject is Module.ShieldBooster)
                 {
@@ -48,14 +53,14 @@ namespace Daedalus.Controllers
                     double currentShield = c_Status.shieldCurrent;
                     double maximumShield = c_Status.shieldMaximum;
                     double deficit = (maximumShield - currentShield);
-                    if (deficit > shieldBoosterObject.Boost_Amount && !module.IsActive && !module.IsDeactivating) module.Activate();
-                    else if (deficit < shieldBoosterObject.Boost_Amount && module.IsActive && !module.IsDeactivating) module.Deactivate();
+                    if (deficit > shieldBoosterObject.Boost_Amount && !module.IsActive && !module.IsDeactivating && module.IsOnline) module.Activate();
+                    else if (deficit < shieldBoosterObject.Boost_Amount && module.IsActive && !module.IsDeactivating && module.IsOnline) module.Deactivate();
                 }
                 else if (moduleObject is Module.ShieldHardener)
                 {
                     Module.ShieldHardener shieldHardenerObject = moduleObject as Module.ShieldHardener;
                     IModule module = Daedalus.myShip.Module(SlotType.MedSlot, shieldHardenerObject.Slot_Index);
-                    if (!module.IsActive) module.Activate();
+                    if (!module.IsActive && module.IsOnline) module.Activate();
                 }
             }
         }
@@ -68,14 +73,12 @@ namespace Daedalus.Controllers
                 {
                     Module.MissileLauncher missileLauncherObject = moduleObject as Module.MissileLauncher;
                     IModule module = Daedalus.myShip.Module(missileLauncherObject.slotType, missileLauncherObject.slotIndex);
-                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
+                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo && module.IsOnline)
                     {
-                        double engageRange = missileLauncherObject.maxFlightRange;
-                        Daedalus.DaedalusUI.newConsoleMessage("c_Modules: maxFlightRange=" + engageRange.ToString());
+                        double engageRange = (module.Charge.MaxFlightTime + module.Charge.MaxVelocity);
                         double distanceToTarget = f_Entities.GetDistanceBetween(target);
                         if (distanceToTarget < engageRange)
                         {
-                            Daedalus.DaedalusUI.newConsoleMessage("c_Modules: MissileLauncher firing");
                             module.Activate();
                         }
                     }
@@ -84,16 +87,14 @@ namespace Daedalus.Controllers
                 {
                     Module.Turret turretObject = moduleObject as Module.Turret;
                     IModule module = Daedalus.myShip.Module(turretObject.slotType, turretObject.slotIndex);
-                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
+                    if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo && module.IsOnline)
                     {
-                        double? falloffRange = turretObject.falloffRange;
-                        double? optimalRange = turretObject.optimalRange;
+                        double? falloffRange = (module.AccuracyFalloff * 1.5);
+                        double? optimalRange = module.OptimalRange;
                         double? engageRange = (falloffRange + optimalRange);
                         double distanceToTarget = f_Entities.GetDistanceBetween(target);
-                        Daedalus.DaedalusUI.newConsoleMessage("c_Modules: engageRange=" + engageRange.ToString() + " - distanceToTarget=" + distanceToTarget.ToString());
                         if (distanceToTarget < engageRange)
                         {
-                            Daedalus.DaedalusUI.newConsoleMessage("c_Modules: Turret firing");
                             module.Activate();
                         }
                     }
@@ -109,7 +110,7 @@ namespace Daedalus.Controllers
                 {
                     Module.Afterburner afterburnerObject = moduleObject as Module.Afterburner;
                     IModule module = Daedalus.myShip.Module(SlotType.MedSlot, afterburnerObject.Slot_Index);
-                    if (!module.IsActive) module.Activate();
+                    if (!module.IsActive && module.IsOnline) module.Activate();
                 }
             }
         }
@@ -122,7 +123,7 @@ namespace Daedalus.Controllers
                 {
                     Module.TrackingComputer trackingComputerObject = moduleObject as Module.TrackingComputer;
                     IModule module = Daedalus.myShip.Module(SlotType.MedSlot, trackingComputerObject.Slot_Index);
-                    if (!module.IsActive) module.Activate();
+                    if (!module.IsActive && module.IsOnline) module.Activate();
                 }
             }
         }

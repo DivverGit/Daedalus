@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EVE.ISXEVE;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -293,21 +294,31 @@ namespace Daedalus.Data
 
         public static List<ESI_Entity> esiEntities = new List<ESI_Entity>();
 
-        private static List<int> Priority_dgmAttributes = new List<int>
+        public static float GetShipGroup(Entity entity)
         {
-            504, // entityWarpScrambleChance
-            512, // modifyTargetSpeedChance
-            930, // ECMEntityChance
-            931, // energyNeutralizerEntityChance
-            933, // npcTrackingDisruptorActivationChance
-            935 // entityTargetPaintDurationChance
-        };
-        private static List<int> Status_dgmAttributes = new List<int>
+            foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+            {
+                if (esiEntity.type_id == entity.TypeID)
+                {
+                    return esiEntity.entityOverviewShipGroupId;
+                }
+            }
+            return 0.0f;
+        }
+        public static bool GetIsPriority(Entity entity)
         {
-            9, // hp
-            265, // armorHP
-            263, // shieldCapacity
-        };
+            foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+            {
+                if (esiEntity.type_id == entity.TypeID)
+                {
+                    if(esiEntity.canECM || esiEntity.canNeut || esiEntity.canScramble || esiEntity.canTargetPaint || esiEntity.canTrackingDisrupt || esiEntity.canWeb)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
         public static void SaveQueryToFile(ESI_Entity esiEntity)
         {
@@ -422,7 +433,6 @@ namespace Daedalus.Data
         {
             if (!queries.Contains(typeid))
             {
-                Daedalus.DaedalusUI.newConsoleMessage("d_ESI: TypeID=" + typeid.ToString() + " queued for ESI query");
                 queries.Add(typeid);
             }
         }

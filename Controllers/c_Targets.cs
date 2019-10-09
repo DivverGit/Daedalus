@@ -43,6 +43,7 @@ namespace Daedalus.Controllers
             // Step 1: If targets within targeting range
             if (enemyNpcEntitiesInRange.Count > 0)
             {
+                c_Modules.bastionAppropriate = true;
                 if (UI.selectedTargetingProfile == TargetingProfile.byClass)
                 {
                     optimalTargets = enemyNpcEntitiesInRange
@@ -68,6 +69,7 @@ namespace Daedalus.Controllers
             // Step 2: If no targets within targeting range then if targets outside of it, approach the nearest one
             else if (enemyNpcEntitiesInRange.Count == 0 && enemyNpcEntities.Count > 0)
             {
+                c_Modules.bastionAppropriate = false;
                 if (f_Entities.GetEntityMode(Daedalus.me.ToEntity) != EntityMode.Approaching) f_Movement.Approach(enemyNpcEntities[0]);
             }
 
@@ -99,8 +101,8 @@ namespace Daedalus.Controllers
                 toReturn.Add(new EnemyNPC(
                     f_Entities.GetDistanceBetween(entity),
                     entity,
-                    d_NPC_Classes.GetNpcClass(entity.GroupID),
-                    d_Priority_Targets.IsPriority(entity.Name)
+                    ESI_Cache.GetShipGroup(entity),
+                    ESI_Cache.GetIsPriority(entity)
                     ));
             }
             return toReturn;
@@ -111,9 +113,9 @@ namespace Daedalus.Controllers
     {
         public double distance { get; set; }
         public Entity entity { get; set; }
-        public int shipClass { get; set; }
+        public float shipClass { get; set; }
         public bool isPriority { get; set; }
-        public EnemyNPC(double Distance, Entity anEntity, int ShipClass, bool IsPriority)
+        public EnemyNPC(double Distance, Entity anEntity, float ShipClass, bool IsPriority)
         {
             distance = Distance;
             entity = anEntity;

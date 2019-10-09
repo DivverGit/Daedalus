@@ -25,7 +25,6 @@ namespace Daedalus
             movementComboBox.SelectedIndex = Settings.Default.movementIndex;
             propulsionComboBox.SelectedIndex = Settings.Default.propulsionIndex;
             targetingComboBox.SelectedIndex = Settings.Default.targetingIndex;
-            //d_ESI.QueryESI(17609, QueryType.byTypeid);
         }
 
         // Labels
@@ -120,8 +119,7 @@ namespace Daedalus
         // Log & Targets
         public void newConsoleMessage(string input)
         {
-            //Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
-            Console.Items.Add(input);
+            Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
         public void setTargetsList(List<EnemyNPC> targets)

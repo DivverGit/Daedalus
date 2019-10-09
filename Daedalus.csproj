@@ -93,9 +93,6 @@
     </Content>
     <Compile Include="Data\d_ESI.cs" />
     <Compile Include="Data\d_Weapon_Groups.cs" />
-    <Compile Include="Data\d_Priority_Targets.cs" />
-    <Compile Include="Data\d_NPC_Types.cs" />
-    <Compile Include="Data\d_NPC_Classes.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
     <Compile Include="Functions\f_Entities.cs" />
@@ -146,20 +143,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\NPC_Classes.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\NPC_Types.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Priority_Targets.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Weapon_Groups.xml" />

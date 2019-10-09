@@ -17,7 +17,25 @@ namespace Daedalus.Functions
     {
         public static List<Entity> AllEntities()
         {
-            List<Entity> toReturn = Daedalus.eve.QueryEntities();
+            List<Entity> toReturn = new List<Entity>();
+            List<Entity> entitiesList = Daedalus.eve.QueryEntities();
+            if(entitiesList.Count > 0)
+            {
+                foreach (Entity entity in entitiesList)
+                {
+                    bool found = false;
+                    foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+                    {
+                        if (esiEntity.type_id == entity.TypeID)
+                        {
+                            found = true;
+                            toReturn.Add(entity);
+                            break;
+                        }
+                    }
+                    if (!found) ESI_Queue.Add(entity.TypeID);
+                }
+            }
             if (toReturn == null) if (toReturn == null) return new List<Entity>();
             return toReturn;
         }
@@ -36,17 +54,6 @@ namespace Daedalus.Functions
             foreach (Entity entity in entitiesList)
             {
                 if (f_Entities.GetDistanceBetween(entity) < distance) toReturn.Add(entity);
-            }
-            return toReturn;
-        }
-        public static List<Entity> GetEntitiesWithinDistance(List<Entity> entitiesList, double distance, List<string> filteredByList)
-        {
-            List<Entity> toReturn = new List<Entity>();
-            foreach (Entity entity in entitiesList)
-            {
-                if (f_Entities.GetDistanceBetween(entity) < distance &&
-                    d_Priority_Targets.All.Contains(entity.Name))
-                    toReturn.Add(entity);
             }
             return toReturn;
         }
@@ -90,14 +97,14 @@ namespace Daedalus.Functions
             List<Entity> toReturn = new List<Entity>();
             foreach (Entity entity in entitiesList)
             {
-                if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
-
-                bool found = false;
-                foreach(ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+                foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
                 {
-                    if (esiEntity.type_id == entity.TypeID)   found = true;
+                    if (esiEntity.type_id == entity.TypeID && esiEntity.entityBracketColour == 1)
+                    {
+                        toReturn.Add(entity);
+                        break;
+                    }
                 }
-                if (!found) ESI_Queue.Add(entity.TypeID);
             }
             if (toReturn == null) return new List<Entity>();
             return toReturn;
