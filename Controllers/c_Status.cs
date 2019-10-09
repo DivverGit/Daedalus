@@ -68,7 +68,7 @@ namespace Daedalus.Controllers
                 {
                     Daedalus.DaedalusUI.changeStatusLabel(StatusLabels.mediumPowerSlotLabels[i], modules[i].ToItem.Name);
                     if (modules[i].IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(StatusLabels.mediumPowerSlotLabels[i], Color.Green);
-                    else if (!modules[i].IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(StatusLabels.highPowerSlotLabels[i], Color.Black);
+                    else if (!modules[i].IsActive) Daedalus.DaedalusUI.changeStatusLabelColour(StatusLabels.mediumPowerSlotLabels[i], Color.Black);
                 }
                 else
                 {

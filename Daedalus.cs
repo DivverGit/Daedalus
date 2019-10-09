@@ -7,6 +7,7 @@ namespace Daedalus
     using Controllers;
     using Data;
     using global::Daedalus.Functions;
+    using global::Daedalus.Properties;
 
     public class Daedalus
     {
@@ -35,7 +36,8 @@ namespace Daedalus
             // Set the Frame event to call the Pulse function.
             Frame += new EventHandler<LSEventArgs>(Pulse);
 
-            DaedalusUI.newConsoleMessage("Daedalus, Update 8, October 2019");
+            DaedalusUI.newConsoleMessage("Daedalus, Update 10, October 2019");
+            d_ESI.CacheEsiEntities();
             System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
@@ -79,11 +81,10 @@ namespace Daedalus
                     eve = new EVE.ISXEVE.EVE();
                     me = new EVE.ISXEVE.Me();
                     myShip = new EVE.ISXEVE.Ship();
-
                     DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + c_Behaviours.activeBehaviour.ToString() + "] [Routine: " + c_Routines.activeRoutine.ToString() + "]";
                     c_Behaviours.Pulse();
+                    ESI_Queue.Process();
                 }
-                return;
             }
         }
     }

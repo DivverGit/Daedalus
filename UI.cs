@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Daedalus.Data;
 
 namespace Daedalus
 {
@@ -24,7 +25,6 @@ namespace Daedalus
             movementComboBox.SelectedIndex = Settings.Default.movementIndex;
             propulsionComboBox.SelectedIndex = Settings.Default.propulsionIndex;
             targetingComboBox.SelectedIndex = Settings.Default.targetingIndex;
-
             //d_ESI.QueryESI(17609, QueryType.byTypeid);
         }
 
@@ -98,8 +98,8 @@ namespace Daedalus
         }
         private void propulsionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (targetingComboBox.SelectedIndex == 0) Settings.Default.propulsionIndex = 0;
-            else if (targetingComboBox.SelectedIndex == 1) Settings.Default.propulsionIndex = 1;
+            if (propulsionComboBox.SelectedIndex == 0) Settings.Default.propulsionIndex = 0;
+            else if (propulsionComboBox.SelectedIndex == 1) Settings.Default.propulsionIndex = 1;
             Settings.Default.Save();
         }
         private void targetingComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,7 +120,8 @@ namespace Daedalus
         // Log & Targets
         public void newConsoleMessage(string input)
         {
-            Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
+            //Console.Items.Add("(" + DateTime.Now.ToString("HH:mm:ss") + ") " + input);
+            Console.Items.Add(input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
         public void setTargetsList(List<EnemyNPC> targets)

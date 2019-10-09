@@ -91,6 +91,13 @@ namespace Daedalus.Functions
             foreach (Entity entity in entitiesList)
             {
                 if (d_NPC_Types.All.Contains(entity.GroupID)) toReturn.Add(entity);
+
+                bool found = false;
+                foreach(ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+                {
+                    if (esiEntity.type_id == entity.TypeID)   found = true;
+                }
+                if (!found) ESI_Queue.Add(entity.TypeID);
             }
             if (toReturn == null) return new List<Entity>();
             return toReturn;

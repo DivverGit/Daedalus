@@ -88,6 +88,9 @@
     <Compile Include="Behaviours\b_Station.cs" />
     <Compile Include="Controllers\c_Modules.cs" />
     <Compile Include="Daedalus.cs" />
+    <Content Include="Data\Cache.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Data\d_ESI.cs" />
     <Compile Include="Data\d_Weapon_Groups.cs" />
     <Compile Include="Data\d_Priority_Targets.cs" />
@@ -130,6 +133,7 @@
       <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Data\dgmTypeAttributes.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Weapon_Groups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\dgmTypeEffects.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />
