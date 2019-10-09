@@ -41,6 +41,7 @@ namespace Daedalus.Routines
 
                 if (primaryTarget.IsLockedTarget)
                 {
+                    Daedalus.DaedalusUI.newConsoleMessage("r_Combat_Active: Primary is locked");
                     if (primaryTarget.IsActiveTarget)
                     {
                         if (orbitTargetID != primaryTarget.ID)
@@ -48,10 +49,12 @@ namespace Daedalus.Routines
                             orbitTargetID = primaryTarget.ID;
                             f_Movement.Orbit(primaryTarget, Convert.ToInt32(UI.orbitRange));
                         }
+                        Daedalus.DaedalusUI.newConsoleMessage("r_Combat_Active: OffensePulse()");
                         c_Modules.OffensePulse(primaryTarget);
                     }
                     else if (!primaryTarget.IsActiveTarget)
                     {
+                        Daedalus.DaedalusUI.newConsoleMessage("r_Combat_Active: Making primary active");
                         primaryTarget.MakeActiveTarget();
                     }
                 }

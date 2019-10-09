@@ -71,8 +71,13 @@ namespace Daedalus.Controllers
                     if (module.IsValid && !module.IsActive && !module.IsReloadingAmmo)
                     {
                         double engageRange = missileLauncherObject.maxFlightRange;
+                        Daedalus.DaedalusUI.newConsoleMessage("c_Modules: maxFlightRange=" + engageRange.ToString());
                         double distanceToTarget = f_Entities.GetDistanceBetween(target);
-                        if (distanceToTarget < engageRange) module.Activate();
+                        if (distanceToTarget < engageRange)
+                        {
+                            Daedalus.DaedalusUI.newConsoleMessage("c_Modules: MissileLauncher firing");
+                            module.Activate();
+                        }
                     }
                 }
                 else if (moduleObject is Module.Turret)
@@ -85,7 +90,12 @@ namespace Daedalus.Controllers
                         double? optimalRange = turretObject.optimalRange;
                         double? engageRange = (falloffRange + optimalRange);
                         double distanceToTarget = f_Entities.GetDistanceBetween(target);
-                        if (distanceToTarget < engageRange) module.Activate();
+                        Daedalus.DaedalusUI.newConsoleMessage("c_Modules: engageRange=" + engageRange.ToString() + " - distanceToTarget=" + distanceToTarget.ToString());
+                        if (distanceToTarget < engageRange)
+                        {
+                            Daedalus.DaedalusUI.newConsoleMessage("c_Modules: Turret firing");
+                            module.Activate();
+                        }
                     }
                 }
             }

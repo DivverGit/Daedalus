@@ -39,6 +39,7 @@ namespace Daedalus.Functions
 
         public static void GetAllModules()
         {
+            c_Modules.modules = new List<Controllers.Module>();
             GetAfterburnerModules();
             GetArmorHardenerModules();
             GetArmorRepairModules();
