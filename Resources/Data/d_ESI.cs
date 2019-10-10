@@ -20,7 +20,7 @@ namespace Daedalus.Data
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    ESI_Cache.esiEntities.Add(new ESI_Cache.ESI_Entity(
+                    ESI_Cache.esiEntities[int.Parse(values[0])] = (new ESI_Cache.ESI_Entity(
                         int.Parse(values[0]),
                         int.Parse(values[1]),
                         values[2],
@@ -160,7 +160,7 @@ namespace Daedalus.Data
                                 break;
                         }
                     }
-                    ESI_Cache.esiEntities.Add(esiEntity);
+                    ESI_Cache.esiEntities[id] = esiEntity;
                     ESI_Cache.SaveQueryToFile(esiEntity);
                     Daedalus.DaedalusUI.newConsoleMessage("d_ESI: " + esiEntity.name + " cached");
                 }
@@ -292,30 +292,21 @@ namespace Daedalus.Data
             }
         }
 
-        public static List<ESI_Entity> esiEntities = new List<ESI_Entity>();
+        public static Dictionary<int, ESI_Entity> esiEntities = new Dictionary<int, ESI_Entity>();
 
         public static float GetShipGroup(Entity entity)
         {
-            foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+            if (esiEntities.TryGetValue(entity.TypeID, out var esiEntity))
             {
-                if (esiEntity.type_id == entity.TypeID)
-                {
-                    return esiEntity.entityOverviewShipGroupId;
-                }
+                return esiEntity.entityOverviewShipGroupId;
             }
             return 0.0f;
         }
         public static bool GetIsPriority(Entity entity)
         {
-            foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+            if (esiEntities.TryGetValue(entity.TypeID, out var esiEntity))
             {
-                if (esiEntity.type_id == entity.TypeID)
-                {
-                    if(esiEntity.canECM || esiEntity.canNeut || esiEntity.canScramble || esiEntity.canTargetPaint || esiEntity.canTrackingDisrupt || esiEntity.canWeb)
-                    {
-                        return true;
-                    }
-                }
+                return (esiEntity.canECM || esiEntity.canNeut || esiEntity.canScramble || esiEntity.canTargetPaint || esiEntity.canTrackingDisrupt || esiEntity.canWeb);
             }
             return false;
         }

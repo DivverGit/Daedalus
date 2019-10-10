@@ -1,0 +1,8 @@
+{
+  "Endpoints": {
+    "Types": "https://esi.evetech.net/dev/universe/types/{0}/",
+    "DogmaAttributes": "https://esi.evetech.net/dev/dogma/effects/{0}/",
+    "DogmaEffects": "https://esi.evetech.net/dev/dogma/attributes/{0}/"
+  }
+  
+}

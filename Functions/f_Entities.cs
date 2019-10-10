@@ -1,6 +1,7 @@
 ﻿using Daedalus.Data;
 using EVE.ISXEVE;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Daedalus.Functions
 {
@@ -19,24 +20,18 @@ namespace Daedalus.Functions
         {
             List<Entity> toReturn = new List<Entity>();
             List<Entity> entitiesList = Daedalus.eve.QueryEntities();
-            if(entitiesList.Count > 0)
+
+            foreach (Entity entity in entitiesList)
             {
-                foreach (Entity entity in entitiesList)
+                if (ESI_Cache.esiEntities.TryGetValue(entity.TypeID, out var esiEntity))
                 {
-                    bool found = false;
-                    foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
-                    {
-                        if (esiEntity.type_id == entity.TypeID)
-                        {
-                            found = true;
-                            toReturn.Add(entity);
-                            break;
-                        }
-                    }
-                    if (!found) ESI_Queue.Add(entity.TypeID);
+                    toReturn.Add(entity);
+                }
+                else
+                {
+                    ESI_Queue.Add(entity.TypeID);
                 }
             }
-            if (toReturn == null) if (toReturn == null) return new List<Entity>();
             return toReturn;
         }
         public static double GetDistanceBetween(Entity entity)
@@ -95,18 +90,15 @@ namespace Daedalus.Functions
         public static List<Entity> GetNpcEntities(List<Entity> entitiesList)
         {
             List<Entity> toReturn = new List<Entity>();
+
             foreach (Entity entity in entitiesList)
             {
-                foreach (ESI_Cache.ESI_Entity esiEntity in ESI_Cache.esiEntities)
+                if (ESI_Cache.esiEntities.TryGetValue(entity.TypeID, out var esiEntity))
                 {
-                    if (esiEntity.type_id == entity.TypeID && esiEntity.entityBracketColour == 1)
-                    {
+                    if (esiEntity.entityBracketColour == 1)
                         toReturn.Add(entity);
-                        break;
-                    }
                 }
             }
-            if (toReturn == null) return new List<Entity>();
             return toReturn;
         }
     }
