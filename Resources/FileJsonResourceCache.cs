@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Daedalus.Resources
 {
-    class FileJsonCache
+    class FileJsonResourceCache
     {
         private string BasePath = AppDomain.CurrentDomain.BaseDirectory;
         private Dictionary<string, JsonResource> Cache = new Dictionary<string, JsonResource>();
@@ -23,17 +23,22 @@ namespace Daedalus.Resources
         public void Save(string resourcePath, JsonResource jsonObject)
         {
             string fullPath = Path.Combine(BasePath, resourcePath);
-
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
             string json = JsonConvert.SerializeObject(jsonObject);
             File.WriteAllText(fullPath, json);
         }
 
         public bool TryLoad<T>(string resourcePath, out T jsonObject) where T : JsonResource
         {
+            jsonObject = null;
             if (Cache.TryGetValue(resourcePath, out JsonResource cachedObject))
             {
-                jsonObject = cachedObject as T;
-                return true;
+                if (cachedObject is T)
+                {
+                    jsonObject = cachedObject as T;
+                    return true;
+                }
+                return false;
             }
 
             string fullPath = Path.Combine(BasePath, resourcePath);

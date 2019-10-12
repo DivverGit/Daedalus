@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Daedalus.Eve.ESI.Data
 {
-    class ESIData
+    public class ESIData
     {
         [JsonIgnore]
         protected string RawJSON = string.Empty;
