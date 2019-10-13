@@ -70,6 +70,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Priority Queue, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\OptimizedPriorityQueue.4.2.0\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,10 +87,14 @@
   <ItemGroup>
     <Compile Include="Controllers\c_Modules.cs" />
     <Compile Include="Daedalus.cs" />
+    <Compile Include="Eve\Bot\Actions\Action.cs" />
+    <Compile Include="Eve\Bot\Actions\ActionQueue.cs" />
     <Compile Include="Eve\Bot\Behaviours\Behavior.cs" />
     <Compile Include="Eve\Bot\Behaviours\b_Combat.cs" />
     <Compile Include="Eve\Bot\Behaviours\b_Space.cs" />
     <Compile Include="Eve\Bot\Behaviours\b_Station.cs" />
+    <Compile Include="Eve\Bot\Controllers\Controller.cs" />
+    <Compile Include="Eve\Bot\Routine.cs" />
     <Compile Include="Eve\ESI\Data\ESIData.cs" />
     <Compile Include="Eve\ESI\Data\ESIDogmaAttribute.cs" />
     <Compile Include="Eve\ESI\Data\ESIDogmaEffect.cs" />
@@ -167,9 +174,7 @@
     <Content Include="FodyWeavers.xml" />
     <Content Include="Resources\Data\Weapon_Groups.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Eve\Bot\Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Daedalus.Eve.Bot.Behaviours
 {
-    public abstract class Behavior : IPulseable
+    public abstract class Behaviour : IPulseable
     {
         public abstract void Pulse();
         public abstract void DoWork();

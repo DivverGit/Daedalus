@@ -27,6 +27,7 @@ namespace Daedalus
         private DateTime NextPulse = DateTime.MaxValue;
         private TimeSpan PulseTimeSpan = new TimeSpan(0, 0, 0, 1, 0);
         private TimeSpan PulseTimeSpanVariance = new TimeSpan(0, 0, 0, 0, 0);
+        private TimeSpan MinimumPulseTimeSpan = new TimeSpan(0, 0, 0, 0, 100);
         private Random Random = new Random();
 
         public Daedalus(UI Arg)
@@ -56,7 +57,7 @@ namespace Daedalus
         public void Exit()
         {
             Stop();
-            Application.Exit(0);
+            Application.Exit();
         }
 
         private void Setup()
@@ -76,16 +77,27 @@ namespace Daedalus
             if (!Running)
                 return;
 
-            DateTime now = DateTime.Now;
+            DateTime startTime = DateTime.Now;
 
-            if (NextPulse > now)
+            if (NextPulse > startTime)
                 return;
 
             DaedalusPulse?.Invoke();
 
-            // Assign next time for pulse
-            int millisecondVariance = (int)(Random.NextDouble() * PulseTimeSpanVariance.TotalMilliseconds);
-            NextPulse = now.Add(PulseTimeSpan).AddMilliseconds(millisecondVariance);
+            DateTime endTime = DateTime.Now;
+            TimeSpan duration = endTime - startTime;
+
+            if (duration < MinimumPulseTimeSpan)
+            {
+                int millisecondVariance = (int)(Random.NextDouble() * PulseTimeSpanVariance.TotalMilliseconds);
+                NextPulse = startTime.Add(PulseTimeSpan).AddMilliseconds(millisecondVariance);
+            } else
+            {
+                // Pulse took too long to complete maybe error and stop the bot?
+                // We calculate the time from the endtime to favor spreading the pulses out over timing accuracy
+                int millisecondVariance = (int)(Random.NextDouble() * PulseTimeSpanVariance.TotalMilliseconds);
+                NextPulse = endTime.Add(PulseTimeSpan).AddMilliseconds(millisecondVariance);
+            }
         }
 
         private void Pulse()
