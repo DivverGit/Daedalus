@@ -4,88 +4,97 @@ using System;
 
 namespace Daedalus
 {
-    using Controllers;
     using Data;
+    using global::Daedalus.Eve.Bot.Behaviours;
+    using global::Daedalus.Eve.Bot.Controllers;
+    using global::Daedalus.Eve.Wrappers;
     using global::Daedalus.Functions;
     using global::Daedalus.Properties;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
 
     public class Daedalus
     {
-        // EventHandler for pulse
-        private static event EventHandler<LSEventArgs> Frame;
+        public UI DaedalusUI;
 
-        // ISXEVE variables
-        public static EVE.ISXEVE.EVE eve;
-		public static EVE.ISXEVE.Me me;
-        public static EVE.ISXEVE.Ship myShip;
-        public static EVE.ISXEVE.Station station;
+        List<Behaviour> Behaviours = new List<Behaviour>();
+        List<Controller> Controllers = new List<Controller>();
 
-        // Pulse variables
-        private static DateTime nextPulse;
-        private static double pulseRate = 1.5;
+        public event Action ISXEVEPulse;
+        public event Action DaedalusPulse;
 
-        // Misc variables
-        public static bool paused = false;
-
-        public static UI DaedalusUI;
+        private bool Running = false;
+        private DateTime NextPulse = DateTime.MaxValue;
+        private TimeSpan PulseTimeSpan = new TimeSpan(0, 0, 0, 1, 0);
+        private TimeSpan PulseTimeSpanVariance = new TimeSpan(0, 0, 0, 0, 0);
+        private Random Random = new Random();
 
         public Daedalus(UI Arg)
         {
+            System.Media.SystemSounds.Asterisk.Play();
+
             DaedalusUI = Arg;
 
-            // Set the Frame event to call the Pulse function.
-            Frame += new EventHandler<LSEventArgs>(Pulse);
+            Setup();
+            AttachEvents();
 
-            DaedalusUI.newConsoleMessage("Daedalus, Update 10, October 2019");
-            d_ESI.CacheEsiEntities();
-            System.Media.SystemSounds.Asterisk.Play();
             Start();
         }
 
-        public static void Start()
+        public void Start()
         {
-            // Attach Daedalus to ISXEVE
-            AttachEvent();
-
-            // Set the first pulse
-            nextPulse = DateTime.Now.AddSeconds(pulseRate);
+            Running = true;
+            NextPulse = DateTime.Now;
         }
 
-        static internal void AttachEvent()
+        public void Stop()
         {
-            // Attach Daedalus to the ISXEVE_OnFrame event, this event is called every frame so 30 FPS is 30 events per second.
-            LavishScript.Events.AttachEventTarget("ISXEVE_OnFrame", Frame);
-            DaedalusUI.newConsoleMessage("Attaching to ISXEVE");
+            Running = false;
+            NextPulse = DateTime.MaxValue;
         }
 
-        static internal void AttachEvent(object sender, EventArgs e)
+        public void Exit()
         {
-            AttachEvent();
+            Stop();
+            Application.Exit(0);
         }
-        
-        static internal void DetachEvent()
-        {
-			LavishScript.Events.DetachEventTarget("ISXEVE_OnFrame", Frame);
-        }
-        
-        private static void Pulse(object sender, LSEventArgs e)
-        {
-            using (new FrameLock(true))
-            {
-                //  We don't need to process our code every single frame as it's inefficient, so let's only do it every *pulseRate*
-                if (DateTime.Now > nextPulse)
-                {
-                    nextPulse = DateTime.Now.AddSeconds(pulseRate);
 
-                    // Let's refresh all the data made available by ISXEVE
-                    eve = new EVE.ISXEVE.EVE();
-                    me = new EVE.ISXEVE.Me();
-                    myShip = new EVE.ISXEVE.Ship();
-                    DaedalusUI.Text = "Daedalus - " + me.Name + " [Behaviour: " + c_Behaviours.activeBehaviour.ToString() + "] [Routine: " + c_Routines.activeRoutine.ToString() + "]";
-                    c_Behaviours.Pulse();
-                    ESI_Queue.Process();
-                }
-            }
+        private void Setup()
+        {
+
+        }
+
+        private void AttachEvents()
+        {
+            LavishScript.Events.AttachEventTarget("ISXEVE_OnFrame", (sender, lsargs) => ISXEVEPulse?.Invoke());
+            ISXEVEPulse += (() => FramePulse());
+            DaedalusPulse += (() => Pulse());
+        }
+
+        private void FramePulse()
+        {
+            if (!Running)
+                return;
+
+            DateTime now = DateTime.Now;
+
+            if (NextPulse > now)
+                return;
+
+            DaedalusPulse?.Invoke();
+
+            // Assign next time for pulse
+            int millisecondVariance = (int)(Random.NextDouble() * PulseTimeSpanVariance.TotalMilliseconds);
+            NextPulse = now.Add(PulseTimeSpan).AddMilliseconds(millisecondVariance);
+        }
+
+        private void Pulse()
+        {
+            // Invalidates entity cache
+            DEve.Instance.InvalidateCache();
+
+            Controllers.ForEach(c => c.Pulse());
+            Behaviours.ForEach(b => b.Pulse());
         }
     }
 }

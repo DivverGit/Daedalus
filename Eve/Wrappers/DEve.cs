@@ -14,6 +14,11 @@ namespace Daedalus.Eve.Wrappers
         private Dictionary<long, Entity> EntityCache = new Dictionary<long, Entity>(100);
         private bool RepopulateCache = true;
 
+        public void InvalidateCache()
+        {
+            RepopulateCache = true;
+        }
+
         public void CheckCache(bool forceRepopulate = false)
         {
             if (RepopulateCache || forceRepopulate)
@@ -28,6 +33,7 @@ namespace Daedalus.Eve.Wrappers
                     EntityCache.Add(e.ID, e);
                 }
             }
+            RepopulateCache = false;
         }
 
         public List<DEntity> GetEntities()
