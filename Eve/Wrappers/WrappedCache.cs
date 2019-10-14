@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Daedalus.General
+namespace Daedalus.Eve.Wrappers
 {
     public abstract class WrappedCache<TKey, TValue, TWrapped>
         where TWrapped : Wrapper<TKey, TValue>

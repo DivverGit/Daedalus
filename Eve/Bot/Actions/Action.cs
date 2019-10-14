@@ -12,9 +12,8 @@ namespace Daedalus.Eve.Bot.Actions
         private bool Concurrent = false;
         private TimeSpan ActionTime = TimeSpan.Zero;
 
-
         public abstract bool Equals(Action other);
 
-        public abstract void DoAction();
+        public abstract bool DoAction();
     }
 }
