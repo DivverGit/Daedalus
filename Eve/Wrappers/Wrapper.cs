@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Daedalus.Eve.Wrappers
 {
-    public abstract class Wrapper<TKey, TValue>
+    public abstract class Wrapper<T>
     {
-        public TKey Key { get; set; }
-        public TValue Value { get; set; }
-        public abstract void Initialize(TValue value);
+        public abstract T GetRaw();
     }
 }

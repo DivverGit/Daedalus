@@ -7,23 +7,28 @@ using System.Threading.Tasks;
 namespace Daedalus.Eve.Wrappers
 {
     public abstract class WrappedCache<TKey, TValue, TWrapped>
-        where TWrapped : Wrapper<TKey, TValue>
+        where TWrapped : CacheWrapper<TKey, TValue, TWrapped>, new()
     {
-        protected Dictionary<TKey, TValue> CachedItems;
-        private Dictionary<TKey, TWrapped> CachedWrappers;
-        protected bool RepopulateCache = true;
+        private Dictionary<TKey, TValue> CachedItems = new Dictionary<TKey, TValue>();
+        private Dictionary<TKey, TWrapped> CachedWrappers = new Dictionary<TKey, TWrapped>();
+        private bool RepopulateItemCache = true;
 
-        public WrappedCache(int startingSize)
+        public void ClearWrappers()
         {
-            CachedItems = new Dictionary<TKey, TValue>(startingSize);
-            CachedWrappers = new Dictionary<TKey, TWrapped>(startingSize);
+            CachedWrappers.Clear();
         }
 
-        public void InvalidateCache()
+        public void ClearItems()
         {
             CachedItems.Clear();
-            RepopulateCache = true;
-        }        
+            RepopulateItemCache = true;
+        }
+
+        public void ClearCache()
+        {
+            ClearItems();
+            ClearWrappers();
+        }
 
         /// <summary>
         /// Override to populate CachedItems
@@ -32,13 +37,18 @@ namespace Daedalus.Eve.Wrappers
 
         private void CheckCache()
         {
-            if (RepopulateCache)
+            if (RepopulateItemCache)
+            {
                 PopulateItems(ref CachedItems);
+                CachedWrappers = CachedWrappers.Where(entry => CachedItems.ContainsKey(entry.Key))
+                                 .ToDictionary(entry => entry.Key,
+                                               entry => entry.Value);
+            }
         }
 
         public bool TryGetItem(TKey key, out TValue value)
         {
-            CheckCache();
+            CheckCache();   
             if (CachedItems.TryGetValue(key, out TValue cachedValue))
             {
                 value = cachedValue;
@@ -67,6 +77,7 @@ namespace Daedalus.Eve.Wrappers
             {
                 TWrapped newWrappedInstance = Activator.CreateInstance<TWrapped>();
                 newWrappedInstance.Key = key;
+                newWrappedInstance.Cache = this;
                 newWrappedInstance.Initialize(rawValue);
 
                 CachedWrappers.Add(key, newWrappedInstance);

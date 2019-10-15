@@ -109,6 +109,11 @@
     <Compile Include="Eve\Interfaces\IPulseable.cs" />
     <Compile Include="Eve\Wrappers\DEntity.cs" />
     <Compile Include="Eve\Wrappers\DEve.cs" />
+    <Compile Include="Eve\Wrappers\DModule.cs" />
+    <Compile Include="Eve\Cache\ModuleCache.cs" />
+    <Compile Include="Eve\Cache\WrappedCache.cs" />
+    <Compile Include="Eve\Cache\CacheWrapper.cs" />
+    <Compile Include="Eve\Wrappers\DWrapper.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
     <Compile Include="Functions\f_Entities.cs" />
@@ -119,8 +124,6 @@
     <Compile Include="Controllers\c_Targets.cs" />
     <Compile Include="Controllers\c_Status.cs" />
     <Compile Include="Controllers\c_Routines.cs" />
-    <Compile Include="General\WrappedCache.cs" />
-    <Compile Include="General\Wrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Data\d_ESI.cs" />

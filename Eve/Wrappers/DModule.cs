@@ -8,16 +8,9 @@ using System.Threading.Tasks;
 
 namespace Daedalus.Eve.Wrappers
 {
-    public class DModule : Wrapper<int, SlotType>
+    public class DModule : CacheWrapper<int, Module, DModule>
     {
         private DModuleType ModuleType { get; }
-
-        public DModule(int slotIndex, SlotType slotType, DModuleType moduleType)
-        {
-            base.Key = slotIndex;
-            Initialize(slotType);
-            ModuleType = moduleType;
-        }
 
         public bool CanActivate()
         {
@@ -45,9 +38,9 @@ namespace Daedalus.Eve.Wrappers
             //}
         }
 
-        public override void Initialize(SlotType value)
+        public override void Initialize(Module value)
         {
-
+            throw new NotImplementedException();
         }
     }
 
