@@ -15,10 +15,12 @@ namespace Daedalus
 
     public class Daedalus
     {
+        public readonly Daedalus Instance;
+
         public UI DaedalusUI;
 
-        List<Behaviour> Behaviours = new List<Behaviour>();
-        List<Controller> Controllers = new List<Controller>();
+        Dictionary<Type, Behaviour> Behaviours = new Dictionary<Type, Behaviour>();
+        Dictionary<Type, Controller> Controllers = new Dictionary<Type, Controller>();
 
         public event Action ISXEVEPulse;
         public event Action DaedalusPulse;
@@ -30,8 +32,23 @@ namespace Daedalus
         private TimeSpan MinimumPulseTimeSpan = new TimeSpan(0, 0, 0, 0, 100);
         private Random Random = new Random();
 
+        public T GetController<T>() where T : Controller
+        {
+            if (Controllers.TryGetValue(typeof(T), out Controller controller))
+                return controller as T;
+            return null;
+        }
+
+        public T GetBehavior<T>() where T : Behaviour
+        {
+            if (Behaviours.TryGetValue(typeof(T), out Behaviour behaviour))
+                return behaviour as T;
+            return null;
+        }
+
         public Daedalus(UI Arg)
         {
+            Instance = this;
             System.Media.SystemSounds.Asterisk.Play();
 
             DaedalusUI = Arg;
@@ -105,8 +122,15 @@ namespace Daedalus
             // Invalidates entity cache
             DEve.Instance.InvalidateCache();
 
-            Controllers.ForEach(c => c.Pulse());
-            Behaviours.ForEach(b => b.Pulse());
+            foreach (var entry in Controllers)
+            {
+                entry.Value.Pulse();
+            }
+
+            foreach (var entry in Behaviours)
+            {
+                entry.Value.Pulse();
+            }
         }
     }
 }
