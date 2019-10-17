@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Daedalus.Eve.Wrappers
+namespace Daedalus.Eve.Cache.Base
 {
     public abstract class WrappedCache<TKey, TValue, TWrapped>
         where TWrapped : CacheWrapper<TKey, TValue, TWrapped>, new()
@@ -109,6 +109,11 @@ namespace Daedalus.Eve.Wrappers
                     wrappedValues.Add(wrappedValue);
             }
             return wrappedValues;
+        }
+
+        public bool ItemExists(TKey key)
+        {
+            return CachedItems.ContainsKey(key);
         }
     }
 }

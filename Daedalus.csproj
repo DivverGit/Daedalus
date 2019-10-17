@@ -100,6 +100,9 @@
     <Compile Include="Eve\Bot\Behaviours\b_Station.cs" />
     <Compile Include="Eve\Bot\Controllers\Controller.cs" />
     <Compile Include="Eve\Bot\Routine.cs" />
+    <Compile Include="Eve\Cache\EntityCache.cs" />
+    <Compile Include="Eve\Cache\EveCache.cs" />
+    <Compile Include="Eve\Enums\ShipSlot.cs" />
     <Compile Include="Eve\ESI\Data\ESIData.cs" />
     <Compile Include="Eve\ESI\Data\ESIDogmaAttribute.cs" />
     <Compile Include="Eve\ESI\Data\ESIDogmaEffect.cs" />
@@ -111,9 +114,9 @@
     <Compile Include="Eve\Wrappers\DEve.cs" />
     <Compile Include="Eve\Wrappers\DModule.cs" />
     <Compile Include="Eve\Cache\ModuleCache.cs" />
-    <Compile Include="Eve\Cache\WrappedCache.cs" />
-    <Compile Include="Eve\Cache\CacheWrapper.cs" />
-    <Compile Include="Eve\Wrappers\DWrapper.cs" />
+    <Compile Include="Eve\Cache\Base\WrappedCache.cs" />
+    <Compile Include="Eve\Cache\Base\CacheWrapper.cs" />
+    <Compile Include="Eve\Wrappers\Wrapper.cs" />
     <Compile Include="Functions\f_Bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
     <Compile Include="Functions\f_Entities.cs" />

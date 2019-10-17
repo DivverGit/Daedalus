@@ -1,4 +1,6 @@
-﻿using EVE.ISXEVE;
+﻿using Daedalus.Eve.Cache.Base;
+using Daedalus.Eve.Enums;
+using EVE.ISXEVE;
 using EVE.ISXEVE.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,17 +10,22 @@ using System.Threading.Tasks;
 
 namespace Daedalus.Eve.Wrappers
 {
-    public class DModule : CacheWrapper<int, Module, DModule>
+    public class DModule : CacheWrapper<ShipSlot, IModule, DModule>
     {
-        private DModuleType ModuleType { get; }
+        public ShipSlot ShipSlot => Key;
+        public long ItemID;
+        public long CategoryID;
 
         public bool CanActivate()
         {
-            MyShip myShip = new MyShip();
-            double? activationCost = myShip.Module(base.Value, base.Key).ActivationCost;
+            IModule mod = GetRaw();
+            if (mod == null || !mod.IsValid)
+                return false;
+
+            double? activationCost = mod.ActivationCost;
             if (activationCost != null)
             {
-                double currrentCapacitor = myShip.Capacitor;
+                double currrentCapacitor = new MyShip().Capacitor;
                 return activationCost < currrentCapacitor ? true : false;
             }
             else
@@ -27,21 +34,14 @@ namespace Daedalus.Eve.Wrappers
             }
         }
 
-        public void Deconstruct(out DModuleType moduleType)
+        public override void Initialize(IModule value)
         {
-            moduleType = ModuleType;
-
-            //C# 8.0
-            //if (DModule is DModule(Afterburner))
-            //{
-            //  code executes if ModuleType is Afterburner
-            //}
+            IItem asItem = value.ToItem;
+            ItemID = asItem.ID;
+            CategoryID = asItem.CategoryID;
         }
 
-        public override void Initialize(Module value)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 
     public enum DModuleType
