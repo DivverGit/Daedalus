@@ -33,11 +33,16 @@ namespace Daedalus.Eve.Bot.Controllers
         {
             Active = false;
         }
-
         public void SetState(string stateName)
         {
+            if (States.TryGetValue(stateName, out State state))
+            {
+                state.EndState();
+                CurrentStateName = stateName;
+            }
             if (States.ContainsKey(stateName))
             {
+
                 CurrentStateName = stateName;
             } else
             {
@@ -47,6 +52,7 @@ namespace Daedalus.Eve.Bot.Controllers
 
         public void AddState(string name, State state, string nextState)
         {
+            state.Controller = this;
             StateProgression[name] = nextState;
             AddState(name, state);
         }
@@ -71,8 +77,9 @@ namespace Daedalus.Eve.Bot.Controllers
                         CurrentStateName = nextStateName;
                     } else
                     {
+                        // No progression found so deactivating
+                        Active = false;
                         return;
-                        // No progression found
                     }
 
                 }

@@ -13,6 +13,7 @@ namespace Daedalus.Eve.Wrappers
     {
         public int TypeID;
         public long EntityID => Key;
+        public CategoryType CategoryType => GetRaw().CategoryType;
         public bool ESIDataExists => ESICache.Instance.DataExists<ESIEntity>(TypeID);
         
         // Will return null if doesnt exist yet

@@ -23,5 +23,13 @@ namespace Daedalus.Eve.Cache
                 }
             }
         }
+
+        public List<DEntity> AllEntities
+        {
+            get
+            {
+                return GetAllWrappedItems();
+            }
+        }
     }
 }

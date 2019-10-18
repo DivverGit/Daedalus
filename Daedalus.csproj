@@ -99,7 +99,11 @@
     <Compile Include="Eve\Bot\Behaviours\b_Space.cs" />
     <Compile Include="Eve\Bot\Behaviours\b_Station.cs" />
     <Compile Include="Eve\Bot\Controllers\Controller.cs" />
-    <Compile Include="Eve\Bot\Routine.cs" />
+    <Compile Include="Eve\Bot\Controllers\TravelController.cs" />
+    <Compile Include="Eve\Bot\States\DockState.cs" />
+    <Compile Include="Eve\Bot\States\State.cs" />
+    <Compile Include="Eve\Bot\States\UndockState.cs" />
+    <Compile Include="Eve\Bot\States\WarpAndJumpState.cs" />
     <Compile Include="Eve\Cache\EntityCache.cs" />
     <Compile Include="Eve\Cache\EveCache.cs" />
     <Compile Include="Eve\Enums\ShipSlot.cs" />
